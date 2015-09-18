@@ -1,0 +1,92 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Data Cleaning Rules
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Fundamentals}
+\label{sec:expl}
+
+To study the problem, we begin with a background knowledge and continue with Section~\ref{sec:example} describing an example of an incomplete database table that is affected by several data quality issues and formulate data cleaning rules which using data dependencies and integrity constraints.
+
+
+%%%%%%%%%%%%%%%%%%%
+%\subsection{Data Quality}
+\newdef{definition}{Definition}
+\newdef{example}{Example}
+
+\textbf{Data Quality.} We consider a database instance $\mathcal{D}$ with a relational schema $\mathcal{S}$. 
+Furthermore, we consider relation $\mathcal{R} \in \mathcal{S}$ 
+that is defined for the set of attributes $attr(\mathcal{R})$. 
+Moreover, $dom(U_i)$ denotes the domain of an $i$-th attribute $U_i \in attr(\mathcal{R})$. 
+For the data 
+cleaning, we consider a set of data quality rules, which are data-agnostic and rely on data integrity 
+constraints~\cite{AbiteboulHV95}. In the following we study data cleaning rules based on 
+\emph{Integrity Constraints}.
+
+\vspace{-1em}
+\begin{definition}
+A \textbf{functional dependency} (FD) on a relational \\schema $S$ is an expression of the 
+form $\phi: X \rightarrow Y$ where 
+  $X \subseteq attr(\mathcal{R}) $ and $Y \subseteq attr(\mathcal{R}) $ 
+are subsets of $\mathcal{R}'s$ attributes $attr(\mathcal{R})$. This FD holds if every pair of tuples of $\mathcal{R}$ that agree in each of attributes $X$, also agree in the $Y$ attributes. $\Box$ 
+\end{definition}
+\vspace{-2em}
+
+Such functional dependencies are used by data quality management systems 
+to find and correct dirty data, because these dependencies 
+specify the semantics of the data in a declarative way.
+The main disadvantage of functional dependencies is that they operate solely on the schema level 
+and are often not able to detect
+conflicts in real-life data. For this reason, we consider 
+\emph{conditional functional dependencies}, which are extensions of the 
+traditional functional dependencies.
+
+\vspace{-1em}
+\begin{definition}
+  A \textbf{conditional functional dependency} (CFD) defined on the relational schema $\mathcal{S}$ 
+is a pair $\psi(X \rightarrow Y , T_p)$,  where 
+\vspace{-3em}
+\begin{enumerate}
+    \item $X \rightarrow Y$ is a standard FD and $X \cup Y \in attr(\mathcal{R})$; 
+    \item $T_p$ is a tuple pattern, which is a set of constraints holding on the particular subset $X \cup Y$ of tuples. For each $U \in X \cup Y$, the value of the attribute $U$ for $T_p$, $T_p[U]$ is either a variable value $`\_`$, or a constant $u \in dom(U)$
+  \end{enumerate} 
+We assume that CFDs are provided in the normal form. This means if $\psi(X \rightarrow Y_1,Y_2,\dots , T_p)$, then $\psi$ will be decomposed into several CFDs where $RHS(\psi)$ (right hand side of $\psi$) becomes a single attribute: $\psi_1(X \rightarrow Y_1 , T_p)$, $\psi_2(X \rightarrow Y_2 , T_p) \dots$. Furthermore, we distinguish between \textit{constant} and \textit{variable} CFDs. The former contains tuple pattern $T_p$ where $T_p[Y]\neq `\_`$. Otherwise, $\psi$ is called \textit{variable}.
+$\Box$
+  \end{definition}
+\vspace{-2em}
+
+Data deduplication techniques use FDs to define the matching dependencies. The difference here is that matching dependencies use the
+notion of the similarity predicate instead of equality predicate.
+\vspace{-1em}
+\begin{definition}
+  A \textbf{Matching Dependency} (MD) for schemas $\mathcal{S}_1$ and $\mathcal{S}_2$ is syntacticly defined as:
+  \begin{equation*}
+  \mu: \mathcal{S}_1[X_1]\approx \mathcal{S}_2[X_2]\rightarrow \mathcal{S}_1[Y_1]\rightleftharpoons \mathcal{S}_2[Y_2]   
+  \end{equation*}  
+  where $X_1 \cup Y_1$ and $X_2 \cup Y_2$ are pairwise compatible sets of attributes in $attr(\mathcal{R}_1), \mathcal{R}_1\in \mathcal{S}_1$ and $attr(\mathcal{R}_2), \mathcal{R}_2\in \mathcal{S}_2$, respectively; $\approx$ indicates
+  similar attributes and $\rightleftharpoons$ is called the \textit{matching operator}. $\Box$
+\end{definition}
+\vspace{-2em}
+
+In other words the matching operator $\rightleftharpoons$ means that for each $\mathcal{S}_1$ tuple $t_1$ and each $\mathcal{S}_2$ tuple $t_2$: $t_1[Y_1]$ and $t_2[Y_2]$ refers to the same real-world entity. Having dynamic semantics, that is pointing \textit{how} to repair data, MD forces to update $t_1[Y_1]$ and $t_2[Y_2]$ such that they have the same values. The operator $\rightleftharpoons$ only requires that the $t_1[Y_1]$ and $t_2[Y_2]$ are identified.
+
+%%%%%%%%%%%%%%%%%%%%
+%\subsection{Markov Logic}
+
+\textbf{Markov logic}~\cite{domingos2009markov} is a knowledge representation system that combines first-order logic as a declarative language and probabilistic graphical models (undirected Markov Networks) on top of which probabilistic inference is performed. Markov Networks can be viewed in terms of \emph{cliques} which are subgraphs where all pairs of nodes are connected. Edges between nodes can be parametrized by values or factors, also known as potentials, to encode the strength of a conditional dependency. The joint probability of a Markov Network can then be attained by computing the normalized product over clique potentials. 
+%\todo[inline]{markov logic into from the Rockit paper section: "Markov Logic"; \\ also explain $F_i$ below - adopt from ELEMENTARY paper page 7: semantics}
+Semantically, a Markov Logic Network (MLN) is a log-linear model (also known as exponential model), which defines the probability 
+distribution over possible worlds, in our case all possible states in the database.% Such models have many names, including maximum-entropy models, exponential models, and Gibbs models; Markov random fields are structured log-linear models, conditional random fields (Lafferty et al., 2001) are Markov random fields with a specific training criterion
+We consider a set of formulae $\bar{F} = F_1, F_2 \dots F_N$ with corresponding weights $w_1 \dots w_N$ as an input. These weighted first-order logic formulae define a probability distribution as follows:
+\begin{equation*}
+P \left( X = x \right) = \frac{1}{Z} \exp\left( \sum_{F_i} w_i n_i \left( x \right) \right)
+\end{equation*}
+Where $n_i(x)$ is the number of true groundings of formula $F_i$ in $x$ and $w_i$ is the corresponding formula weight and $Z$ is a normalization constant.
+Given a formula $F_i$ with variables $(x_1 \dots x_n)$, we create new formula $g$ called \textit{ground formula} as follows: for each $x_k$ and its domain $dom(U_k)$, each variable $x_k$ is being substituted with a value from its domain $dom(U_k)$.
+Let define $w$ to be a function that maps each ground formula $g$ to its assigned weight. If $g$ is false (true) and $w(g)>0$ (respectively $w(g)<0$), then the ground formula is violated. Hence, the probability of the particular word is higher the less ground formulae is violated and the lower is the cost of the world $W$: 
+\begin{equation*}
+cost_W = \left( \sum_{g \in V(W)} w(g) \right)
+\end{equation*} 
+Here $V(W)$ is the set of violated ground formulae.
+
+Please note that formula weights are not probabilities itself but the certainty of this formula. This also means that weights 
+can be considered as empirical frequencies where each formula should hold. Weights can be specified in two ways: first, heuristically (e.g using the domain expertise); second, by performing weight learning on data, e.g. by running weight learning algorithms on MLN \cite{lowd2007efficient}. In this paper we focus on an inference task as a prediction for the data cleaning operations.
+

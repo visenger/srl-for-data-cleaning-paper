@@ -1,0 +1,33 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Related Work
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Related Work}
+\label{sec:related}
+
+Our research builds on previous work from two areas: 
+\begin{inparaenum}[\itshape 1\upshape)]
+\item Data Quality Management and
+\item Statistical Relational Learning, namely probabilistic-logical languages.
+\end{inparaenum}
+
+\textbf{Data Quality Management}: A rich theoretical and practical investigation into data cleaning was presented in~\cite{Fan:2014:IRM:2628135.2567657} and \cite{fellegi1976systematic}. Fan W. et al.~\cite{Fan:2011:IRM:1989323.1989373} first proposed to unify the record matching and data repairing processes. They also proved that this unification greatly contributes to improvement of the data quality. Based on this fundamental research we propose to use probabilistic-logical frameworks to model the interaction of data quality rules and show that Markov logic enables us to simultaneously use MDs and CFDs. This enables the incorporation of integrity constraints, such as inclusion constraints. Holistic data cleaning methods based on integrity constraints and denial constraints with ad-hoc predicates has been also studied in \cite{chu2013holistic}. In this approach, authors consider the generalization of the integrity constraints by translating them into denial constraints. However, denial constraints can not express the inclusion dependencies, hence in our work we use clausal form of the first-order predicate logic to express all kind of integrity constraints.
+
+A generalization of dependencies was proposed by the Llunatic system in \cite{llunaticVDLB2013b}. They proposed a new language based on equality generated dependencies to standardize the way to express intra- and inter-dependencies. A clustering-based declarative approach for deduplication by considering data constraints was suggested in the Dedupalog language in \cite{Arasu:2009:LDC:1546683.1547340}.
+
+A reference system to ours is \textsc{UniClean}, proposed in \cite{Fan:2014:IRM:2628135.2567657}. Being a repairing system, \textsc{UniClean} also creates fixes by declaring cleaning rules and unifying matching and repairing processes. In general, \textsc{UniClean} achieves high accuracy by executing three algorithms for generating fixes in consecutive manner. In contrast, our data cleaning solution is a one-step process for executing the inference on MLN modeled according to data cleaning rules. Furthermore, as our experiments show, our approach does not require the availability of master data. 
+
+The \textsc{Nadeeff} system from \cite{Dallachiesa:2013:NCD:2463676.2465327} is the closest system to ours regarding to the data cleaning systems requirements coverage. Similar to our system, they treat data quality rules holistically. In contrast to \textsc{Nadeeff} we 
+\begin{inparaenum}[\itshape 1\upshape)]
+	\item Use first-order logic to define all the kind of data quality rules and therefore in our system we do not have black-boxes in form of UDFs. Furthermore, we claim better usability of the system through the declarative rules formulation;
+	\item Perform data cleaning as an inference process on Markov Networks. Through the formulation of data quality rules as Markov logic, the inference is fully hidden from the user. This achieves a great deal of complexity reduction regarding such data cleaning systems;
+\end{inparaenum}  
+
+Relevant work in statistical inference and data cleaning was conducted by Mayfield Ch. and his team in~\cite{Mayfield:2010:EDA:1807167.1807178}. Their system \textsc{Eracer} was designed to perform missing values imputation. In our work, we also use statistical inference to predict missing values, repair data, and detect duplicate entries. We apply a MAP inference to infer the types of errors and their sources. We also assume that the data quality rules based on FDs, CFDs and MDs are already defined. Profiling algorithms to discover CFDs and MDs automatically are presented in the work of Song and Chen in~\cite{song2009discovering} and Fan W. et al. in \cite{Fan:2011:DCF:1978258.1978514}. Applying machine learning for entity deduplication was demonstrated in \cite{guo2010record}. The work in \cite{beskales2010probclean} uses a probabilistic model for duplicate detection with uncertain outcomes. Throughout our work we use SRL, which is an extension of machine learning w.r.t. existing relations in the data.
+
+The most recent work in data curation that subsumes the data cleaning is the Data Timer System~\cite{Stonebraker_datacuration}. The researchers presented an end-to-end system that performs massive data curation and data deduplication by combining two elements: machine learning and expert (human) feedback. In our work we emphasize on joint execution of data cleaning rules, which can be declared as \textit{"soft"} or \textit{"hard"}. Furthermore, we do not use human input to achieve high accuracy results, instead we fully rely on the MAP-inference results to predict errors. 
+
+Using Machine learning and likelihood methods for cleaning noisy databases by predicting possible data updates was introduced in \cite{Yakout:2013:DSU:2463676.2463706}. Their data cleaning system \textsc{SCARE} does not focus on database constraints due to databases contains non-trivial errors and accurately predicts replacement for the noisy values. In contrast to \textsc{SCARE}, our solution is capable to model and predict not only missing values imputation and data consistency but also data deduplication. 
+
+\textbf{Statistical Relational Learning}: An advantage of probabilistic modeling for improving data quality was investigated in~\cite{doi:10.1080/01621459.1972.10481323} and~\cite{chen2011usher}. Markov logic as a formalism for joint inference has been successfully used in a number of tasks, including natural language processing \cite{che2010jointly},~\cite{riedel08collective},~\cite{meza09jointly}, ontology alignment and data integration~\cite{niepert2011probabilistic} and coreference resolution~\cite{poon2008joint}, \cite{singla2006entity}. These research results demonstrated the clear advantage of the joint modeling vs. pipeline execution. We are the first to apply this formalism to data cleaning and show the benefits of a joint data cleaning approach that uses MLNs as a framework for interacting data quality rules. 
+

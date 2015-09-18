@@ -1,0 +1,58 @@
+%\documentclass[11pt, landscape]{article}
+
+\documentclass{vldb}
+
+\usepackage{booktabs}
+\usepackage[table,xcdraw]{xcolor}
+
+\begin{document}
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{booktabs}
+% \usepackage[table,xcdraw]{xcolor}
+% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
+
+\begin{table*}[h]
+
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+\rowcolor[HTML]{C0C0C0} 
+\textbf{C\_ID} & \textbf{FN}     & \textbf{LN}     & \textbf{STREET}    & \textbf{CITY}        & \textbf{ZIP}   & \textbf{TEL}   \\ \midrule
+1     & Ron    & Howard & 1 Sun Dr  & Los Angeles & 90001 & 12345 \\
+2     & Robert & Miller & 12 Hay St & Napa        & 94558 & 11234 \\ \bottomrule
+\end{tabular}
+\caption{\textsc{customer} table}
+\end{table*}
+
+\begin{table*}[h]
+
+\begin{tabular}{@{}llll@{}}
+\rowcolor[HTML]{C0C0C0} 
+\textbf{A\_ID} & \textbf{NAME}      & \textbf{VENDOR} & \textbf{PRICE} \\
+1              & Leather Case Pink  & ASUS            & 39.90          \\
+2              & Leather Case Black & Apple           & 49.90          \\
+3              & Leather Case GS5   & Samsung         & \textbf{19.90}
+\end{tabular}
+\caption{\textsc{accessories} table}
+\label{my-label}
+\end{table*}
+
+%%%%% ORDERS table %%%%%%%
+\begin{table*}[h]
+
+\begin{tabular}{@{}lllllllllll@{}}
+\rowcolor[HTML]{C0C0C0} 
+\textbf{O\_ID} & \textbf{TITLE}   & \textbf{ITEM} & \textbf{VENDOR} & \textbf{FN}                          & \textbf{LN} & \textbf{STREET}                     & \textbf{CITY}                        & \textbf{ZIP} & \textbf{PHONE}                       & \textbf{PRICE}                         \\
+1              & iPhone6          & phone         & Apple           & {\color[HTML]{6200C9} \textbf{R.}}   & Howard      & 1 Sun Dr                            & {\color[HTML]{FE0000} \textbf{null}} & 90001        & {\color[HTML]{FE0000} \textbf{null}} & 599                                    \\
+2              & Galaxy S5        & phone         & Samsung         & {\color[HTML]{FE0000} \textbf{null}} & Miller      & 12 Hay St                           & {\color[HTML]{FE0000} \textbf{null}} & 94558        & 11234                                & 399                                    \\
+3              & Nexus 5          & phone         & Asus            & Ron                                  & Howard      & {\color[HTML]{FE0000} \textbf{null}} & {\color[HTML]{FE0000} \textbf{null}} & 90001        & 12345                                & 349                                    \\
+4              & Leather Case GS5 & accessories   & Samsung         & {\color[HTML]{6200C9} \textbf{Bob}}  & Miller      & 12 Hay St                           & Napa                                 & 94558        & {\color[HTML]{FE0000} \textbf{null}} & {\color[HTML]{6200C9} \textbf{119.90}}
+\end{tabular}
+\caption{\textsc{orders} table}
+\end{table*}
+
+
+
+
+\end{document}
