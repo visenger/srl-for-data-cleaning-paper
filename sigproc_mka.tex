@@ -26,7 +26,8 @@
 %
 % For tracking purposes - this is V3.1SP - APRIL 2009
 
-\documentclass{acm_proc_article-sp}
+%\documentclass{acm_proc_article-sp}
+\documentclass{sig-alternate}
 
 \usepackage{times, epsfig}
 \usepackage{url}
@@ -46,11 +47,19 @@
 \usepackage{amsfonts}
 \usepackage{siunitx}
 
+\newcommand{\anno}[1]{\textcolor{red}{\textsc{[ #1 ]}}}
+\newcommand{\note}[1]{\textcolor{red}{-- TODO #1 --}}
+
+\def\sharedaffiliation{%
+\end{tabular}
+\begin{tabular}{c}
+}
+
 \begin{document}
 
 %\title{Modeling Data Quality Rules with Markov Logic}
 %\title{Effective Exploiting of Statistical Relational Learning for Data Cleaning}
-\title{Using Statistical Relational Learning for Data Cleaning}
+\title{\textcolor{red}{Using} Statistical Relational Learning for Data Cleaning}
 
 %
 % You need the command \numberofauthors to handle the 'placement
@@ -81,50 +90,33 @@
 % of EIGHT authors. SIX appear on the 'first-page' (for formatting
 % reasons) and the remaining two appear in the \additionalauthors section.
 %
-\author{
-% You can go ahead and credit any number of authors here,
-% e.g. one 'row of three' or two rows (consisting of one row of three
-% and a second row of one, two or three).
+
+\author {
 %
-% The command \alignauthor (no curly braces needed) should
-% precede each author name, affiliation/snail-mail address and
-% e-mail address. Additionally, tag each line of
-% affiliation/address with \affaddr, and tag the
-% e-mail address with \email.
-%
-% 1st. author
-\alignauthor
-Larysa Visengeriyeva\\
-       \affaddr{TU Berlin}\\
-       \affaddr{Germany}\\
-       \email{fn.ln@tu-berlin.de}
-\alignauthor
-Alan Akbik\\
-       \affaddr{TU Berlin}\\
-       \affaddr{Germany}\\
-       \email{fn.ln@tu-berlin.de}
-\alignauthor
-Sebastian Schelter\\
-       \affaddr{TU Berlin}\\
-       \affaddr{Germany}\\
-       \email{fn.ln@tu-berlin.de}
-\and%
-\alignauthor
-Manohar Kaul\\
-       \affaddr{TU Berlin}\\
-       \affaddr{Germany}\\
-       \email{fn.ln@tu-berlin.de}
-\alignauthor
-Volker Markl\\
-       \affaddr{TU Berlin}\\
-       \affaddr{Germany}\\
-       \email{fn.ln@tu-berlin.de}
+ \alignauthor Larysa Visengeriyeva
+ %
+ \alignauthor Alan Akbik
+       %
+ \alignauthor Sebastian Schelter
+  %
+ \and
+ \alignauthor Manohar Kaul
+ %
+ \alignauthor Volker Markl
+       %
+ \alignauthor
+ \sharedaffiliation
+ \\
+ \affaddr{Technische Universit{\"a}t Berlin, Germany}\\
+ \affaddr{\raisebox{0pt}[0pt][0pt]\ firstname.lastname@tu-berlin.de}
+%  % \email{} does not work for some reason...
 }
+
 
 
 \maketitle
 \begin{abstract}
-High quality data is important for data science methods. Unfortunately,  digitally collected data often suffers from many data quality issues, such as duplicate, incorrect or incomplete data. A common approach for counteracting such issues is to formulate a set of data agnostic cleaning rules intended to identify and repair incorrect, duplicate and missing data. There is also a need for new approaches to overcome the limits of existing heuristic data cleaning solution. In this paper, we address this issue by proposing an approach to data cleaning based on Statistical Relational Learning (SRL) and probabilistic inference. We argue that a well-known formalism - Markov logic - is a natural fit for modeling interacting data quality rules in a flexible and extensible way. We show how data quality rules expressed as first-order formulas can be directly translated into a predictive model in an SRL framework. This approach allows the usage of probabilistic joint inference over interleaved data cleaning rules to improve data quality. In an experimental study we demonstrate the viability of our proposed approach.
+High quality data is important for data science and data analysis. Unfortunately,  digitally collected data often suffers from many data quality issues, such as duplicate, incorrect or incomplete data. A common approach for counteracting such issues is to formulate a set of data agnostic cleaning rules intended to identify and repair incorrect, duplicate and missing data. There is a need for new approaches to overcome the limits of existing heuristic data cleaning solution. \note{Why? Which limits?} Therefore, we propose an approach to data cleaning based on Statistical Relational Learning (SRL) and probabilistic inference. We argue that a well-known formalism - Markov logic - is a natural fit for modeling interacting data quality rules in a flexible and extensible way. We show how data quality rules expressed as first-order formulas directly translate into a predictive model in an SRL framework. This approach allows the usage of probabilistic joint inference over interleaved data cleaning rules to improve data quality. \note{Mention contributions!} In an experimental study we demonstrate the viability of our proposed approach. \note{Mention details of best experimental outcomes, e.g. improved the accuracy by a factor of X.y compared to state-of-the-art solutions.}
 \end{abstract}
 
 

@@ -1,10 +1,17 @@
 \section{Data Cleaning Scenario}
+
+\anno{This section is well-written and enlightening to read. However, it is way too long, we did still not reach the contribution part of the paper....}
+
+\anno{maybe we should merge this with section 4 (where we finally have a contribution...)}
+
+\anno{Maybe we should name this section something like "Limitations of first-order logic for data cleaning or so", that would make its purpose much more clear!}
+
 \label{sec:example}
 % CUSTOMER
-\begin{table}[t]\footnotesize
+\begin{table}[h]\footnotesize
 \scriptsize
 \begin{tabular}{lllllll} \toprule 
-\textbf{id} &  \textbf{fn} & \textbf{ln} & \textbf{st} & \textbf{city} & \textbf{zip} & \textbf{tel} \\ \midrule
+\textbf{id} &  \textbf{firstname} & \textbf{lastname} & \textbf{street} & \textbf{city} & \textbf{zipcode} & \textbf{phone} \\ \midrule
 $c_1$ & Ron & Howard & 1 Sun Dr. & Los Angeles & 90001 & 12345 \\
 $c_2$ & Max & Miller & 12 Hay St. & Napa & 94558 & 11234 \\ \bottomrule
 \end{tabular}
@@ -14,10 +21,10 @@ $c_2$ & Max & Miller & 12 Hay St. & Napa & 94558 & 11234 \\ \bottomrule
 \end{table}
 
 % TRANSACTION
-\begin{table}[t]\footnotesize
+\begin{table}[h]\footnotesize
 \scriptsize
 \begin{tabular}{llllllll} \toprule 
-\textbf{id} & \textbf{item} &  \textbf{fn} & \textbf{ln} & \textbf{st} & \textbf{city} & \textbf{zip} & \textbf{tel} \\ \midrule
+\textbf{id} & \textbf{item} &  \textbf{firstname} & \textbf{lastname} & \textbf{street} & \textbf{city} & \textbf{zipcode} & \textbf{phone} \\ \midrule
 $t_1$ & iPhone6 & R. & Howard & 1 Sun Dr. & L.A. & null & null \\
 $t_2$ & Galaxy5 & null & Miller & 12 Hay St. & null & 94558 & 11234 \\
 $t_3$ & Nexus5 & Howard & Ron & null & null & 90001 & 12345 \\ \bottomrule
@@ -29,87 +36,28 @@ $t_3$ & Nexus5 & Howard & Ron & null & null & 90001 & 12345 \\ \bottomrule
 
 
 %\todo[inline]{LV: write data cleaning rules in plain English (for example see the NADEEF paper). Use rules designation like in definitions below: $\phi$ for FD $\psi$ for CFD $\mu$ for MD and $\xi$ for CIND}
-As an example, consider the following relational tables.  
-The \textsc{customer} table (Table~\ref{tab:cust}) records address and contact details of 
-each customer, while
-the \textsc{transaction} table (Table~\ref{tab:trans}) records each item bought and personal details as 
-entered by the customer during the purchase. 
-For ease of explanation, we alias \textsc{customer} as \textsc{c} and 
-\textsc{transaction} as \textsc{t}. Apparently there exist several data quality issues. 
-The first are missing values in the \textsc{transaction} table, indicated by \emph{null} values. The 
-second are false values: For instance, the customer ``Ron Howard'' ($c_1$) 
-is involved in transaction $t_3$ , but here his name is falsely recorded as ``Howard Ron''. 
-The third are 
-duplication issues, the city of ``Los Angeles'' is sometimes entered into the table as ``L.A.'' while the 
-first name ``Ron'' is once abbreviated as ``R.''. 
+Consider the following relational tables as an example. The \textsc{customer} table (Table~\ref{tab:cust}) records address and contact details of each customer, while the \textsc{transaction} table (Table~\ref{tab:trans}) records each item bought and personal details as entered by the customer during the purchase. 
+There exist several data quality issues: (1) Missing values in the \textsc{transaction} table, indicated by \emph{null} values; (2) False values, e.g.,  the customer ``Ron Howard'' is involved in transaction $t_3$ , but here his name is falsely recorded as ``Howard Ron''; (3) Duplication issues, e.g., the city of ``Los Angeles'' is sometimes entered into the table as ``L.A.'' and the first name ``Ron'' is once abbreviated as ``R.''. 
 
-These issues can be addressed for each transaction by identifying the corresponding entries in the \textsc{customer} table and using this to automatically clean the transaction data. Although enough information remains to make such links possible through manual linking, defining automatic cleaning rules to accomplish this is not a trivial task. For instance, while we can define a hard rule that states that $\textsf{city}$ field values ``L.A.'' and 
-``Los Angeles'' are always the same, we cannot do the same for the $\textsf{fn}$ values ``R.'' and 
-``Ron''. Rather, we would need a \emph{soft rule} that indicates that both strings \emph{possibly} refer 
-to the same entity, but that we may require additional evidence. Consider also the \emph{null} value in $t_1.$\textsf{zip}. We may want to fill this missing value by linking 
-the transaction to customer $c_1$, but only the fields \textsf{ln} and \textsf{st} fully match, while 
-\textsf{city} (and possibly \textsf{fn}) may match using the de-duplication rules mentioned above. Even 
-though this provides significant evidence that the transaction should be linked to customer $c_1$, 
-there is still a chance that two different people share the same last name and street address in a large 
-city. Only if we include the \textsf{tel} field into the rule can we be reasonably certain that they 
-should be linked, but as the example shows, the value for this field is missing. 
+An approach to address these issues is to to identify the corresponding entries for each transation in the \textsc{customer} table and use these to automatically clean the transaction data. Although enough information remains to make such links possible through manual linking, defining automatic cleaning rules to accomplish this is not a trivial task. For instance, a hard rule that states that $\textsf{city}$ field values ``L.A.'' and ``Los Angeles'' are always the same, intuitively makes sense. Yet, this does not hold for the $\textsf{firstname}$ values ``R.'' and ``Ron''. Rather, we would need a \emph{soft rule} that indicates that both strings \emph{possibly} refer to the same entity, but that we may require additional evidence. Consider also the \emph{null} value in $t_1.$\textsf{zipcode}. We may want to fill this missing value by linking the transaction to customer $c_1$, but only the fields \textsf{lastname} and \textsf{street} fully match, while \textsf{city} (and possibly \textsf{firstname}) may match using the de-duplication rules mentioned above. Even though this provides significant evidence that the transaction should be linked to customer $c_1$, there is still a chance that two different people share the same last name and street address in a large city. Only if we include the \textsf{phone} field into the rule can we be reasonably certain that they should be linked, but as the example shows, the value for this field is missing. 
 
-This example illustrates the limitations of data cleaning via hard rules: Because the example table is 
-heavily corrupted, nearly no hard data cleaning rules can be defined that may not create errors of their 
-own. Instead, we could define a number of \emph{soft rules} that aggregate evidence, such as a first 
-name abbreviation rule (``R.'' vs. ``Ron''), a first and last name switch rule (indicating that there is a 
-small chance that ``Ron Howard'' and ``Howard Ron'' are the same person) and rules that indicate that 
-the more fields two tuples in the \textsc{customer} and \textsc{transaction} tables share, the more likely 
-it is that they refer to the same person. 
+This example illustrates the limitations of data cleaning via hard rules: Because the example table is heavily corrupted, nearly no hard data cleaning rules can be defined that may not create errors of their own. Instead, we could define a number of \emph{soft rules} that aggregate evidence, such as a first 
+name abbreviation rule (``R.'' vs. ``Ron''), a first and last name switch rule (indicating that there is a small chance that ``Ron Howard'' and ``Howard Ron'' are the same person) and rules that indicate that the more fields two tuples in the \textsc{customer} and \textsc{transaction} tables share, the more likely 
+it is that they refer to the same person. \anno{You are switching between talking about hard and soft rules. Talk about hard rules first, then introduce soft rules.}
 
-Given the database schema explained above, consider the functional dependency: 
-\begin{equation*}
-\textsf{fd}: \textsc{t}([\textsf{city}, \textsf{tel}] \rightarrow [\textsf{st}, \textsf{zip}])
-\end{equation*}
-\vspace{-2em}
+The functional dependency: $\textsf{fd}: \textsc{transaction}([\textsf{city}, \textsf{phone}] \rightarrow [\textsf{street}, \textsf{zipcode}])$ declares that, in the \textsc{transaction} table, the two fields \textsf{city} and \textsf{phone} together 
+uniquely determine the two fields \textsf{street} and \textsf{zipcode}. Although two instances of the customer ``Ron Howard'' in table~ are recorded, one is missing the \textsf{phone} value. In this case, the rule only applies when combined with additional data cleaning rules. The rule $\textsf{cfd}: \textsc{transaction}([\textsf{zipcode}] \rightarrow [\textsf{city}], T_1 =(90001~||~\text{Los~Angeles}))$ states that every tuple in which the value for \textsf{zipcode} equals $90001$ must have its \textsf{city} attribute set to ``Los~Angeles". In our example in Table~\ref{tab:trans}, this rule corrects the \emph{null} value in transaction $t_3$. 
 
-This rule declares that, in the \textsc{transaction} table, 
-the two fields \textsf{city} and \textsf{phone} together 
-uniquely determine the two fields \textsf{st} and \textsf{zip}. 
-This implies that if 
-two entries share the same city and phone number, they must also share the same address. In our example in Tables~\ref{tab:trans}, 
-this rule cannot be applied. Although two instances of the customer ``Ron Howard''
-are recorded, one is missing the \textsf{tel} value. Thus, in the example, this rule can only be applied 
-together with additional data cleaning rules. Consider this CFD for Table~\ref{tab:trans}: 
-\begin{equation*}
-\textsf{cfd}: \textsc{t}([\textsf{zip}] \rightarrow [\textsf{city}],
-T_1 =(90001~||~\text{Los~Angeles}))  
-\end{equation*}
-This rule states that every tuple in which the value for
-\textsf{zip} equals $90001$ should have its \textsf{city} attribute set to ``Los~Angeles".
-In our example in Table~\ref{tab:trans}, this rule can be used to correct the \emph{null} 
-value in transaction $t_3$. 
-
-Consider the \textsf{fn} field in transaction $t_1$ in Table~\ref{tab:trans}. 
-We may define a rule that indicates that the values ``R.'' and ``Ron'' could refer to the same name, but cannot always be certain whether
-this is the case. To include additional evidence, we create the following MD to link transaction $t_1$ 
+For the \textsf{firstname} field in transaction $t_1$ in Table~\ref{tab:trans}, we could define a rule indicating that the values ``R.'' and ``Ron'' refer to the same name, but cannot always be certain whether this is the case. To include additional evidence, we create the following MD to link transaction $t_1$ 
 to customer $c_1$: 
-\begin{align*} 
- &\textsf{md}: \textsc{t}[\textsf{ln}, \textsf{city}, \textsf{st}] 
- = \textsc{c}[\textsf{ln}, \textsf{city}, \textsf{st}] \\
- &\land \textsc{t}[\textsf{fn}] \approx \textsc{c}[\textsf{fn}] 
- \rightarrow \textsc{t}[\textsf{fn}] \rightleftharpoons \textsc{c}[\textsf{fn}]
-\end{align*}
-\vspace*{-0.5cm}
+$ \textsf{md}: \textsc{transaction}[\textsf{lastname}, \textsf{city}, \textsf{street}]
+= \textsc{customer}[\textsf{lastname}, \textsf{city}, \textsf{street}] \land \textsc{t}[\textsf{firstname}] \approx \textsc{customer}[\textsf{firstname}] 
+ \rightarrow \textsc{transaction}[\textsf{firstname}] \rightleftharpoons \textsc{customer}[\textsf{firstname}]$
+
 
 This MD states that if any two tuples from \textsc{transaction} and \textsc{customer}
-agree on \textsf{ln}, \textsf{city}, \textsf{st},
-and their \textsf{fn} values are similar, then \textsc{t}[\textsf{fn}] and 
-\textsc{c}[\textsf{fn}]
-should be identified and have the same values.
-
-This is an example of how the notion of similarity may be included in rules, but only within first-order logic, i.e., the similarity
-condition is either \emph{true} or \emph{false}. In reality though, we may be able
-to determine more graded similarity, i.e., some types of similarity that we deem to be more probable (``L.A.'' and ``Los Angeles''), 
-and others that are less probable (``R.'' and ``Ron''). Moreover, we may have different levels
-of confidence regarding functional or matching dependencies that we define. 
-The above rule for example may be deemed as likely, 
-but not necessarily always true. However, hard first-order logic does not permit us to formalize this intuition.
+agree on \textsf{lastname}, \textsf{city}, \textsf{street}, and their \textsf{firstname} values are similar, then \textsc{transaction}[\textsf{firstname}] and 
+\textsc{customer}[\textsf{firstname}] should have the same values. This rule shows how the notion of similarity may be included in rules, but only within first-order logic, i.e., the similarity condition is either \emph{true} or \emph{false}. In reality though, we are able to determine more graded similarity, i.e., some types of similarity that we deem to be more probable (``L.A.'' and ``Los Angeles''), and others that are less probable (``R.'' and ``Ron''). Moreover, we may have different levels of confidence regarding functional or matching dependencies that we define. The above rule for example may be deemed as likely, but not necessarily always true. However, hard first-order logic does not permit us to formalize this intuition.
 
 %Detecting inconsistencies between tuples across different relations requires definition of the interrelation dependencies such as \emph{(Conditional) Inclusion Dependencies}:
 %\begin{definition}

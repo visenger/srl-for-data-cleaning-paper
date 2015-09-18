@@ -5,8 +5,18 @@
 \section{Proposed Approach}
 \label{sec:method}
 
+% \begin{figure}[t]
+% \centering
+% \includegraphics[width=200px, height=140px]{img/system.pdf}
+% \caption{\anno{Rmove this picture?} Our proposed method for data cleaning based on Markov logic consists of three main components: 
+% (I) A \textbf{Rule-based Data Quality Management} component that is based on the data quality rules to address different data quality issues;
+% (II) A \textbf{relation prediction} component based on probabilistic inference performed by the Markov logic framework and (III) 
+% a \textbf{Data Layer} that includes a number of data sources including relational and semi-structured data.}
+% \label{fig:system}
+%\end{figure}     
+
 Our proposed approach is to model data cleaning rules in a Markov Logic~\cite{domingos2009markov} formalism and use probabilistic inference 
-for data cleaning. Figure~\ref{fig:system} shows a high-level overview of our system that consists of three main components: 
+for data cleaning. Conceptually, our system consists of three main components: 
 \begin{inparaenum}[\itshape I\upshape)]
 \item a Rule-based Data Quality Management component;
 \item a Statistical Inference with Markov Logic component; and

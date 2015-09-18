@@ -10,7 +10,8 @@
 %What is the problem?
 % see here for description why data quality is important.
 % http://books.google.de/books?hl=en&lr=&id=SULMBFgtwQoC&oi=fnd&pg=PA1&ots=uaNGyVfL7V&sig=RER31QotCCRJeaQq8OafAtpgK1k#v=onepage&q&f=false
-
+\note{'Using' in the title sounds weak. Can we have a title containing 'Enhancing' oder 'Leveraging'? To state the value added by SRL?}
+\note{We will rewrite the introduction once the experimental section is redone}
 Having access to high quality data is of great importance in data analysis. However, in the real world, data is often considered \textit{dirty}, meaning that it contains inaccurate, incomplete, inconsistent, duplicated, or stale values ~\cite{chu2004blissful}. A number of distinct data quality issues are known in the field of Data Quality Management such as \textit{data consistency}, \textit{currency}, \textit{accuracy}, \textit{deduplication} and \textit{information completeness}~\cite{fan2012foundations}. As previous work has observed, such data quality issues may be detrimental to data analysis~\cite{national2013Frontiers,Fan:2008:CFD:1366102.1366103} and cause huge costs to businesses ~\cite{waynew.eckerson2002}. Therefore, improving data quality with respect to business and integrity constraints is a crucial component of data management. 
 A common approach to increasing data quality is to formulate a set of \textit{data cleaning rules} that detect semantic errors by utilizing data dependencies~\cite{fan2012foundations, Arasu:2009:LDC:1546683.1547340, Dallachiesa:2013:NCD:2463676.2465327, llunaticVDLB2013b}. However, previous research identified a number of challenges associated with creating such rule sets: 
 \todo[inline]{Desiderata: 1.Usability and domain knowledge integration (aka human interaction); 2.Interleaved rules; 3.Automation}
@@ -25,12 +26,4 @@ In this paper, we present an approach to data cleaning based on Statistical Rela
 \todo[inline]{Contributions: 1.[Frontend] We demonstrate how data cleaning rules based on integrity constraints are modeled within the probabilistic-logic framework such as Markov logic; 2.[Backend/Compiler] We demonstrate how data cleaning problem is expressed as probabilistic graphical model and using joint inference for data correction prediction; 3. [Execution Engine] We demonstrate the empirical study of modeling and errors prediction in the data cleaning by using Markov Logic}
 \todo[inline]{Experimental results: Preview.}
  
- \begin{figure}[t]
- \centering
- \includegraphics[width=200px, height=140px]{img/system.pdf}
- \caption{Our proposed method for data cleaning based on Markov logic consists of three main components: 
- (I) A \textbf{Rule-based Data Quality Management} component that is based on the data quality rules to address different data quality issues;
- (II) A \textbf{relation prediction} component based on probabilistic inference performed by the Markov logic framework and (III) 
- a \textbf{Data Layer} that includes a number of data sources including relational and semi-structured data.}
- \label{fig:system}
-\end{figure}     
+
