@@ -157,32 +157,42 @@
 \caption{\label{tab:predicates} Markov logic predicates used in data quality rules.}
 \end{table}
 
-\todo[inline]{For each experiment follow the structure: 
-1. Corresponding Contribution
-2. Experimental Setup (Dataset; Method)
-3. Results (Describe plots, measures etc.)
-4. Explanation (Why we have such results) and Relation to Contribution
-}
+
 We now evaluate our proposed method through an experimental study in which we execute our method on a 
-well-known data sets used for evaluating data cleaning systems. To evaluate the effectiveness of our method we asses the accuracy and the scalability of proposed data cleaning with Markov logic. We provide a quality assessment and runtime evaluation for each of the datasets. 
+well-known data sets used for evaluating another data cleaning systems. To evaluate the effectiveness of our method we asses the accuracy and the scalability of proposed data cleaning with Markov logic.% We provide a quality assessment and runtime evaluation for each of the datasets. 
 
 \subsection{Experimental Setting} 
-We conducted our experiments on a real-life and synthetic data sets, which were also used by previous work to investigate data cleaning approaches.
+We conducted our experiments on a real-life and synthetic data sets, which were also used by previous work to investigate data cleaning approaches. We also distinguish between relational data formats and Web data.
 
 \textbf{\textsc{hosp}}. The \textsc{hosp} data set is taken from US Department of Health $\&$ Human Services\footnote{http://www.medicare.gov/hospitalcompare/Data/Data-Download.html}. This data set comprises 9 attributes: \textsf{addr}, \textsf{city}, \textsf{cond}, \textsf{country}, \textsf{hospname}, \textsf{measure}, \textsf{phone}, \textsf{state}, \textsf{zip}. 
 We used 6 CDFs and one MD, which were manually designed. These data quality rules were generously provided to us by the researchers Dallachiesa, M. et al. from~\cite{Dallachiesa:2013:NCD:2463676.2465327}. One example of their rules is a CFD that states that if two tuples of \textsf{hosp} agree on attribute values for $\textsf{zip}$, then they should also agree on \textsf{country} and \textsf{state} attributes values. They define one MD that makes use of another table, namely US ZIP codes: ZIPCode\footnote{http://databases.about.com/od/access/a/zipcodedatabase.htm}. This additional data set contains $43K$ tuples with two attributes: \textsf{zip} and \textsf{state}. The MD defines that if two tuples from \textsf{hosp} and ZIPCode respectively possess the same zip code values, and the state values are distinct, then the state value from the ZIPCode table should be adopted. 
 
-\textbf{\textsc{tpc-h}.} The \textsc{tpc-h}\footnote{http://www.tpc.org/tpch/} is well-known data set used in decision support benchmarks for databases. For our experiments we used two relations \textit{Customer} and \textit{Orders}, wich we joined in order to introduce duplications on the \textit{Customer} relations data. The resulted data set consists of 17 attributes of schema $T$: \textsf{c\_custkey}, \textsf{c\_name}, \textsf{c\_address},  \textsf{c\_nationkey}, \textsf{c\_phone}, \textsf{c\_acctbal},\\ \textsf{c\_mtksegment}, \textsf{c\_comment}, \textsf{o\_orderkey}, \textsf{o\_custkey},\\ \textsf{o\_orderstatus}, \textsf{o\_totalprice}, \textsf{o\_orderdate},\\ \textsf{o\_orderpriority}, \textsf{o\_clerk}, \textsf{o\_shippriority}, \textsf{o\_comment}.  
+\textbf{\textsc{tpc-h}.} The \textsc{tpc-h}\footnote{http://www.tpc.org/tpch/} is well-known data set used in decision support benchmarks for databases. For our experiments we used two relations \textit{Customer} and \textit{Orders}, wich we joined in order to introduce duplications on the \textit{Customer} relations data. The resulted data set consists of 17 attributes of schema $T$: \textsf{c\_custkey}, \textsf{c\_name}, \textsf{c\_address},  \textsf{c\_nationkey}, \textsf{c\_phone}, \textsf{c\_acctbal},\\ \textsf{c\_mtksegment}, \textsf{c\_comment}, \textsf{o\_orderkey}, \textsf{o\_custkey},\\ \textsf{o\_orderstatus}, \textsf{o\_totalprice}, \textsf{o\_orderdate},\\ \textsf{o\_orderpriority}, \textsf{o\_clerk}, \textsf{o\_shippriority}, \textsf{o\_comment}. 
 
-\textbf{\textsc{microsoft academic graph (msag)}.} \cite{msag2015} At the core of MSAG\footnote{http://research.microsoft.com/en-us/projects/mag/} is a heterogeneous entity graph comprised of six types of entities that model the scholarly activities: field of study, author, institution, paper, venue, and event.
+\textbf{Dirty Data.} The dirty data on relational data sets \textsc{hosp} and \textsc{tpc-h} is produced by introducing noise. There are several arts of noise our method is capable to deal with: missing values, errors from the active domain and typos. The initial data set is considered as being clean and therefore acting as a ground truth. We also manually assessed that the ground truth data set is consistent regarding the CFDs and MDs. Afterwards, we inserted noise to the data sets. We conducted our experiments on two data sets with a different noise rate ranging from $\mathsf{noi\%}$=2$\%$ to $\mathsf{noi\%}$=10$\%$, which were introduced into different data sets sizes ranging from 1k to 100k data points. The noise rate is a ratio of the number of erroneous values to the total number of values in the data set. Furthermore, we only introduced noise to the attributes which are involved in data quality rules.
 
-\todo[inline]{\textsc{msag} data set description; 1) see \cite{msag2015} for the description of the nature /graph/Web data; 2) Size;}  
+\textbf{\textsc{microsoft academic graph (msag)}.} Data quality issues are massively present in the context of the Web due to integration of heterogeneous data from different sources. Thus, to asses our method on the Web data cleaning, we include a third data set, which models the real-life academic activities. At the core of MSAG\footnote{http://research.microsoft.com/en-us/projects/mag/} data set \cite{msag2015} is a heterogeneous entity graph comprised of six types of entities that model the academic relationships: field of study, author, institution, paper, venue, and conference instances. The raw data is obtained from different sources and organized as connected graph schema. For our experiments, we selected three entities from the whole graph, namely \textit{author}, \textit{organisation} and \textit{paper} entities. This subgraph was primarily compiled from two types of sources: academic publishers and web-pages indexed by Bing search engine. This part of \textsc{msag} is of interest because it reveals important characteristics of extracted web data, such as missing and inconsistent values. In particular, we discovered that there are inconsistencies in organisation names for the same author. Furthermore, some entries suffers from missing affiliation by an author. In order to model and run data cleaning on web (graph) data, we consider the following attributes of the selected entities in \textsc{msag}: 
+\begin{table}[h]\footnotesize
+\scriptsize
+\centering
+\begin{tabular}{ccc}
+\textbf{\textit{Paper}}         & \textbf{\textit{Author}}     & \textbf{\textit{Organisation}}      \\ \hline
+\textsf{paper\_id}     & \textsf{author\_id} & \textsf{affiliation\_id}  \\
+\textsf{publish\_year} &            & \textsf{origin\_name}     \\
+              &            & \textsf{normalized\_name}\\ \hline
+\end{tabular}
+\end{table}
 
-\textbf{Dirty Data.} The dirty data on \textsc{hosp} and \textsc{tpc-h} we use in our experiments is produced by introducing noise. There are several arts of noise our method is capable to deal with: missing values, errors from the active domain and typos. The initial data set is considered as being clean and therefore acting as a ground truth. We also manually assessed that the ground truth data set is consistent regarding the CFDs and MDs. Afterwards, we inserted noise to the data sets. We conducted our experiments on two data sets with a different noise rate ranging from $\mathsf{noi\%}$=2$\%$ to $\mathsf{noi\%}$=10$\%$, which were introduced into different data sets sizes ranging from 1k to 100k data points. The noise rate is a ratio of the number of erroneous values to the total number of values in the data set. Furthermore, we only introduced noise to the attributes which are involved in data quality rules.
-\todo[inline]{MSAG missing values introduction; 1) describe the problem in msag data set; 2) explain how we obtain the gold standard}
-\todo[inline]{picture}
+\textbf{Data Quality Issues.} In order to perform data cleaning experiments on web data we extracted a subset of entities instances, which were complete. Having this clean data we reproduced data quality issues that we observed in \textsc{msag}: namely missing values. In order to create gold standard to asses the data cleaning method we proceed in the following way: We removed one affiliation entry from each author if there were more than three publications made by the same affiliation. In this way we created a data set with missing \textsf{affiliation\_id}, \textsf{origin\_name} and \textsf{normalized\_name} attributes. In general, we obtained graph data where $37\%$ of all authors reveal one missing edge to theirs affiliation; $27\%$ are missing two edges for theirs institutions; $15\%$ - three edges. Almost $21\%$ suffers from missing more than three edges. 
 
-We use the state-of-the-art inference engine for Markov logic \textit{RockIt}, developed by Noessner J. et al.~\cite{NoessnerNS13} for Markov logic modeling and performing statistical inference. All results in our experiments were achieved by using a Maximum A Posteriori (MAP) inference method for Statistical Relational Learning.
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.25\textwidth, trim = 0mm 4mm 0mm 5mm, clip]{img/graph01.png}
+    \caption{The part of the \textsc{msag} data set illustrating missing organisation value issue.}
+    \label{fig:msagmissing}
+\end{figure}
+
+We use the state-of-the-art inference engine for Markov logic \textit{RockIt}, developed by Noessner J. et al.~\cite{NoessnerNS13} for Markov logic modeling and performing statistical inference. All results in our experiments were achieved by using MAP inference method for Statistical Relational Learning by using Linux machine with an Intel 3.4GHz 4 Cores CPU 16GB RAM.
 
 \textbf{Evaluation metrics}To evaluate the effectiveness of our data cleaning method we consider two aspects: the accuracy and the scalability of the method. To assess the quality of the data cleaning framework on relational data, we use \textit{Precision ($P$)}, \textit{Recall ($R$)} and \textit{F-measure ($F_1$)}. We also acquired master data (also referred to as \textit{"gold standard"}), which is clean and correct. We use this master data to determine $true~positives (tp)$ - correctly selected by the method attribute values; $false~positives (fp)$- is a degree of false assignment of the attribute values that are selected to be corrected and $false~negatives (fn)$- correct attribute value, which were not found by our framework.
 
@@ -195,7 +205,12 @@ Therefore, precision is the ratio of true positives to all values found and reca
 The efficiency of our method we asses by running our experiments on data sets of different size ranging from 1k to 100k tuples each.
 
 \subsection{Experimental Results} 
-
+\todo[inline]{For each experiment follow the structure: 
+1. Corresponding Contribution
+2. Experimental Setup (Dataset; Method)
+3. Results (Describe plots, measures etc.)
+4. Explanation (Why we have such results) and Relation to Contribution
+}
 
 We conducted several series of experiments:  two series on \textsc{hosp} data set with different noise percentage and one experiment set was conducted on the synthetic data set \textsc{tpc-h}, the final set of experiments we performed on real world Web data set \textsc{msag}: 
 
