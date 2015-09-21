@@ -1,7 +1,19 @@
-# Travis CI config
+os: linux
 
-pdflatex sigproc_mka
-bibtex sigproc_mka
-bibtex sigproc_mka
-pdflatex sigproc_mka
-pdflatex sigproc_mka
+# we use the R VM because it contains LaTeX and pandoc
+language: r
+
+# we need super user privileges, so we depend on the old travis-ci infrastructure
+sudo: required
+
+# we can install additional software
+apt_packages:
+# we download pdf2djvu to also generate a djvu file of our LaTeX source
+  - pdf2djvu
+
+script:
+# in the next step we use pdflatex to convert .tex to .pdf
+# of course we could use pandoc for this also, but pdflatex generates nicer PDFs
+  - pdflatex -interaction=nonstopmode HowtoDeployLatexDocs-DE.tex
+  - pdflatex -interaction=nonstopmode HowtoDeployLatexDocs-EN.tex
+  - pdflatex -interaction=nonstopmode README.tex
