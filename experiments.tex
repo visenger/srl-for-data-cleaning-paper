@@ -244,7 +244,8 @@ We now evaluate our method through an experimental study in which we execute our
 well-known data sets used for evaluating another data cleaning systems. Each of the data sets suffers from different data quality issues such as duplicates, inconsistency or missing values. To evaluate the effectiveness of our method we asses the accuracy and the scalability of proposed data cleaning with Markov logic.% We provide a quality assessment and runtime evaluation for each of the datasets. 
 
 \subsection{Experimental Setting} 
-We conducted our experiments on a real-life and synthetic data sets, which were also used by previous work to investigate data cleaning approaches. We also distinguish between relational data formats and Web data.
+We conducted our experiments on a real-life and synthetic data sets, which were also used by previous work to investigate data cleaning approaches. We also distinguish between relational data formats and Web data. 
+\todo[inline]{make our data public}
 
 \textbf{\textsc{hosp}}. The \textsc{hosp} data set is taken from US Department of Health $\&$ Human Services\footnote{http://www.medicare.gov/hospitalcompare/Data/Data-Download.html}. This data set comprises 9 attributes: \textsf{addr}, \textsf{city}, \textsf{cond}, \textsf{country}, \textsf{hospname}, \textsf{measure}, \textsf{phone}, \textsf{state}, \textsf{zip}. 
 We used 6 CDFs and one MD, which were manually designed. These data quality rules were generously provided to us by the researchers Dallachiesa, M. et al. from~\cite{Dallachiesa:2013:NCD:2463676.2465327}. One example of their rules is a CFD that states that if two tuples of \textsf{hosp} agree on attribute values for $\textsf{zip}$, then they should also agree on \textsf{country} and \textsf{state} attributes values. They define one MD that makes use of another table, namely US ZIP codes: ZIPCode\footnote{http://databases.about.com/od/access/a/zipcodedatabase.htm}. This additional data set contains $43K$ tuples with two attributes: \textsf{zip} and \textsf{state}. The MD defines that if two tuples from \textsf{hosp} and ZIPCode respectively possess the same zip code values, and the state values are distinct, then the state value from the ZIPCode table should be adopted. 
@@ -472,10 +473,11 @@ This experiment tells us that the joint modeling and joint inference on detectio
 
  \\ %\hline
 \end{tabular}
-\caption{(a) \textsc{msag} cleaning: Recall and F1 values; (b) \textsc{msag} Experiments} \label{tab:msag}
+\caption{(a) \textsc{msag} cleaning: Recall and F1 values; (b) \textsc{msag} Experiments} 
+\label{tab:msag}
 \end{table*}
 
-\todo[inline]{MSAG Experiment description: Dataset, pre-clustering, noise, results...Information completeness and data consistency interaction: see book p.171, p.173.. Application on Web/graph data. \cite{Chen2009extended} WE CAN MODEL ADDITIONAL KNOWLEDGE e.g build-in predicates }
+In the following experiment we studied the efficiency of the data cleaning on Web data by leveraging the connection between information completeness and data consistency. Meaning that to repair the attributes of an entity they should not be missing and on the other hand, for information completeness the data should be consistent. The initial size of the \textsc{msag} subgraph \textit{Paper}-\textit{Author}-\textit{Organisation} is about 30GB and certainly not tractable to run the inference on whole data. Therefore, in this experiment we partitioned our data by running inference for each author in separate. In this way we obtained subgraphs for each \textit{Author}-entity with number of \textit{Paper}-\textit{Author} edges beginning from 10. For this experiment we randomly selected 600 \textit{Author}-entities and Table \ref{tab:msag} (a) and (b) shows the accuracy of our approach on the sample of \textsc{msag} data set. The result shows the following: The method demonstrates overall $F_1$ score greater than $50\%$ and recall greater than $78\%$ for \textit{Author}-entities with one to two missing edges. Beginning from three missing edges we still are able to achieve a good recall, though the precision (and therefore $F_1$ score) drops. We explain this because our approach selects more false positives with increasing number of missing values. This experiment tells us that applying on Web data, our method can still produce good results, yet extending data cleaning rules with domain specific information should be studied further in order to reduce false positives values in data repair.
 
 \textbf{Exp-4: Rules Execution Order}
 %\todo[inline]{Execution order experiment description:  Dataset, method, results... Handling deduplication and accuaracy issues interaction}
