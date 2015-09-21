@@ -1,11 +1,13 @@
 os: linux
 
-# we use the R VM because it contains LaTeX and pandoc
+# we use the R VM because it contains LaTeX
 language: r
 
 # we need super user privileges, so we depend on the old travis-ci infrastructure
 sudo: required
 
+
 script:
+
 # in the next step we use pdflatex to convert .tex to .pdf
-  - pdflatex sigproc_mka.tex
+  - pdflatex -interaction=nonstopmode sigproc_mka.tex
