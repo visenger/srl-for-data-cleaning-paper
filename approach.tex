@@ -207,15 +207,13 @@ each element represents the number of true groundings of the
 corresponding literal in the formula and $d$ denotes the 
 maximum number of literals in a given formula. Additionally, 
 we have a weight/parameter vector $\theta \in \mathcal{R}^d$:
-\vspace{-3em}
-
+%\vspace{-3em}
 \begin{equation*}
 Pr \left( q | \theta \right) = 
 \frac{1}{Z(\theta)} \exp\left( \langle \theta, \phi(q) \rangle  \right), 
 Z(\theta) = \sum_{q \in \mathcal{L}^n}\exp\left( \langle \theta, \phi(q) \rangle  \right) 
 \end{equation*}
-\vspace{-2em}
-
+%\vspace{-2em}
 where $\langle \theta, \phi(q) \rangle$ denotes a dot product. 
 $Z(\theta)$ is the normalization constant also called the 
 \emph{partition function}. Since the partition function is a constant and the exponential is monotonic, finding the MAP assignment in our data cleansing problem is equivalent to finding the assignment $q_M$ that maximizes the probability $Pr \left( q | \theta \right)$.
@@ -236,6 +234,6 @@ that are available to solving MAP inference problems, we chose to cast the infer
 passing} perform \emph{belief propagation} 
 along the edges of the graphical model. Although, message passing is easy to implement it has troubles converging and tends not to give as good results as ILP. \note{big claim, can you give a reference?}
   
-\todo[inline]{Using CPI method for the inference}
+\todo[inline]{Motivate why we are using CPI method for the inference - see here paper \cite{riedel08improving}}
 \todo[inline]{The complexity of the method}
 
