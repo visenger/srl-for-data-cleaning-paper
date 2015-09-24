@@ -256,7 +256,7 @@ We use 6 CDFs and one MD, which have been manually designed. These data quality 
 
 \textbf{\textsc{microsoft academic graph (msag)}.} Data quality issues are massively present in the context of the web due to the integration of heterogeneous data from different sources. Thus we include a third dataset - \textsc{microsoft academic graph (MSAG)}\footnote{http://research.microsoft.com/en-us/projects/mag/}~\cite{msag2015} - to assess our method on web data cleaning. MSAG is a heterogeneous entity graph comprised of six types of entities that model real-life academic relationships: field of study, author, institution, paper, venue, and conference instances. The raw data has been obtained from different sources (academic publishers and web-pages indexed by Bing search engine) and is organized as connected graph schema. For our experiments, we select three entities from the whole graph, namely \textit{author}, \textit{organisation} and \textit{paper} entities. This part of \textsc{MSAG} is of interest because it reveals important characteristics of extracted web data, such as missing and inconsistent values. In particular, we discover that there are inconsistencies in organisation names for the same author. Furthermore, a number of entries suffer from missing affiliation by an author. In order to model and run data cleaning on this web dataset, we consider the attributes of the selected entities in \textsc{MSAG}, as presented in Table~\ref{tab:msagattrs}. 
 \begin{table}[t]\footnotesize
-\scriptsize
+%\scriptsize
 \centering
 \begin{tabular}{ccc}
 \textbf{\textit{Paper}}         & \textbf{\textit{Author}}     & \textbf{\textit{Organisation}}      \\ \hline

@@ -21,10 +21,8 @@
 We propose to model data cleaning rules in the \textit{Markov logic}~\cite{domingos2009markov} formalism and use probabilistic inference for data cleaning. Markov logic is a knowledge representation system that combines first-order logic as a declarative language and probabilistic graphical models (undirected Markov Networks) on top of which we perform probabilistic inference. We introduce technical aspects of Markov Logic and joint inference for data cleaning in Section~\ref{subsec:jointinference}
 
 The main advantage of Markov logic is the ability to reason simultaneously about complex and interacting relationships. By modeling different data cleaning rules as Markov logic program we leverage the joint inference on underlying probabilistic graphical model. In this way, we implement \textit{holistic} data cleaning, which is one of main requirements for the data cleaning systems \cite{fan2013data, Fan:2014:IRM:2628135.2567657, Dallachiesa:2013:NCD:2463676.2465327}. If no perfect resolution of a ruleset is possible, we want to find data cleaning steps that fulfill as many rules as possible while violating only a few~\cite{genesereth1987logical, domingos2009markov}. Therefore, in order to infer the types of errors and their sources, we consider integrity constraints to be probabilistic. We build on an existing approach to specify \textit{"soft"} functional dependencies between columns~\cite{Ilyas:2004:CAD:1007568.1007641}. 
-
-Another advantage of Markov Logic is that it allows us to tackle overfitting, a common problem when applying machine learning for repairing errorneous data \anno{You still need to explain overfitting!, EDBT reviewers might not be ML experts}. Overfitting occurs when one applies data quality rules that hold only for a fraction of data, but do not hold globally. Markov logic programs with \textit{"soft"} rules prohibit overfitting by adding weights to the constaint-based rules and incorporating partial knowledge \cite{singla2006entity, poon2008joint, lowd2007recursive}. \note{one more sentence, how does adding weights prohibit overfitting? do we show this experimentally somehow? if not, we might want to remove this paragraph}. Furthermore, Markov Logic enables us to extend traditional data quality rules with semantic constraints~\cite{spies2013knowledge}. \note{explain this in more detail, I don't understand what you mean}
-
-
+%Another advantage of Markov Logic is that it allows us to tackle overfitting, a common problem when applying machine learning for repairing errorneous data \anno{You still need to explain overfitting!, EDBT reviewers might not be ML experts}. Overfitting occurs when one applies data quality rules that hold only for a fraction of data, but do not hold globally. Markov logic programs with \textit{"soft"} rules prohibit overfitting by adding weights to the constaint-based rules and incorporating partial knowledge \cite{singla2006entity, poon2008joint, lowd2007recursive}. \note{one more sentence, how does adding weights prohibit overfitting? do we show this experimentally somehow? if not, we might want to remove this paragraph}. 
+Furthermore, Markov Logic enables us to extend traditional data quality rules with semantic constraints~\cite{spies2013knowledge}. \note{explain this in more detail, I don't understand what you mean}
 
 In the following, we illustrate how to transfer data cleaning rules into Markov Logic and leverage probabilistic inference to determine data repair operations for a given dataset. \anno{See also Figure \ref{fig:system} for high-level overview of our method-workflow.} \note{YOU NEED TO EXPLAIN FIGURES, NOT JUST REFERENCE THEM *PEITSCH*}
 
@@ -75,7 +73,7 @@ Analogously, we translate a matching dependency $ \mu: \mathcal{S}_1[x_1]\approx
 If we specify a matching dependency using two relations, we need to mark the attributes corresponding to a relation with that relation $\mathsf{\textsf{attr-X/}}\mathcal{R}$. Furthermore, as introduced above, we use predicates to represent operators in the data quality as shown in Table \note{ref table}.
 
 \begin{table}[h]\footnotesize
-%\scriptsize
+\scriptsize
 \centering
 \begin{tabular}{@{}lcl@{}}
 \toprule
