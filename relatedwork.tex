@@ -15,8 +15,6 @@ Our research builds on previous work from two areas:
 
 A generalization of dependencies was proposed by the Llunatic system in \cite{llunaticVDLB2013b}. They proposed a new language based on equality generated dependencies to standardize the way to express intra- and inter-dependencies. A clustering-based declarative approach for deduplication by considering data constraints was suggested in the Dedupalog language in \cite{Arasu:2009:LDC:1546683.1547340}.
 
-A reference system to ours is \textsc{UniClean}, proposed in \cite{Fan:2014:IRM:2628135.2567657}. Being a repairing system, \textsc{UniClean} also creates fixes by declaring cleaning rules and unifying matching and repairing processes. In general, \textsc{UniClean} achieves high accuracy by executing three algorithms for generating fixes in consecutive manner. In contrast, our data cleaning solution is a one-step process for executing the inference on MLN modeled according to data cleaning rules. Furthermore, as our experiments show, our approach does not require the availability of master data. 
-
 The \textsc{Nadeeff} system from \cite{Dallachiesa:2013:NCD:2463676.2465327} is the closest system to ours regarding to the data cleaning systems requirements coverage. Similar to our system, they treat data quality rules holistically. In contrast to \textsc{Nadeeff} we 
 \begin{inparaenum}[\itshape 1\upshape)]
 	\item Use first-order logic to define all the kind of data quality rules and therefore in our system we do not have black-boxes in form of UDFs. Furthermore, we claim better usability of the system through the declarative rules formulation;
