@@ -239,6 +239,18 @@ hidden \\ predicates
 \caption{\label{tab:predicates} Markov logic predicates used in data quality rules.}
 \end{table*}
 
+\begin{table}[t]\footnotesize
+%\scriptsize
+\centering
+\begin{tabular}{ccc}
+\textbf{\textit{Paper}}         & \textbf{\textit{Author}}     & \textbf{\textit{Organisation}}      \\ \hline
+\textsf{paper\_id}     & \textsf{author\_id} & \textsf{affiliation\_id}  \\
+\textsf{publish\_year} &            & \textsf{origin\_name}     \\
+              &            & \textsf{normalized\_name}\\ \hline
+\end{tabular}
+\caption{Entities \textbf{\textit{Paper}}, \textbf{\textit{Author}} and \textbf{\textit{Organisation}} and their attributes that have been used in experiments for Web data cleaning with Markov Logic.}
+    \label{tab:msagattrs}
+\end{table}
 
 We evaluate our method through an experimental study on well-known datasets used for assessing another data cleaning systems. Each of the datasets suffers from different data quality issues such as duplicates, inconsistency or missing values. 
 
@@ -255,18 +267,6 @@ We use 6 CDFs and one MD, which have been manually designed. These data quality 
 \textbf{Dirty Data.} The dirty data on relational datasets \textsc{hosp} and \textsc{tpc-h} is produced by introducing noise. There are several kinds of noise which our method handles: missing values, errors from the active domain and typos. We consider the initial as being clean and therefore use it as ground truth. Additionally, we manually assess that the ground truth dataset is consistent regarding the CFDs and MDs. Afterwards, we insert noise into the datasets. We conduct our experiments on two datasets with different noise rates ranging from $\mathsf{noi\%}$=2$\%$ to $\mathsf{noi\%}$=10$\%$. We introduce this noise into different dataset sizes ranging from one thousand to one hundred thousand data points. The noise rate depicts the ratio of the number of erroneous values to the total number of values in the dataset. We only introduce noise to the attributes which are involved in data quality rules.
 
 \textbf{\textsc{microsoft academic graph (msag)}.} Data quality issues are massively present in the context of the web due to the integration of heterogeneous data from different sources. Thus we include a third dataset - \textsc{microsoft academic graph (MSAG)}\footnote{http://research.microsoft.com/en-us/projects/mag/}~\cite{msag2015} - to assess our method on web data cleaning. MSAG is a heterogeneous entity graph comprised of six types of entities that model real-life academic relationships: field of study, author, institution, paper, venue, and conference instances. The raw data has been obtained from different sources (academic publishers and web-pages indexed by Bing search engine) and is organized as connected graph schema. For our experiments, we select three entities from the whole graph, namely \textit{author}, \textit{organisation} and \textit{paper} entities. This part of \textsc{MSAG} is of interest because it reveals important characteristics of extracted web data, such as missing and inconsistent values. In particular, we discover that there are inconsistencies in organisation names for the same author. Furthermore, a number of entries suffer from missing affiliation by an author. In order to model and run data cleaning on this web dataset, we consider the attributes of the selected entities in \textsc{MSAG}, as presented in Table~\ref{tab:msagattrs}. 
-\begin{table}[t]\footnotesize
-%\scriptsize
-\centering
-\begin{tabular}{ccc}
-\textbf{\textit{Paper}}         & \textbf{\textit{Author}}     & \textbf{\textit{Organisation}}      \\ \hline
-\textsf{paper\_id}     & \textsf{author\_id} & \textsf{affiliation\_id}  \\
-\textsf{publish\_year} &            & \textsf{origin\_name}     \\
-              &            & \textsf{normalized\_name}\\ \hline
-\end{tabular}
-\caption{Entities \textbf{\textit{Paper}}, \textbf{\textit{Author}} and \textbf{\textit{Organisation}} and their attributes that have been used in experiments for Web data cleaning with Markov Logic.}
-    \label{tab:msagattrs}
-\end{table}
 
 \textbf{Data Quality Issues.} We extract a subset of complete entity instances in order to perform data cleaning experiments on web data. We reproduce data quality issues that we observe in \textsc{MSAG}: namely missing values. In order to a create gold standard to assess the data cleaning method, we proceed in the following way: We remove one affiliation entry from each author if there are more than three publications made by the same affiliation. Thus, we create a dataset with missing \textsf{affiliation\_id}, \textsf{origin\_name} and \textsf{normalized\_name} attributes. In general, we obtain graph data where $37\%$ of all authors reveal one missing edge to theirs affiliation; $27\%$ are missing two edges for theirs institutions; $15\%$ - three edges. Almost $21\%$ of authors suffer from missing more than three edges. 
 
@@ -381,10 +381,14 @@ nodes with one or two missing \textit{Author}-\textit{Organisation} edges, nodes
 Because the \textsc{MSAG} dataset has only recently been published and the related work in data cleaning systems provide results for cleaning relational data only, we are not able to compare ourselves to another system directly.
 
 \subsection{Impact of Rule Execution Order}
-Next, we study different orders of executing data cleaning rules, in order to show that specifying the optimal order of rules manually is hardly achievable~\cite{Dallachiesa:2013:NCD:2463676.2465327}. We investigate whether it is beneficial to leverage joint inference for simultaneous rule execution instead of manual specification of the optimal order of data cleaning rule execution. Therefore, we run our Markov Logic program on the \textsc{hosp} dataset and fix the data set size at ninety thousands tuples with a noise rate varying from $2\%$ to $10\%$. Each experiment consists of three parts: First, we run the MD rules and then the CFDs, which gives us the overall worst accurracy. This results agree with the previous experiment about the joint modeling data cleaning rules (c.f.,~Table~\ref{tab:plots} (a) and Section \ref{subsec:exp1}). The MD rules perform poorer than CFDs. Because of error propagation from MDs to CFDs, the overall results are poor. \anno{what is poor? explain in reference to plots!}. In the second part of the experiment, we change the sequence of execution to running CFD rules before MD rules. This slightly improves the $F_1$ scores. We attribute this to the fact that CFDs initially detect more violations. However, analogous to the previous part, error propagation leads to the insufficient results. In the third and final part of the experiment, we perform the joint execution of CFD and MD rules. \note{Describe the result, it is missing here! its probably the main result of your paper}. These results confirm our hypotheses that it is highly beneficial to execute multiple data cleaning rules simultaneously. We verify the result in Figure~\ref{fig:orderexec} by showing the $F_1$-score ($y$-axis) distribution of various data quality settings performed on varying noise rate ($x$-axis). \note{Describe what we see here, don't let readers figure that out themselves}.
- 
-%UniClean and Nadeef:
-%A reference system to ours is \textsc{uniclean}, proposed in \cite{Fan:2014:IRM:2628135.2567657}. Being a repairing system, \textsc{UniClean} also creates fixes by declaring cleaning rules and unifying matching and repairing processes. In general, \textsc{UniClean} achieves high accuracy by executing three algorithms for generating fixes in consecutive manner. As our experiments demonstrate that the order of execution matters and different order produces distinct results. Furthermore, our data cleaning solution is a one-step process for executing the inference on MLN modeled according to data cleaning rules. Similar to our experiments were performed by another reference system \textsc{nadeef}, which demonstrated that various types of rules should be treated holistically. Although, we report $F_1$-score improvement by almost $10\%$ against values reported by \textsc{nadeef} in \cite{Dallachiesa:2013:NCD:2463676.2465327}.
+Next, we study different orders of executing data cleaning rules, in order to show that specifying the optimal order of rules manually is hardly achievable~\cite{Dallachiesa:2013:NCD:2463676.2465327}. We investigate whether it is beneficial to leverage joint inference for simultaneous rule execution instead of manual specification of the optimal order of data cleaning rule execution. We verify the result in Figure~\ref{fig:orderexec} by showing the $F_1$-score ($y$-axis) distribution of various data quality settings performed on varying noise rate ($x$-axis). We run our Markov Logic program on the attributes \textsf{state} and \textsf{zip} of the \textsc{hosp} dataset because they both participate in CFD and MD. Furthermore, we fix the data set size at ninety thousands tuples with a noise rate varying from $2\%$ to $10\%$. Each experiment consists of three parts: First, we run the MD rules and then the CFDs, which gives us the overall worst accuracy. This results agree with the previous experiment about the joint modeling data cleaning rules (c.f.,~Table~\ref{tab:plots} (a) and Section \ref{subsec:exp1}). The MD rules perform poorer than CFDs. The overall $F_1$ score ranges between $0.01$ and $0.02$, which can be explained by really low precision and recall values due to error propagation from MDs to CFDs. 
+%\anno{what is poor? explain in reference to plots!}. 
+In the second part of the experiment, we change the sequence of execution to running CFD rules before MD rules. This slightly improves the $F_1$ scores by increasing them from $0.1$ to $0.3$ for different noise values. We attribute this to the fact that CFDs initially detect more violations. However, analogous to the previous part, error propagation leads to the insufficient results. 
+
+In the third and final part of the experiment, we perform the simultaneous execution of CFD and MD rules, meaning we modeled matching (for values deduplication) and repair (for erroneous values) processes together. Here we see rapid increase of all accuracy values from $0.86$ for $2\%$ noise to $0.95$ on $10\%$ noise against the previously performed sequential execution of data cleaning rules. The growing trend of the $F_1$ scores has same explanation as results the experiment about holistic data cleaning (c.f.,~Table~\ref{tab:plots} (a) and Section \ref{subsec:exp1}) namely the functionality of the CPI algorithm. %\note{Describe the result, it is missing here! its probably the main result of your paper}. 
+These results confirm our hypotheses that it is highly beneficial to execute multiple data cleaning rules simultaneously.  
+
+Similar to our experiments were performed by another reference system \textsc{nadeef}, which also demonstrated that various types of rules should be treated holistically. Although, we report $F_1$-score improvement by almost $10\%$ against values reported by \textsc{nadeef} in \cite{Dallachiesa:2013:NCD:2463676.2465327}.
 %\pgfplotsset{small,  compat=1.5}
 
 \begin{figure}
