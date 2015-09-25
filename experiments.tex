@@ -126,22 +126,22 @@
 
 
 \begin{table}[t]\footnotesize
-\scriptsize
+%\scriptsize
 \centering
-\begin{tabular}{@{}ccccc@{}}
+\begin{tabular}{@{}cccc@{}}
 \toprule
-{\bf experiment}       & {\bf \begin{tabular}[c]{@{}c@{}}numer \\ of tuples\end{tabular}} & {\bf \begin{tabular}[c]{@{}c@{}}evidence\\ atoms\end{tabular}} & {\bf \begin{tabular}[c]{@{}c@{}}number\\ of formulas\end{tabular}}  & {\bf \begin{tabular}[c]{@{}c@{}}runtime\\ (sec)\end{tabular}} \\ 
-%\midrule
-%                     & 63K                                                              & 266K                                                        & 21                                                                                                                                        & 2551                                                           \\
-%{\bf \textsc{base}}           & 83K                                                              & 446K                                                        & 21                                                                                                                                        & 5128                                                           \\
-%\multicolumn{1}{l}{} & 143K                                                             & 1286K                                                        & 21                                                                                                                                        & 12576                                                          \\
+{\bf dataset}       & 
+{\bf \begin{tabular}[c]{@{}c@{}}numer \\ of tuples\end{tabular}} & 
+{\bf \begin{tabular}[c]{@{}c@{}}number\\ of formulas\end{tabular}}  & 
+{\bf \begin{tabular}[c]{@{}c@{}}runtime\\ (sec)\end{tabular}} \\ 
+                                                         \\
 \midrule
-                     & 63K                                                              & 266K                                                        & 21                                                                                                                                        & 242                                                           \\
-{\bf \textsc{hosp}}           & 83K                                                              & 446K                                                        & 21                                                                                                                                        & 477                                                           \\
-\multicolumn{1}{l}{} & 143K                                                             & 1286K                                                        & 21                                                                                                                                        & 1107                                                          \\ \midrule
-\multicolumn{1}{l}{} & 20K                                                              & 210K                                                        & 15                                                                                                                                        & 41                                                            \\
-{\bf \textsc{tpc-h}}           & 40K                                                              & 419K                                                        & 15                                                                                                                                        & 131                                                           \\
-\multicolumn{1}{l}{} & 100K                                                             & 1055K                                                        & 15                                                                                                                                        & 732                                                           \\ \bottomrule
+                     & 63K                                                                                                                     & 21                                                                                                                                        & 242                                                           \\
+{\bf \textsc{hosp}}           & 83K                                                                                                                      & 21                                                                                                                                        & 477                                                           \\
+\multicolumn{1}{l}{} & 143K                                                                                                                    & 21                                                                                                                                        & 1107                                                          \\ \midrule
+\multicolumn{1}{l}{} & 20K                                                                                                                      & 15                                                                                                                                        & 41                                                            \\
+{\bf \textsc{tpc-h}}           & 40K                                                                                                                      & 15                                                                                                                                        & 131                                                           \\
+\multicolumn{1}{l}{} & 100K                                                                                                                     & 15                                                                                                                                        & 732                                                           \\ \bottomrule
 \end{tabular}
 \caption{\label{tab:runtime} Scalability of the data cleaning for \textsc{tpc-h} and \textsc{hosp} data sets (with fixed noise 4\%). }
 \end{table}
@@ -305,6 +305,12 @@ Our results are in line with the observations made in \cite{Dallachiesa:2013:NCD
 
 We conclude from this experiment that the joint modeling and joint inference improves the accuracy achieved by running single data quality rules.
 
+We also study the runtime of our method for different data sizes and noise rates. Table~\ref{tab:plots}~(c) for \textsc{hosp} and Table~\ref{tab:plots} (f) for \textsc{tpc-h} show the general trend for the runtime values ($y$-axis) for every data size ($x$-axis) setting. Each plot denotes different noise percentages. We see that the runtime on both, real-life and synthetic data, reveals an upward trend. Cleaning datasets with joint inference will take longer the larger the data is and the more noise it contains. In particular, for real-life \textsc{hosp} data of size $100K$ with increasing noise rate we observe runtime incrementing by factor $1.2$ for every noise setting. 
+%\note{one plot shows linear increase, the other superlinear, mention and explain this!}. - hmm. for 10% and 8% for 100k on tpc-h sh** happens. and I do not know how to explain this without blaming rockit.
+Additionaly, Table~\ref{tab:runtime} provides a detailed runtime values for different data sizes of \textsc{hosp} and \textsc{tpc-h} by fixing the noise to $4\%$. Here we observe that while data size increasing from twenty to $143$ thousands tuples, the average runtime growth rate is $1.9$. 
+This is again a characteristic of the underlying MAP inference algorithm \textit{Cutting Plane Inference} \cite{riedel08improving}: Having less noise causes the algorithm converge faster, hence faster runtime values for data with less noise. %This experiment tells us that, while our method is robust against noise, but adding more noise leads to higher runtime. \anno{That is not a good finding, elaborate on the rate of runtime increase}
+
+
 \subsection{Holistic Data Cleaning: Missing Value and Consistency Issues Interaction}
 
 \pgfplotsset{small,  compat=1.5}
@@ -422,9 +428,8 @@ nodes near coords align={vertical},
 \label{fig:orderexec}
 \end{figure}
 
-\subsection{Performance}
+%\subsection{Performance}
 
-Next, we study the runtime of our method for different data sizes and noise rates. Table~\ref{tab:runtime}~(c) for \textsc{hosp} and Table~\ref{tab:runtime}~(c) (f) for \textsc{tpc-h} show the runtime values ($y$-axis) for every data size ($x$-axis) setting. Each plot denotes different noise percentages. We see that the runtime on both, real-life and synthetic data, reveals an upward trend. Cleaning datasets with joint inference will take longer the larger the data is and the more noise it contains. \note{one plot shows linear increase, the other superlinear, mention and explain this!}. This is again a characteristic of the underlying MAP inference algorithm \textit{Cutting Plane Inference} \cite{riedel08improving}: Having less noise causes the algorithm converge faster, hence faster runtime values for data with less noise. This experiment tells us that, while our method is robust against noise, but adding more noise leads to higher runtime. \anno{That is not a good finding, elaborate on the rate of runtime increase}
 
 
 \subsection{Modeling Data Cleaning Rules}
