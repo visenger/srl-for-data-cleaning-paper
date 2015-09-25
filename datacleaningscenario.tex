@@ -5,11 +5,12 @@ Next, we showcase limitations of rule-based data cleaning. Therefore, we introdu
 % CUSTOMER
 \begin{table}[h]\footnotesize
 \scriptsize
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{lllllll} \toprule 
 \textbf{id} &  \textbf{firstname} & \textbf{lastname} & \textbf{street} & \textbf{city} & \textbf{zipcode} & \textbf{phone} \\ \midrule
 $c_1$ & Ron & Howard & 1 Sun Dr. & Los Angeles & 90001 & 12345 \\
 $c_2$ & Max & Miller & 12 Hay St. & Napa & 94558 & 11234 \\ \bottomrule
-\end{tabular}
+\end{tabular}}
 \vspace{-1em}
 \caption{\textsc{customer} table (with errors)}
 \label{tab:cust}
@@ -18,12 +19,13 @@ $c_2$ & Max & Miller & 12 Hay St. & Napa & 94558 & 11234 \\ \bottomrule
 % TRANSACTION
 \begin{table}[h]\footnotesize
 \scriptsize
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{llllllll} \toprule 
 \textbf{id} & \textbf{item} &  \textbf{firstname} & \textbf{lastname} & \textbf{street} & \textbf{city} & \textbf{zipcode} & \textbf{phone} \\ \midrule
 $t_1$ & iPhone6 & R. & Howard & 1 Sun Dr. & L.A. & null & null \\
 $t_2$ & Galaxy5 & null & Miller & 12 Hay St. & null & 94558 & 11234 \\
 $t_3$ & Nexus5 & Howard & Ron & null & null & 90001 & 12345 \\ \bottomrule
-\end{tabular}
+\end{tabular}}
 \vspace{-1em}
 \caption{\textsc{transaction} table (with errors)}
 \label{tab:trans}
