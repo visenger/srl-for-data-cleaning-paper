@@ -40,11 +40,22 @@ This example illustrates the limitations of data cleaning via hard rules: Becaus
 The functional dependency: $\textsf{fd}: \textsc{transaction}([\textsf{city}, \textsf{phone}] \rightarrow [\textsf{street}, \textsf{zipcode}])$ declares that, in the \textsc{transaction} table, the two fields \textsf{city} and \textsf{phone} together 
 uniquely determine the two fields \textsf{street} and \textsf{zipcode}. Although two instances of the customer ``Ron Howard'' in ~Table~\ref{tab:trans} are recorded, one is missing the \textsf{phone} value. In this case, the rule only applies when combined with additional data cleaning rules. The rule $\textsf{cfd}: \textsc{transaction}([\textsf{zipcode}] \rightarrow [\textsf{city}], T_1 =(90001~||~\text{Los~Angeles}))$ states that every tuple in which the value for \textsf{zipcode} equals $90001$ must have its \textsf{city} attribute set to ``Los~Angeles". In our example in Table~\ref{tab:trans}, this rule corrects the \emph{null} value in transaction $t_3$. 
 
-For the \textsf{firstname} field in transaction $t_1$ in Table~\ref{tab:trans}, we could define a rule indicating that the values ``R.'' and ``Ron'' refer to the same name, but cannot always be certain whether this is the case. To include additional evidence, we create the following MD to link transaction $t_1$ 
-to customer $c_1$:\\ 
+For the \textsf{firstname} field in transaction $t_1$ in Table~\ref{tab:trans}, we could define a rule indicating that the values ``R.'' and ``Ron'' refer to the same name, but cannot always be certain whether this is the case. To include additional evidence, we create the following MD to link transaction $t_1$ to customer $c_1$:\\ 
+%$ \textsf{md}: \textsc{transaction}[\textsf{lastname}, \textsf{city}, \textsf{street}] = \textsc{customer}[\textsf{lastname}, \textsf{city}, \textsf{street}] \land \textsc{t}[\textsf{firstname}] \approx \textsc{customer}[\textsf{firstname}]  \rightarrow \textsc{transaction}[\textsf{firstname}] \rightleftharpoons \textsc{customer}[\textsf{firstname}]$
+\vspace*{-0.5cm}
+\begin{table}[h]\footnotesize
+\scriptsize
+\centering
+\begin{tabular}{l}
+\begin{tabular}[c]{@{}c@{}}
 $ \textsf{md}: \textsc{transaction}[\textsf{lastname}, \textsf{city}, \textsf{street}]
-= \textsc{customer}[\textsf{lastname}, \textsf{city}, \textsf{street}] \land \textsc{t}[\textsf{firstname}] \approx \textsc{customer}[\textsf{firstname}] 
- \rightarrow \textsc{transaction}[\textsf{firstname}] \rightleftharpoons \textsc{customer}[\textsf{firstname}]$
+= \textsc{customer}[\textsf{lastname}, \textsf{city}, \textsf{street}] $ \\
+$\land \textsc{transaction}[\textsf{firstname}] \approx \textsc{customer}[\textsf{firstname}] $ \\
+$ \rightarrow \textsc{transaction}[\textsf{firstname}] \rightleftharpoons \textsc{customer}[\textsf{firstname}]$
 
+\end{tabular}
+\end{tabular}
+\end{table}
+\vspace*{-0.5cm}
 
 This MD states that if any two tuples from \textsc{transaction} and \textsc{customer} agree on \textsf{lastname}, \textsf{city}, \textsf{street}, and their \textsf{firstname} values are similar, then \textsc{transaction}[\textsf{firstname}] and \textsc{customer}[\textsf{firstname}] should have the same values. This rule shows how the notion of similarity may be included in rules, but only within first-order logic, i.e., the similarity condition is either \emph{true} or \emph{false}. In reality though, we are able to determine a more graded similarity, i.e., some types of similarity that we deem to be more probable (``L.A.'' and ``Los Angeles''), and others that are less probable (``R.'' and ``Ron''). Moreover, we may have different levels of confidence regarding functional or matching dependencies that we define. The above rule for example is likely, but not necessarily always true. However, hard first-order logic does not permit us to formalize this intuition, as it does not allow for a probabilistic interpretation of the rules.
