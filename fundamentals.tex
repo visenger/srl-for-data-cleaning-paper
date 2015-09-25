@@ -3,14 +3,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Data Quality Fundamentals}
 \label{sec:expl}
-
-%\note{This section is NOT a contribution and reads way too difficult. We need to shorten it and make it easier to read, so that reviewers easily reach Section 3}
-
-%\subsection{Data Quality}
-
 In this section, we explain the notation and underlying theory to the data cleaning problem. 
 
-We consider a database instance $\mathcal{D}$ with a relational schema $\mathcal{S}$. $\mathcal{D}$ contains a relation $\mathcal{R} \in \mathcal{S}$ that is defined for the set of attributes $attr(\mathcal{R})$. $dom(U_i)$ denotes the domain of an $i$-th attribute with $U_i \in attr(\mathcal{R})$. For the data cleaning, we use a set of data quality rules, which are data-agnostic and rely on data integrity constraints~\cite{AbiteboulHV95}.
+We consider a database instance $\mathcal{D}$ with a relational schema $\mathcal{S}$. $\mathcal{D}$ contains a relation $\mathcal{R} \in \mathcal{S}$ that is defined for the set of attributes $attr(\mathcal{R})$. $dom(U_i)$ denotes the domain of an $i$-th attribute with $U_i \in attr(\mathcal{R})$. For the data cleaning, we use a set of data quality rules, which are data-agnostic and rely on data integrity constraints~\cite{AbiteboulHV95, fan2012foundations}.
 
 A \textbf{functional dependency} (FD) on a relational schema $S$ is an expression of the form $\phi: X \rightarrow Y$ where $X \subseteq attr(\mathcal{R}) $ and $Y \subseteq attr(\mathcal{R}) $ are subsets of $\mathcal{R}'s$ attributes $attr(\mathcal{R})$. An FD holds if every pair of tuples of $\mathcal{R}$ that agree in each of attributes $X$, also agree in the $Y$ attributes. Data quality management systems leverage functional dependencies to find and correct dirty data, because these dependencies specify the semantics of the data in a declarative way. The main disadvantage of functional dependencies is that they operate solely on the schema level and are often not able to detect conflicts in real-life data. This is the case because FDs do not capture a patricular subset of data but instead always operate globally on the whole data set.
 Therefore, we consider an extension of traditional functional dependencies:  A \textbf{conditional functional dependency} (CFD) 
