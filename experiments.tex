@@ -383,8 +383,14 @@ In the second part of the experiment, we change the sequence of execution to run
 
 In the third and final part of the experiment, we perform the simultaneous execution of CFD and MD rules, meaning we modeled matching (for values deduplication) and repair (for erroneous values) processes together. Here we see a rapid increase of all accuracy values from $0.86$ for $2\%$ noise to $0.95$ on $10\%$ noise against the previously performed sequential execution of data cleaning rules. The growing trend of the $F_1$ scores has same explanation as results the experiment about holistic data cleaning (c.f.,~Table~\ref{tab:plots} (a) and Section \ref{subsec:exp1}) namely the functionality of the CPI algorithm. These results confirm our hypotheses that it is highly beneficial to execute multiple data cleaning rules simultaneously.  
 
-The \textsc{nadeef} system~\cite{Dallachiesa:2013:NCD:2463676.2465327}, which also treats various types of rules holistically, ran an analogous experiment. Note that we report $F_1$-score improvements by almost $10\%$ over the values reported by \textsc{nadeef}. \note{rewrite sentence, tell readers factor of improvement as above}.
+The \textsc{nadeef} system~\cite{Dallachiesa:2013:NCD:2463676.2465327}, which also treats various types of rules holistically, ran an analogous experiment. Note that we report $F_1$-score improvements by factor $1.1$ on data with $10\%$ noise over the values reported by \textsc{nadeef}. 
+%\note{rewrite sentence, tell readers factor of improvement as above}.
 %\pgfplotsset{small,  compat=1.5}
+
+\makeatletter
+\let\percent\@percentchar
+\makeatother
+%\usetikzlibrary{patterns}
 
 \begin{figure}
 \centering
@@ -392,23 +398,27 @@ The \textsc{nadeef} system~\cite{Dallachiesa:2013:NCD:2463676.2465327}, which al
 \begin{axis}[
 ybar,
 enlargelimits=0.1,
-legend style={at={(0.5,-0.15)}, anchor=north,legend columns=-1},
+legend style={at={(0.5,1.15)}, anchor=north, legend columns=-1},
 bar width=4,
 ylabel={$F_1$},
-xlabel=noise in \%,
-symbolic x coords={2,4,6,8,10},
+xlabel=noise,
+symbolic x coords={{$2\percent$},{$4\percent$},{$6\percent$},{$8\percent$},{$10\percent$}},
 xtick=data,
 nodes near coords align={vertical},
 ]
-\addplot coordinates {(2, 0.1) (4, 0.1552) (6, 0.2039) (8, 0.2625) (10, 0.3048)};
-\addplot coordinates {(2, 0.0176) (4, 0.0139) (6, 0.0173) (8, 0.0214) (10, 0.016)};
-\addplot coordinates {(2, 0.8566) (4, 0.9114) (6, 0.9403) (8, 0.9512) (10, 0.9569)};
+\addplot coordinates {({$2\percent$}, 0.1) ({$4\percent$}, 0.1552) ({$6\percent$}, 0.2039) ({$8\percent$}, 0.2625) ({$10\percent$}, 0.3048)};
+\addplot coordinates {({$2\percent$}, 0.0176) ({$4\percent$}, 0.0139) ({$6\percent$}, 0.0173) ({$8\percent$}, 0.0214) ({$10\percent$}, 0.016)};
+\addplot coordinates {({$2\percent$}, 0.8566) ({$4\percent$}, 0.9114) ({$6\percent$}, 0.9403) ({$8\percent$}, 0.9512) ({$10\percent$}, 0.9569)};
+
+%\addplot[pattern=north east lines] coordinates {({$2\percent$}, 0.1) ({$4\percent$}, 0.1552) ({$6\percent$}, 0.2039) ({$8\percent$}, 0.2625) ({$10\percent$}, 0.3048)};
+%\addplot[pattern=dots] coordinates {({$2\percent$}, 0.0176) ({$4\percent$}, 0.0139) ({$6\percent$}, 0.0173) ({$8\percent$}, 0.0214) ({$10\percent$}, 0.016)};
+%\addplot[pattern=horizontal lines] coordinates {({$2\percent$}, 0.8566) ({$4\percent$}, 0.9114) ({$6\percent$}, 0.9403) ({$8\percent$}, 0.9512) ({$10\percent$}, 0.9569)};
 
 \legend{cfd+md,md+cfd,joint cfd md}
 
 \end{axis}
 \end{tikzpicture}
-\caption{\note{Label for x axis missing!} Execution order with Markov Logic} 
+\caption{Execution order with Markov Logic} 
 \label{fig:orderexec}
 \end{figure}
 
@@ -417,7 +427,7 @@ nodes near coords align={vertical},
 Next, we study the runtime of our method for different data sizes and noise rates. Table~\ref{tab:runtime}~(c) for \textsc{hosp} and Table~\ref{tab:runtime}~(c) (f) for \textsc{tpc-h} show the runtime values ($y$-axis) for every data size ($x$-axis) setting. Each plot denotes different noise percentages. We see that the runtime on both, real-life and synthetic data, reveals an upward trend. Cleaning datasets with joint inference will take longer the larger the data is and the more noise it contains. \note{one plot shows linear increase, the other superlinear, mention and explain this!}. This is again a characteristic of the underlying MAP inference algorithm \textit{Cutting Plane Inference} \cite{riedel08improving}: Having less noise causes the algorithm converge faster, hence faster runtime values for data with less noise. This experiment tells us that, while our method is robust against noise, but adding more noise leads to higher runtime. \anno{That is not a good finding, elaborate on the rate of runtime increase}
 
 
-\subsection{Usability in Modeling Data Cleaning Rules}
+\subsection{Modeling Data Cleaning Rules}
 
 %Big table containing all the rules and formulas:
 \begin{table*}[t]\footnotesize
@@ -502,15 +512,16 @@ Next, we study the runtime of our method for different data sizes and noise rate
 
                                 \\ \hline
 \end{tabular}
-\caption{Usability in modeling data cleaning rules as Markov Logic programs.}
+\caption{Modeling data cleaning rules as Markov Logic programs.}
 \label{tab:rulesformulas}
 \end{table*}
 
-\note{This section would greatly benefit from a few concrete examples that show the benefits of modeling rules with markov logic!!! Furthermore, you need to explain how you measure usability!!!}
-
+%\note{This section would greatly benefit from a few concrete examples that show the benefits of modeling rules with markov logic!!! Furthermore, you need to explain how you measure usability!!!} - due to space limitations, I extracted all examples into a table. 
+\note{trying to elaborate the usability methodology from} \cite{Lewis2013UMUX}
 Lastly, we focus on the feasibility of translating data quality rules into Markov logic. We conduct experiments on all three datasets described above. 
 
-\textbf{\textsc{hosp} Quality Rules}. In our data cleaning method for the \textsc{hosp} data, we use 6 manually designed CDFs and one MD, which result in 15 normalized CFDs. One MD rule is transformed into 2 formulas. All data cleaning rules are positive. Finally, all interleaved rules are translated into 21 Markov logic formulas. In the Table \ref{tab:rulesformulas}, we provide an example of these data quality rules, which are defined on pairs of tuples. The MD rule is specified on a two relations. Markov logic predicates used for data quality formulae are shown in Table~\ref{tab:predicates}. After transforming the 100k \textsc{hosp} tuples into Markov logic grounded atoms, the resulting data comprises 1.3M evidence atoms, which will be used for inference. We empirically observe that extending the data quality rules set for for some additional conditions \anno{be specific} reduces the search space and therefore converges much faster than \textit{"pure"} model. This means that each first order logic formula, which represent the RHS of the normalized data quality rule $\mathsf{\textsf{attr}(id1, v1)~\wedge~\textsf{attr}(id2, v2)}$ becomes an inverse part $\mathsf{!\textsf{attr}(id1, v2)~\wedge~!\textsf{attr}(id2, v1)}$. This additional part denotes that we consider only tuples with different values. Here the normalized CFD rules are being compiled as demonstrated in the Table \ref{tab:rulesformulas}. \note{What has this whole paragraph to do with usability? How did you measure it? What is the purpose of this discussion?}
+\textbf{\textsc{hosp} Quality Rules}. In our data cleaning method for the \textsc{hosp} data, we use 6 manually designed CDFs and one MD, which result in 15 normalized CFDs. One MD rule is transformed into 2 formulas. All data cleaning rules are positive. Finally, all interleaved rules are translated into 21 Markov logic formulas. In the Table \ref{tab:rulesformulas}, we provide an example of these data quality rules, which are defined on pairs of tuples. The MD rule is specified on a two relations. Markov logic predicates used for data quality formulae are shown in Table~\ref{tab:predicates}. After transforming the 100k \textsc{hosp} tuples into Markov logic grounded atoms, the resulting data comprises 1.3M evidence atoms, which will be used for inference. We empirically observe that extending the data quality rules set for additional conditions, which makes consideration of similar tuples unnecessary and reduces the search space and therefore converges much faster than \textit{"pure"} model. This means that each first order logic formula, which represent the RHS of the normalized data quality rule $\mathsf{\textsf{attr}(id1, v1)~\wedge~\textsf{attr}(id2, v2)}$ becomes an inverse part $\mathsf{!\textsf{attr}(id1, v2)~\wedge~!\textsf{attr}(id2, v1)}$. This additional part denotes that we consider only tuples with different values. Here the normalized CFD rules are being compiled as demonstrated in the Table \ref{tab:rulesformulas}. 
+%\note{What has this whole paragraph to do with usability? How did you measure it? What is the purpose of this discussion?}
 
 \textbf{\textsc{tpc-h} Quality Rules}. We write 9 CFDs and 3 MDs for this dataset. One example of the rules is a CFD that states if two tuples agree on \textsf{c\_custkey}, then they should agree on \textsf{c\_name} and \textsf{c\_address} attributes. MDs are designed on the same schema \textsc{tpc-h} \textsf{(T, T)}. These MDs state that for any pair of tuples $(t_1,t_2)$ if the LHS is similar, then the attribute values on the RHS should be identified. In the Table \ref{tab:rulesformulas} we provide an except of the data quality rules we create for \textsc{tpc-h}. Markov logic predicates used for data quality rules are shown in Table~\ref{tab:predicates}. After transforming the 100k \textsc{tpc-h} tuples into Markov logic grounded atoms, the resulting data comprises 1 Mio evidence atoms, which are then used for inference. \note{Again: What has this whole paragraph to do with usability? How did you measure it? What is the purpose of this discussion?}
 
