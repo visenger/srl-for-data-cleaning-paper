@@ -9,27 +9,31 @@
 
  \begin{figure}[t]
  \centering
- \includegraphics[width=200px, height=140px]{img/system.pdf}
+ \includegraphics[width=0.9\columnwidth]{img/system.pdf}
  \caption{%\anno{Rmove this picture?} Why? I find this pic useful and supports understanding.
- %\anno{Please redo this picture to make it look better (e.g., make sure the margins of text to borders are always the same.)} - ok if time, I will do. 
- Our proposed method for data cleaning based on Markov logic consists of three main components: 
- (I) A \textbf{Rule-based Data Quality Management} component that is based on the data quality rules to address different data quality issues;
- (II) A \textbf{relation prediction} component based on probabilistic inference performed by the Markov logic framework and (III) 
- a \textbf{Data Layer} that includes a number of data sources including relational and semi-structured data.}
+Overview of the proposed data cleaning approach
+ %\anno{Please redo this picture to make it look better (e.g., make sure the margins of text to borders are always the same.)} 
+ %Our proposed method for data cleaning based on Markov logic consists of three main components: 
+ %(I) A \textbf{Rule-based Data Quality Management} component that is based on the data quality rules to address different data quality issues;
+ %(II) A \textbf{relation prediction} component based on probabilistic inference performed by the Markov logic framework and (III) 
+ %a \textbf{Data Layer} that includes a number of data sources including relational and semi-structured data.}
+ %\anno{Figure caption is too long} 
+}
  \label{fig:system}
 \end{figure}     
 
-We propose to model data cleaning rules in the \textit{Markov logic}~\cite{domingos2009markov} formalism and use probabilistic inference for data cleaning. Markov logic is a knowledge representation system that combines first-order logic as a declarative language and probabilistic graphical models (undirected Markov Networks) on top of which we perform probabilistic inference. We introduce technical aspects of Markov logic and joint inference for data cleaning in Section~\ref{subsec:jointinference}
+We propose to model data cleaning rules in the \textit{Markov logic}~\cite{domingos2009markov} formalism and use probabilistic inference for data cleaning. Markov logic is a knowledge representation system that combines first-order logic as a declarative language and probabilistic graphical models (undirected Markov Networks). On top of this representation we perform probabilistic inference. We introduce technical aspects of Markov logic and joint inference for data cleaning in Section~\ref{subsec:jointinference}.
 
-The main advantage of Markov logic is the ability to reason simultaneously about complex and interacting relationships. By modeling different data cleaning rules as Markov logic program we leverage the joint inference on underlying probabilistic graphical model. In this way, we implement \textit{holistic} data cleaning, which is one of main requirements for the data cleaning systems \cite{fan2013data, Fan:2014:IRM:2628135.2567657, Dallachiesa:2013:NCD:2463676.2465327}. If no perfect resolution of a ruleset is possible, we want to find data cleaning steps that fulfill as many rules as possible while violating only a few~\cite{genesereth1987logical, domingos2009markov}. Therefore, in order to infer the types of errors and their sources, we consider integrity constraints to be probabilistic. We build on an existing approach to specify \textit{"soft"} functional dependencies between columns~\cite{Ilyas:2004:CAD:1007568.1007641}. 
+The main advantage of Markov logic is the ability to reason simultaneously about complex and interacting relationships. By modeling different data cleaning rules as a Markov logic program, we leverage the joint inference on underlying probabilistic graphical model. In this way, we implement \textit{holistic} data cleaning, which is one of main requirements for data cleaning systems \cite{fan2013data, Fan:2014:IRM:2628135.2567657, Dallachiesa:2013:NCD:2463676.2465327}. If no perfect resolution of a rule set is possible, we want to find data cleaning steps that fulfill as many rules as possible while violating only a few~\cite{genesereth1987logical, domingos2009markov}. Therefore, in order to infer the types of errors and their sources, we consider integrity constraints to be probabilistic. We build on an existing approach to specify \textit{soft} functional dependencies between columns~\cite{Ilyas:2004:CAD:1007568.1007641}. 
 %Another advantage of Markov Logic is that it allows us to tackle overfitting, a common problem when applying machine learning for repairing errorneous data \anno{You still need to explain overfitting!, EDBT reviewers might not be ML experts}. Overfitting occurs when one applies data quality rules that hold only for a fraction of data, but do not hold globally. Markov logic programs with \textit{"soft"} rules prohibit overfitting by adding weights to the constaint-based rules and incorporating partial knowledge \cite{singla2006entity, poon2008joint, lowd2007recursive}. \note{one more sentence, how does adding weights prohibit overfitting? do we show this experimentally somehow? if not, we might want to remove this paragraph}. 
-Moreover, Markov Logic enables us to extend traditional data quality rules with semantic constraints~\cite{spies2013knowledge}, meaning that additional knowledge (e.g. in form of predicates that model $\approx$, $\neq,~\leq,\geq$ etc.) can be incorporated into conventional data quality rules. This is very helpful in order to capture non-traditional dependencies \cite{chen2009analyses} for data cleaning. %\note{explain this in more detail, I don't understand what you mean}
+Moreover, Markov logic enables us to extend traditional data quality rules with semantic constraints~\cite{spies2013knowledge}, meaning that additional knowledge (e.g., in form of predicates that model $\approx$, $\neq,~\leq,\geq$, etc.) can be incorporated into conventional data quality rules. This is very helpful in order to capture non-traditional dependencies \cite{chen2009analyses} for data cleaning. %\note{explain this in more detail, I don't understand what you mean}
 
-In the following, we illustrate how to transfer data cleaning rules into Markov Logic and leverage probabilistic inference to determine data repair operations for a given dataset. See also Figure \ref{fig:system} for high-level overview of our method-workflow. We distinguish here between three major components: 
+In the following, we illustrate how to transfer data cleaning rules into Markov logic and leverage probabilistic inference to determine data repair operations for a given data set. See also Figure \ref{fig:system} for high-level overview of our approach. We distinguish between three major components: 
 \begin{inparaenum}[\itshape I\upshape)]
-\item \textit{Rule-based Data Quality Management} where we specify data-agnostic quality rules;
-\item \textit{Statistical Inference with Markov Logic} to compute probabilistic data repair; and
-\item \textit{Data Layer}, which interacts with former two components by providing both integrity constraints and evidence data for Markov logic.
+\item \textit{Rule-based Data Quality Management} where we specify data-agnostic quality rules to address different data quality issues;
+\item \textit{Statistical Inference with Markov Logic} to compute probabilistic data repair based on probabilistic inference performed by the Markov logic framework; and
+\item \textit{Data Layer}, which interacts with former two components by providing both integrity constraints and evidence data from a number of data sources including relational and
+semi-structured data for Markov logic.
 \end{inparaenum}
 %\note{YOU NEED TO EXPLAIN FIGURES, NOT JUST REFERENCE THEM *PEITSCH*} *AUTSCH*
 
@@ -52,19 +56,19 @@ In the following, we illustrate how to transfer data cleaning rules into Markov 
 \label{sec:ml} 
 
 %\anno{Does your system automate the compilation? If yes, mention this!} - right now, there is a master thesis I am supervising, which implements the automate compilation. 
-Next, we describe how to connect the Data Quality Rules formalism to the Markov logic. The base of Markov logic programs is a predicate calculus \cite{genesereth1987logical}, because Markov logic consists of first-order logic sentences. Therefore, we describe a general method to compile formal constraint based data cleaning rules into predicate calculus. We define data cleaning rules in the form of CFDs and MDs as introduced in Section~\ref{sec:expl}. For example, given the following functional dependency $\phi: X \rightarrow Y$, according to the~\cite{Fagin:1982:HCD:322344.322347}, we express $\phi$ as \textit{first-order logic} sentence:
+Next, we describe how to connect the data quality rules formalism to the Markov logic. The base of Markov logic programs is a predicate calculus \cite{genesereth1987logical}, because Markov logic consists of first-order logic sentences. Therefore, we describe a general method to compile formal constraint-based data cleaning rules into predicate calculus. We define data cleaning rules in the form of CFDs and MDs as introduced in Section~\ref{sec:expl}. For example, given the following functional dependency $\phi: X \rightarrow Y$, according to~\cite{Fagin:1982:HCD:322344.322347}, we express $\phi$ as \textit{first-order logic} sentence:
 \begin{equation}
 \mathsf{\forall x, y_1, y_2, z_1, z_2 \mathcal{R}(x, y_1, z_1) \wedge \mathcal{R}(x, y_2, z_2) \Rightarrow y_1=y_2}
 \label{fd2fol}
 \end{equation}
 
-In following we show that first-order logic sentence is crucial for the compilation of data cleaning rules into predictive models. % \note{Aha, why?} - well I think, to understand this, the following explanation is important.
+In following, we show that first-order logic sentence is crucial for the compilation of data cleaning rules into predictive models. % \note{Aha, why?} - well I think, to understand this, the following explanation is important.
 Consider the logical equivalence of the data quality rule $\phi$ in \ref{fd2fol} as a composite component, consisting of subcomponents such as atomic sentences (attribute), logical and quantified sentences (RHS and LHS in FD $\phi$). To describe the structure of $\phi$ in a predicate calculus, we choose symbols that designate the elements of our conceptualization. In connection to the fundamentals of data quality management (c.f.,~Section~\ref{sec:expl}), we define the \textit{vocabulary} we use for the compilation of data quality rules: 
 %\anno{WHY ANOTHER VOCABULARY? THIS IS SUPER CONFUSING!!! REWRITE THIS PART TO CONNECT TO THE REST OF THE PAPER}
 
-The \textit{Universe of Disclosure} is specified by the set of all objects from domain $dom(U)$ that is fixed for the set of attributes $attr(\mathcal{R})$. A \textit{term} is used as a name for an object in the universe of discourse. We define \textit{variables} to denote arguments in atoms and \textit{constants} to denote data constants of particular domain $dom(U_i)$ of an $i$-th attribute $U_i \in attr(\mathcal{R})$. To designate the tuple in relation $\mathcal{R}$: $\mathcal{R}(x_1,x_2, \dots , x_n)$, we use atomic sentences $\mathsf{\textsf{attr-X}_1(id,v_1)}$, $\mathsf{\textsf{attr-X}_2(id,v_2)}$ $\dots$ $\mathsf{\textsf{attr-X}_n(id,v_n)}$ where $\mathsf{\textsf{attr-X}_i(id,v_i)}$ means that $\mathsf{v_i}$ is a attribute value of the $i$-th attribute in $\mathcal{R}(x_1,x_2, \dots , x_n)$ of the $id$-th tuple in relation $\mathcal{R}$. \textit{Relation Constants} denote relations between several objects:
+The \textit{Universe of Disclosure} is specified by the set of all objects from domain $dom(U)$ that is fixed for the set of attributes $attr(\mathcal{R})$. A \textit{term} is used as a name for an object in the universe of discourse. We define \textit{variables} to denote arguments in atoms and \textit{constants} to denote data constants of particular domain $dom(U_i)$ of an $i$-th attribute $U_i \in attr(\mathcal{R})$. To designate the tuple in relation $\mathcal{R}$: $\mathcal{R}(x_1,x_2, \dots , x_n)$, we use atomic sentences $\mathsf{\textsf{attr-X}_1(id,v_1)}$, $\mathsf{\textsf{attr-X}_2(id,v_2)}$ $\dots$ $\mathsf{\textsf{attr-X}_n(id,v_n)}$ where $\mathsf{\textsf{attr-X}_i(id,v_i)}$ means that $\mathsf{v_i}$ is a attribute value of the $i$-th attribute in $\mathcal{R}(x_1,x_2, \dots , x_n)$ of the $id$-th tuple in relation $\mathcal{R}$. \textit{Relation constants} denote relations between several objects:
 	\begin{itemize}
-		\item Similarity: $\mathsf{\textsf{similar}(x_1,x_2)}$ means that $\mathsf{x_1}$ similar to $\mathsf{x_2}$ (e.g by using different similarity measures like cosine or jaccard similarities).
+		\item Similarity: $\mathsf{\textsf{similar}(x_1,x_2)}$ means that $\mathsf{x_1}$ similar to $\mathsf{x_2}$ (e.g., by using different similarity measures like cosine or Jaccard similarities).
 		\item Equality: $\mathsf{\textsf{equal-X}(id_1, id_2)}$ means that the values of the attribute X of two tuples $\mathsf{id_1}$ and $\mathsf{id_2}$ should be equal.
 		\item Matching: $\mathsf{\textsf{match-X}(id_1, id_2)}$ means that values of two tuples $\mathsf{id_1}$ and $\mathsf{id_2}$ of the attribute X are identified to match.
 		\item Custom Predicate: used for encoding diverse semantic constraints (e.g. \textit{contains}, \textit{between}, \textit{less} etc.), which are not part of the data constraints.
@@ -119,7 +123,7 @@ To enable straightforward compilation, we assume that CFDs are provided in norma
 \end{flalign*}
 \vspace*{-0.5cm}
 
-According to~\cite{Fagin:1982:HCD:322344.322347} we can represent these $\mathsf{cfd_1}$ and $\mathsf{cfd_2}$ as two first-order logic formulae:
+According to~\cite{Fagin:1982:HCD:322344.322347} we can represent these $\mathsf{cfd_1}$ and $\mathsf{cfd_2}$ as two first-order logic formulas:
 \begin{flalign*}
 & \mathsf{1)~\forall~\textsf{city}, \textsf{phone}, \textsf{street}_1, \textsf{street}_2 }& \\
 & \mathsf{\textsc{transaction}(\textsf{city}, \textsf{phone}, \textsf{street}_1)~\wedge~\textsc{transaction}(\textsf{city}, \textsf{phone}, \textsf{street}_2) }& \\
@@ -131,9 +135,9 @@ According to~\cite{Fagin:1982:HCD:322344.322347} we can represent these $\mathsf
 \vspace*{-0.3cm}
 
 These formulas state that if two tuples of the \textsc{transaction} relation agree on the \textsf{city} and \textsf{phone} values, then their \textsf{street} and \textsf{zip} values should be the same. Once we have formulated our integrity constraints as first-order logic formulas, we translate them into Markov
-logic syntax. We illustrate this with the first-order logic formulae $\mathsf{1)}$ and $\mathsf{2)}$ defined above.
+logic syntax. We illustrate this with the first-order logic formulas $\mathsf{1)}$ and $\mathsf{2)}$ as defined above.
 Given that every attribute from the schema $\mathsf{\textsc{transaction}}$ is expressed as a predicate, we need two predicates, 
-namely $\mathsf{\textsf{city}(id, city)}$ and $\mathsf{\textsf{phone}(id, phone)}$ to encode the LHS of $\mathsf{fd}$ . They indicate the values for the fields \textsf{city} and \textsf{phone} for each tuple. The full example is given in Table~\ref{tab:mlndeclare}, which shows all steps in predicate translation and how data from our example database is translated into grounded atoms. Additionally, we define two predicates for our data quality rule, namely $\mathsf{\textsf{equal-street}(id, id)}$ and $\mathsf{\textsf{equal-zip}(id, id)}$. These predicates model equality of two values of the attribute \textsf{street} respectively \textsf{zip} (as denoted by the $\mathsf{fd}$ rule above):
+namely $\mathsf{\textsf{city}(id, city)}$ and $\mathsf{\textsf{phone}(id, phone)}$ to encode the LHS of $\mathsf{fd}$. They indicate the values for the fields \textsf{city} and \textsf{phone} for each tuple. The full example is given in Table~\ref{tab:mlndeclare}, which shows all steps in predicate translation and how data from our example database is translated into grounded atoms. Additionally, we define two predicates for our data quality rule, namely $\mathsf{\textsf{equal-street}(id, id)}$ and $\mathsf{\textsf{equal-zip}(id, id)}$. These predicates model equality of two values of the attribute \textsf{street} respectively \textsf{zip} (as denoted by the $\mathsf{fd}$ rule above):
 \begin{flalign*}
 	& \mathsf{1)  \textsf{city}(id_1, city) \wedge \textsf{city}(id_2, city) \wedge \textsf{phone}(id_1, phone) }& \\ 
 	& \mathsf{  \wedge \textsf{phone}(id_2, phone) \Rightarrow \textsf{equal-street}(id_1, id_2)} & \\
