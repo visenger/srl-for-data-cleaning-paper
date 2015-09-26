@@ -158,82 +158,82 @@
 \end{tabular} 
 & 
 \begin{tabular}[c]{@{}l@{}}
-\textsf{providerNr/\textsc{hosp}}(hid, pn)\\ 
-\textsf{hospitalName/\textsc{hosp}}(hid, n)\\ 
-\textsf{address/\textsc{hosp}}(hid, add)\\ 
-\textsf{city/\textsc{hosp}}(hid, c)\\ 
-\textsf{state/\textsc{hosp}}(hid, st)\\ 
-\textsf{zipCode/\textsc{hosp}}(hid, code)\\ 
-\textsf{countryName/\textsc{hosp}}(hid, country)\\ 
-\textsf{phoneNumber/\textsc{hosp}}(hid, numb)\\ 
-\textsf{condition/\textsc{hosp}}(hid, cond)\\ 
-\textsf{measureCode/\textsc{hosp}}(hid, mcode)\\ 
-\textsf{measureName/\textsc{hosp}}(hid, mname)\\ 
-\textsf{score/\textsc{hosp}}(hid, score)\\ 
-\textsf{zip/\textsc{zipcode}}(zid, code)\\ 
-\textsf{state/\textsc{zipcode}}(zid, st)
+\textsl{providerNr/\textsc{hosp}}(hid, pn)\\ 
+\textsl{hospitalName/\textsc{hosp}}(hid, n)\\ 
+\textsl{address/\textsc{hosp}}(hid, add)\\ 
+\textsl{city/\textsc{hosp}}(hid, c)\\ 
+\textsl{state/\textsc{hosp}}(hid, st)\\ 
+\textsl{zipCode/\textsc{hosp}}(hid, code)\\ 
+\textsl{countryName/\textsc{hosp}}(hid, country)\\ 
+\textsl{phoneNumber/\textsc{hosp}}(hid, numb)\\ 
+\textsl{condition/\textsc{hosp}}(hid, cond)\\ 
+\textsl{measureCode/\textsc{hosp}}(hid, mcode)\\ 
+\textsl{measureName/\textsc{hosp}}(hid, mname)\\ 
+\textsl{score/\textsc{hosp}}(hid, score)\\ 
+\textsl{zip/\textsc{zipcode}}(zid, code)\\ 
+\textsl{state/\textsc{zipcode}}(zid, st)
 \end{tabular}                       
 & 
 \begin{tabular}[c]{@{}l@{}}
-\textsf{custKey}(id, key)\\ 
-\textsf{name}(id, n)\\ 
-\textsf{addr}(id, add)\\ 
-\textsf{natKey}(id, nkey)\\ 
-\textsf{phone}(id, ph)\\ 
-\textsf{acc}(id, a)\\ 
-\textsf{mrkt}(id, m)\\ 
-\textsf{orderKey}(id, okey)\\ 
-\textsf{orderStatus}(id, st)\\ 
-\textsf{totalPrice}(id, p)\\ 
-\textsf{orderDate}(id, d)\\ 
-\textsf{orderPriority}(id, pr) \\ 
-\textsf{clerk}(id, c)
+\textsl{custKey}(id, key)\\ 
+\textsl{name}(id, n)\\ 
+\textsl{addr}(id, add)\\ 
+\textsl{natKey}(id, nkey)\\ 
+\textsl{phone}(id, ph)\\ 
+\textsl{acc}(id, a)\\ 
+\textsl{mrkt}(id, m)\\ 
+\textsl{orderKey}(id, okey)\\ 
+\textsl{orderStatus}(id, st)\\ 
+\textsl{totalPrice}(id, p)\\ 
+\textsl{orderDate}(id, d)\\ 
+\textsl{orderPriority}(id, pr) \\ 
+\textsl{clerk}(id, c)
 \end{tabular} 
 & 
 \begin{tabular}[c]{@{}l@{}}
-\textsf{publishYear}(paperid, pubyear)\\
-\textsf{author}(paperid, authorid)\\
-\textsf{affiliation}(paperid, affilid)\\
-\textsf{inRange}(pubyear, pubyear)\\
-\textsf{originAffiliationName}(affilid, oname)\\
-\textsf{normalAffiliationName}(affilid, nname)
+\textsl{publishYear}(paperid, pubyear)\\
+\textsl{author}(paperid, authorid)\\
+\textsl{affiliation}(paperid, affilid)\\
+\textsl{inRange}(pubyear, pubyear)\\
+\textsl{originAffiliationName}(affilid, oname)\\
+\textsl{normalAffiliationName}(affilid, nname)
 \end{tabular}
 \\ \midrule % now hidden predicates
 \begin{tabular}[c]{@{}l@{}}
 hidden \\ predicates
 \end{tabular}  
 & \begin{tabular}[c]{@{}l@{}}
-  \textsf{equal-HospitalName/\textsc{hosp}}(hid, n, hid, n)\\ 
-  \textsf{equal-Address/\textsc{hosp}}(hid, add, hid, add)\\ 
-  \textsf{equal-City/\textsc{hosp}}(hid, c, hid, c)\\ 
-  \textsf{equal-State/\textsc{hosp}}(hid, st, hid, st)\\ 
-  \textsf{equal-ZipCode/\textsc{hosp}}(hid, code, hid, code)\\ 
-  \textsf{equal-CountryName/\textsc{hosp}}(hid, ctr, hid, ctr)\\ 
-  \textsf{equal-PhoneNumber/\textsc{hosp}}(hid, nr, hid, nr)\\ 
-  \textsf{equal-MeasureName/\textsc{hosp}}(hid, mn, hid, mn)\\ 
-  \textsf{equal-Condition/\textsc{hosp}}(hid, cond, hid, cond)\\ 
-  \textsf{\textsc{hosp}/match-State/\textsc{ZipCode}}(hid, zid)\\ 
-  \textsf{\textsc{hosp}/match-ZipCode/\textsc{ZipCode}}(hid, code)
+  \textsl{equal-HospitalName/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-Address/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-City/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-State/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-ZipCode/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-CountryName/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-PhoneNumber/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-MeasureName/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-Condition/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{\textsc{hosp}/match-State/\textsc{ZipCode}}(hid, zid)\\ 
+  \textsl{\textsc{hosp}/match-ZipCode/\textsc{ZipCode}}(hid, code)
 \end{tabular} 
 & 
 \begin{tabular}[c]{@{}l@{}}
- \textsf{equal-Names}(id, n, id, n)\\ 
- \textsf{equal-Addr}(id, add, id, add)\\ 
- \textsf{equal-Natkey}(id, nkey, id, nkey)\\ 
- \textsf{equal-Phone}(id, ph, id, ph)\\ 
- \textsf{equal-Acc}(id, a, id, a)\\ 
- \textsf{equal-Mrkt}(id, m, id, m)\\ 
- \textsf{match-Phone}(id, id)\\ 
- \textsf{match-Addr}(id, id)
+ \textsl{equal-Names}(id, id)\\ 
+ \textsl{equal-Addr}(id, id)\\ 
+ \textsl{equal-Natkey}(id, id)\\ 
+ \textsl{equal-Phone}(id, id)\\ 
+ \textsl{equal-Acc}(id, id)\\ 
+ \textsl{equal-Mrkt}(id, id)\\ 
+ \textsl{match-Phone}(id, id)\\ 
+ \textsl{match-Addr}(id, id)
 \end{tabular} 
 & 
 \begin{tabular}[c]{@{}l@{}}
-\textsf{equal-Affiliation}(paperid, paperid)\\
-\textsf{equal-OriginNames}(oname, oname)\\
-\textsf{equal-OriginNamesByPaperId}(paperid, paperid)\\
-\textsf{equal-NormalNames}(nname, nname)\\
-\textsf{equal-NormalNamesByPaperId}(paperid, paperid)\\
-\textsf{missingOriginName}(paperid, oname)
+\textsl{equal-Affiliation}(paperid, paperid)\\
+\textsl{equal-OriginNames}(oname, oname)\\
+\textsl{equal-OriginNamesByPaperId}(paperid, paperid)\\
+\textsl{equal-NormalNames}(nname, nname)\\
+\textsl{equal-NormalNamesByPaperId}(paperid, paperid)\\
+\textsl{missingOriginName}(paperid, oname)
 \end{tabular}\\ \bottomrule
 \end{tabular}
 \caption{\label{tab:predicates} Markov logic predicates used in data quality rules.}
@@ -244,9 +244,9 @@ hidden \\ predicates
 \centering
 \begin{tabular}{ccc}
 \textbf{\textit{Paper}}         & \textbf{\textit{Author}}     & \textbf{\textit{Organisation}}      \\ \hline
-\textsf{paper\_id}     & \textsf{author\_id} & \textsf{affiliation\_id}  \\
-\textsf{publish\_year} &            & \textsf{origin\_name}     \\
-              &            & \textsf{normalized\_name}\\ \hline
+\textsl{paper\_id}     & \textsl{author\_id} & \textsl{affiliation\_id}  \\
+\textsl{publish\_year} &            & \textsl{origin\_name}     \\
+              &            & \textsl{normalized\_name}\\ \hline
 \end{tabular}
 \caption{Entities \textbf{\textit{Paper}}, \textbf{\textit{Author}} and \textbf{\textit{Organisation}} and their attributes that have been used in experiments for Web data cleaning with Markov Logic.}
     \label{tab:msagattrs}
@@ -259,16 +259,16 @@ We conduct our experiments on the following real-life and synthetic datasets.
 
 \todo[inline]{make our data public}
 
-\textbf{\textsc{hosp}}. The \textsc{hosp} dataset has been published by the US Department of Health $\&$ Human Services\footnote{http://www.medicare.gov/hospitalcompare/Data/Data-Download.html}. This dataset comprises 9 attributes: \textsf{addr}, \textsf{city}, \textsf{cond}, \textsf{country}, \textsf{hospname}, \textsf{measure}, \textsf{phone}, \textsf{state}, \textsf{zip}. 
-We use 6 CDFs and one MD, which have been manually designed. These data quality rules have been generously provided to us by the researchers Dallachiesa et al. from~\cite{Dallachiesa:2013:NCD:2463676.2465327}. One example of their rules is a CFD that states that if two tuples of \textsf{hosp} agree on attribute values for $\textsf{zip}$, then they should also agree on \textsf{country} and \textsf{state} attributes values. They define one MD that makes use of another table, namely US ZIP codes: ZIPCode\footnote{http://databases.about.com/od/access/a/zipcodedatabase.htm}. This additional data set contains $43K$ tuples with two attributes: \textsf{zip} and \textsf{state}. The MD defines that if two tuples from \textsf{hosp} and ZIPCode possess the same zip code values, and the state values are distinct, then the state value from the ZIPCode table should be adopted. 
+\textbf{\textsc{hosp}}. The \textsc{hosp} dataset has been published by the US Department of Health $\&$ Human Services\footnote{http://www.medicare.gov/hospitalcompare/Data/Data-Download.html}. This dataset comprises 9 attributes: \textsl{addr}, \textsl{city}, \textsl{cond}, \textsl{country}, \textsl{hospname}, \textsl{measure}, \textsl{phone}, \textsl{state}, \textsl{zip}. 
+We use 6 CDFs and one MD, which have been manually designed. These data quality rules have been generously provided to us by the researchers Dallachiesa et al. from~\cite{Dallachiesa:2013:NCD:2463676.2465327}. One example of their rules is a CFD that states that if two tuples of \textsl{hosp} agree on attribute values for $\textsl{zip}$, then they should also agree on \textsl{country} and \textsl{state} attributes values. They define one MD that makes use of another table, namely US ZIP codes: ZIPCode\footnote{http://databases.about.com/od/access/a/zipcodedatabase.htm}. This additional data set contains $43K$ tuples with two attributes: \textsl{zip} and \textsl{state}. The MD defines that if two tuples from \textsl{hosp} and ZIPCode possess the same zip code values, and the state values are distinct, then the state value from the ZIPCode table should be adopted. 
 
-\textbf{\textsc{tpc-h}.} The \textsc{tpc-h}\footnote{http://www.tpc.org/tpch/} is well-known dataset used in decision support benchmarks for databases. For our experiments we use two relations \textit{Customer} and \textit{Orders}, wich we join in order to introduce duplications on the \textit{Customer} relations data. The resulting dataset consists of 17 attributes of schema $T$: \textsf{c\_custkey}, \textsf{c\_name}, \textsf{c\_address},  \textsf{c\_nationkey}, \textsf{c\_phone}, \textsf{c\_acctbal},\\ \textsf{c\_mtksegment}, \textsf{c\_comment}, \textsf{o\_orderkey}, \textsf{o\_custkey},\\ \textsf{o\_orderstatus}, \textsf{o\_totalprice}, \textsf{o\_orderdate},\\ \textsf{o\_orderpriority}, \textsf{o\_clerk}, \textsf{o\_shippriority}, \textsf{o\_comment}. 
+\textbf{\textsc{tpc-h}.} The \textsc{tpc-h}\footnote{http://www.tpc.org/tpch/} is well-known dataset used in decision support benchmarks for databases. For our experiments we use two relations \textit{Customer} and \textit{Orders}, wich we join in order to introduce duplications on the \textit{Customer} relations data. The resulting dataset consists of 17 attributes of schema $T$: \textsl{c\_custkey}, \textsl{c\_name}, \textsl{c\_address},  \textsl{c\_nationkey}, \textsl{c\_phone}, \textsl{c\_acctbal},\\ \textsl{c\_mtksegment}, \textsl{c\_comment}, \textsl{o\_orderkey}, \textsl{o\_custkey},\\ \textsl{o\_orderstatus}, \textsl{o\_totalprice}, \textsl{o\_orderdate},\\ \textsl{o\_orderpriority}, \textsl{o\_clerk}, \textsl{o\_shippriority}, \textsl{o\_comment}. 
 
 \textbf{Dirty Data.} We introduce noise into the relational datasets \textsc{hosp} and \textsc{tpc-h} to produce dirty data. Our methods handles several kinds of noise: missing values, errors from the active domain, and typos. We consider the initial data to be clean and therefore use it as ground truth. Additionally, we manually assess that the ground truth datasets are consistent with respect to the CFDs and MDs. Afterwards, we insert noise into the datasets. We conduct our experiments on the two datasets with different noise rates ranging from $\mathsf{noi\%}$=2$\%$ to $\mathsf{noi\%}$=10$\%$. We introduce this noise into different dataset sizes ranging from one thousand to one hundred thousand data points. The noise rate depicts the ratio of the number of erroneous values to the total number of values in the dataset. We only introduce noise to the attributes which are involved in data quality rules.
 
 \textbf{\textsc{microsoft academic graph (msag)}.} Data quality issues are massively present in the context of the web due to the integration of heterogeneous data from different sources. Thus we include a third dataset - \textsc{microsoft academic graph (MSAG)}\footnote{http://research.microsoft.com/en-us/projects/mag/}~\cite{msag2015} - to assess our method on web data cleaning. MSAG is a heterogeneous entity graph comprised of six types of entities that model real-life academic relationships: field of study, author, institution, paper, venue, and conference instances. The raw data has been obtained from different sources (academic publishers and web-pages indexed by Bing search engine) and is organized in the form of a connected graph schema. For our experiments, we select three entities from the whole graph: \textit{author}, \textit{organisation} and \textit{paper} entities. This part of \textsc{MSAG} is of interest because it reveals important characteristics of extracted web data, such as missing and inconsistent values. In particular, we discover that there are inconsistencies in organisation names for the same author. Furthermore, a number of entries suffer from missing affiliation by an author. In order to model and run data cleaning on this web dataset, we consider the attributes of the selected entities in \textsc{MSAG}, as presented in Table~\ref{tab:msagattrs}. 
 
-\textbf{Data Quality Issues.} We extract a subset of complete entity instances in order to perform data cleaning experiments on web data. We reproduce data quality issues that we observe in \textsc{MSAG}: namely missing values. In order to a create gold standard to assess our data cleaning method, we proceed in the following way: We remove one affiliation entry from each author if there are more than three publications made by the same affiliation. Thus, we create a dataset with missing \textsf{affiliation\_id}, \textsf{origin\_name} and \textsf{normalized\_name} attributes. We thereby obtain graph data where $37\%$ of all authors reveal one missing edge to theirs affiliation; $27\%$ are missing two edges for theirs institutions; $15\%$ - three edges. Almost $21\%$ of authors suffer from missing more than three edges. 
+\textbf{Data Quality Issues.} We extract a subset of complete entity instances in order to perform data cleaning experiments on web data. We reproduce data quality issues that we observe in \textsc{MSAG}: namely missing values. In order to a create gold standard to assess our data cleaning method, we proceed in the following way: We remove one affiliation entry from each author if there are more than three publications made by the same affiliation. Thus, we create a dataset with missing \textsl{affiliation\_id}, \textsl{origin\_name} and \textsl{normalized\_name} attributes. We thereby obtain graph data where $37\%$ of all authors reveal one missing edge to theirs affiliation; $27\%$ are missing two edges for theirs institutions; $15\%$ - three edges. Almost $21\%$ of authors suffer from missing more than three edges. 
 
 \begin{figure}[t]
     \centering
@@ -312,7 +312,7 @@ This is again a characteristic of the underlying MAP inference algorithm \textit
 
 
 \subsection{Holistic Data Cleaning: Missing Value and Consistency Issues Interaction}
-
+\label{subsec:exp2}
 \pgfplotsset{small,  compat=1.5}
 \begin{table*}[t]\footnotesize
 \scriptsize
@@ -384,7 +384,8 @@ Table~\ref{tab:msag} (a) shows the accuracy achieved by our approach on the samp
 nodes with one or two missing \textit{Author}-\textit{Organisation} edges, nodes with three or four missing values for the \textit{Author} \textit{Organisation} connection, and finally nodes with more than 5 missing edges. Additionally, Table~\ref{tab:msag} (b) provides another perspective on this experiment by revealing the exact distribution of corrected \textit{Author}-entities ($x$-axis) by $F_1$-score ($y$-axis). The result shows the following: The method demonstrates overall $F_1$ score greater than $50\%$ and recall greater than $78\%$ for \textit{Author}-entities with one to two missing edges. Starting from three missing edges, we still achieve a recall ranging from $0.8$ to $1.0$, though the precision (and therefore $F_1$ score) drops. This happens because our approach selects more false positives with an increasing number of missing values. This experiment tells us that our method produces satisfying results on web data with very little noise only (e.g., missing values). In future work, extending data cleaning rules with domain specific information should be studied further in order to reduce the false positives rate. Because the \textsc{MSAG} dataset has only recently been published and related work in data cleaning systems provide results for cleaning relational data only, we are not able to compare ourselves to another system directly.
 
 \subsection{Impact of Rule Execution Order}
-Next, we study different orders of executing data cleaning rules, to show that specifying the optimal order of rules manually is hardly achievable~\cite{Dallachiesa:2013:NCD:2463676.2465327}. We investigate whether it is beneficial to leverage joint inference for simultaneous rule execution instead of manual specification of the optimal order of data cleaning rule execution. We verify the result in Figure~\ref{fig:orderexec} by investigating the $F_1$-score ($y$-axis) distribution of various data quality settings executed on varying noise rates ($x$-axis). We run our Markov Logic program on the attributes \textsf{state} and \textsf{zip} of the \textsc{hosp} dataset because they both participate in CFD and MD. Furthermore, we fix the dataset size at ninety thousands tuples with a noise rate varying from $2\%$ to $10\%$. Each experiment consists of three parts: First, we run the MD rules and then the CFDs, which gives us the overall worst accuracy. This results agree with the previous experiment about the joint modeling data cleaning rules (c.f.,~Table~\ref{tab:plots} (a) and Section \ref{subsec:exp1}). The MD rules perform poorer than CFDs. The overall $F_1$ score ranges between $0.01$ and $0.02$, which can be explained by really low precision and recall values due to error propagation from MDs to CFDs.  
+\label{subsec:exp3}
+Next, we study different orders of executing data cleaning rules, to show that specifying the optimal order of rules manually is hardly achievable~\cite{Dallachiesa:2013:NCD:2463676.2465327}. We investigate whether it is beneficial to leverage joint inference for simultaneous rule execution instead of manual specification of the optimal order of data cleaning rule execution. We verify the result in Figure~\ref{fig:orderexec} by investigating the $F_1$-score ($y$-axis) distribution of various data quality settings executed on varying noise rates ($x$-axis). We run our Markov Logic program on the attributes \textsl{state} and \textsl{zip} of the \textsc{hosp} dataset because they both participate in CFD and MD. Furthermore, we fix the dataset size at ninety thousands tuples with a noise rate varying from $2\%$ to $10\%$. Each experiment consists of three parts: First, we run the MD rules and then the CFDs, which gives us the overall worst accuracy. This results agree with the previous experiment about the joint modeling data cleaning rules (c.f.,~Table~\ref{tab:plots} (a) and Section \ref{subsec:exp1}). The MD rules perform poorer than CFDs. The overall $F_1$ score ranges between $0.01$ and $0.02$, which can be explained by really low precision and recall values due to error propagation from MDs to CFDs.  
 In the second part of the experiment, we change the sequence of execution to running CFD rules before MD rules. This slightly improves the $F_1$ scores by increasing them from $0.1$ to $0.3$ for different noise values. We attribute this to the fact that CFDs initially detect more violations. However, analogous to the previous part, error propagation leads to the insufficient results. 
 
 In the third and final part of the experiment, we perform the simultaneous execution of CFD and MD rules, meaning we modeled matching (for values deduplication) and repair (for erroneous values) processes together. Here we see a rapid increase of all accuracy values from $0.86$ for $2\%$ noise to $0.95$ on $10\%$ noise against the previously performed sequential execution of data cleaning rules. The growing trend of the $F_1$ scores has same explanation as results the experiment about holistic data cleaning (c.f.,~Table~\ref{tab:plots} (a) and Section \ref{subsec:exp1}) namely the functionality of the CPI algorithm. These results confirm our hypotheses that it is highly beneficial to execute multiple data cleaning rules simultaneously.  
@@ -433,7 +434,7 @@ nodes near coords align={vertical},
 
 
 \subsection{Modeling Data Cleaning Rules}
-
+\label{subsec:exp4}
 %Big table containing all the rules and formulas:
 \begin{table*}[t]\footnotesize
 \scriptsize
@@ -444,21 +445,21 @@ nodes near coords align={vertical},
 %hosp
 \multirow{2}{*}{\textsc{hosp}}  & %hosp dq rules
                         \begin{tabular}[c]{@{}l@{}}
-                        $\mathsf{cfd_1: \textsc{hosp}([\textsf{zip}] \rightarrow [\textsf{state, city}], t1=(\_ \parallel \_, \_))}$\\
-                        $\mathsf{cfd_2: \textsc{hosp}([\textsf{phone}] \rightarrow [\textsf{addr, zip,state, city}],t2=(\_ \parallel \_,\_,\_,\_))}$
+                        $\mathsf{cfd_1: \textsc{hosp}([\textsl{zip}] \rightarrow [\textsl{state, city}], t1=(\_ \parallel \_, \_))}$\\
+                        $\mathsf{cfd_2: \textsc{hosp}([\textsl{phone}] \rightarrow [\textsl{addr, city}],t2=(\_ \parallel \_,\_,\_,\_))}$
                         \end{tabular}                   
                         & %hosp markov logic cfd
                         \begin{tabular}[c]{@{}l@{}}
-                        $\mathsf{w_1: \textsf{zip}(id1, code)~\wedge~\textsf{zip}(id2, code)~\wedge \textsf{state}(id1, s1)~\wedge~\textsf{state}(id2, s2)~}$ \\
-                        $\mathsf{~~~~~~~~\wedge!\textsf{state}(id1, s2)~\wedge~!\textsf{state}(id2, s1)~\Rightarrow \textsf{equal-state}(id1, s1, id2, s2)}$\\
+                        $\mathsf{w_1: \textsl{zip}(id1, code)~\wedge~\textsl{zip}(id2, code)~\wedge \textsl{state}(id1, s1)~\wedge~\textsl{state}(id2, s2)~}$ \\
+                        $\mathsf{~~~~~~~~\wedge!\textsl{state}(id1, s2)~\wedge~!\textsl{state}(id2, s1)~\Rightarrow \textsl{equal-state}(id1, id2)}$\\
                         %second cfd:
-                        $\mathsf{w_2: \textsf{zip}(id1, code)~\wedge~\textsf{zip}(id2, code)~\wedge \textsf{city}(id1, c1)~\wedge~\textsf{city}(id2, c2)~}$ \\
-                        $\mathsf{~~~~~~~~\wedge!\textsf{city}(id1, c2)~\wedge~!\textsf{city}(id2, c1)~\Rightarrow \textsf{equal-city}(id1, c1, id2, c2)}$
+                        $\mathsf{w_2: \textsl{zip}(id1, code)~\wedge~\textsl{zip}(id2, code)~\wedge \textsl{city}(id1, c1)~\wedge~\textsl{city}(id2, c2)~}$ \\
+                        $\mathsf{~~~~~~~~\wedge!\textsl{city}(id1, c2)~\wedge~!\textsl{city}(id2, c1)~\Rightarrow \textsl{equal-city}(id1, id2)}$
                         \end{tabular}                 \\ 
                        & %hosp md rule
                          \begin{tabular}[c]{@{}l@{}}
-                        $\mathsf{md_1: \textsc{hosp}[\textsf{zip}]=\textsc{zipcode}[\textsf{zip}]\wedge \textsc{hosp}[\textsf{state}]\neq \textsc{zipcode}[\textsf{state}]}$\\
-                        $\mathsf{~~~~~~~~~~~~~~\rightarrow\textsc{hosp}[\textsf{state}]\rightleftharpoons \textsc{zipcode}[\textsf{state}]} $
+                        $\mathsf{md_1: \textsc{hosp}[\textsl{zip}]=\textsc{zipcode}[\textsl{zip}]\wedge \textsc{hosp}[\textsl{state}]\neq \textsc{zipcode}[\textsl{state}]}$\\
+                        $\mathsf{~~~~~~~~~~~~~~\rightarrow\textsc{hosp}[\textsl{state}]\rightleftharpoons \textsc{zipcode}[\textsl{state}]} $
                         \end{tabular}                 
                        & %hosp markov logic md
                        \begin{tabular}[c]{@{}l@{}}
@@ -469,7 +470,7 @@ nodes near coords align={vertical},
 %tpc-h
 \multirow{2}{*}{\textsc{tpc-h}} & %tpc-h fds
                         \begin{tabular}[c]{@{}l@{}}
-                        $\mathsf{cfd_1: \textsc{t}([\textsf{c\_custkey}] \rightarrow [\textsf{c\_name,c\_address}],t1=(\_ \parallel \_, \_))} $
+                        $\mathsf{cfd_1: \textsc{t}([\textsl{c\_custkey}] \rightarrow [\textsl{c\_name,c\_address}],t1=(\_ \parallel \_, \_))} $
                         \end{tabular}                   
                         &%tpc-h mlogic fds
                          \begin{tabular}[c]{@{}l@{}}
@@ -478,8 +479,8 @@ nodes near coords align={vertical},
                          \\  
                        & %tpch md rules
                        \begin{tabular}[c]{@{}l@{}}
-                        $\mathsf{md_1: \textsc{t}[\textsf{c\_address}]=\textsc{t}[\textsf{c\_address}] \rightarrow \textsc{t}[\textsf{c\_phone}]\rightleftharpoons \textsc{t}[\textsf{c\_phone}]}$\\ 
-                        $\mathsf{md_2: \textsc{t}[\textsf{c\_name}]=\textsc{t}[\textsf{c\_name}] \rightarrow \textsc{t}[\textsf{c\_address}]\rightleftharpoons \textsc{t}[\textsf{c\_address}]} $
+                        $\mathsf{md_1: \textsc{t}[\textsl{c\_address}]=\textsc{t}[\textsl{c\_address}] \rightarrow \textsc{t}[\textsl{c\_phone}]\rightleftharpoons \textsc{t}[\textsl{c\_phone}]}$\\ 
+                        $\mathsf{md_2: \textsc{t}[\textsl{c\_name}]=\textsc{t}[\textsl{c\_name}] \rightarrow \textsc{t}[\textsl{c\_address}]\rightleftharpoons \textsc{t}[\textsl{c\_address}]} $
 
                         \end{tabular}                  
                        & %tpch md markov logic
@@ -490,8 +491,8 @@ nodes near coords align={vertical},
 %msag
 \multirow{3}{*}{\textsc{msag}}  & % msag fd
                                 \begin{tabular}[c]{@{}l@{}}
-                                $\mathsf{cfd_1: \textsc{m}([\textsf{author\_id, year}] \rightarrow [\textsf{affiliation\_id}],t1=(\_,\_ \parallel \_))} $\\
-                                $\mathsf{cfd_2: \textsc{m}([\textsf{affiliation\_id}] \rightarrow [\textsf{origin\_name}],t2=(\_ \parallel \_))} $
+                                $\mathsf{cfd_1: \textsc{m}([\textsl{author\_id, year}] \rightarrow [\textsl{affiliation\_id}],t1=(\_,\_ \parallel \_))} $\\
+                                $\mathsf{cfd_2: \textsc{m}([\textsl{affiliation\_id}] \rightarrow [\textsl{origin\_name}],t2=(\_ \parallel \_))} $
                                 \end{tabular}                   
                                 & %msag markov logic fd
                                 \begin{tabular}[c]{@{}l@{}}
@@ -500,7 +501,7 @@ nodes near coords align={vertical},
                                 \\  
                                 & % msag extended fd
                                 \begin{tabular}[c]{@{}l@{}}
-                                 $\mathsf{eCfd_1: \textsc{m}([\textsf{author\_id, year}] \rightarrow [\textsf{affiliation\_id}],t1=(\_, diff(\_)\leq 2 \parallel \_))} $   
+                                 $\mathsf{eCfd_1: \textsc{m}([\textsl{author\_id, year}] \rightarrow [\textsl{affiliation\_id}],t1=(\_, diff(\_)\leq 2 \parallel \_))} $   
                                 \end{tabular}             
                                 & % msag markov logic 
                                 \begin{tabular}[c]{@{}l@{}}
@@ -517,27 +518,28 @@ nodes near coords align={vertical},
 
                                 \\ \hline
 \end{tabular}
-\caption{Modeling data cleaning rules as Markov Logic programs.}
+\caption{\note{FINISH ME}Modeling data cleaning rules as Markov Logic programs.}
 \label{tab:rulesformulas}
 \end{table*}
 
 %\note{This section would greatly benefit from a few concrete examples that show the benefits of modeling rules with markov logic!!! Furthermore, you need to explain how you measure usability!!!} - due to space limitations, I extracted all examples into a table. 
-\note{trying to elaborate the usability methodology from} \cite{Lewis2013UMUX}
-Lastly, we focus on the feasibility of translating data quality rules into Markov logic. We conduct experiments on all three datasets described above. 
+%\note{trying to elaborate the usability methodology from} \cite{Lewis2013UMUX, Finstad2010}
+% http://www.measuringu.com/blog/essential-metrics.php
 
-\textbf{\textsc{hosp} Quality Rules}. In our data cleaning method for the \textsc{hosp} data, we use 6 manually designed CDFs and one MD, which result in 15 normalized CFDs. One MD rule is transformed into 2 formulas. All data cleaning rules are positive. Finally, all interleaved rules are translated into 21 Markov logic formulas. In the Table \ref{tab:rulesformulas}, we provide an example of these data quality rules, which are defined on pairs of tuples. The MD rule is specified on a two relations. Markov logic predicates used for data quality formulae are shown in Table~\ref{tab:predicates}. After transforming the 100k \textsc{hosp} tuples into Markov logic grounded atoms, the resulting data comprises 1.3M evidence atoms, which will be used for inference. We empirically observe that extending the data quality rules set for additional conditions, which makes consideration of similar tuples unnecessary and reduces the search space and therefore converges much faster than \textit{"pure"} model. This means that each first order logic formula, which represent the RHS of the normalized data quality rule $\mathsf{\textsf{attr}(id1, v1)~\wedge~\textsf{attr}(id2, v2)}$ becomes an inverse part $\mathsf{!\textsf{attr}(id1, v2)~\wedge~!\textsf{attr}(id2, v1)}$. This additional part denotes that we consider only tuples with different values. Here the normalized CFD rules are being compiled as demonstrated in the Table \ref{tab:rulesformulas}. 
+To asses usability of our method, we adopt research methodology from Usability Metric for User Experience (\textsc{umux-lite})~\cite{Lewis2013UMUX, Finstad2010} and discuss two items from \textsc{umux-lite} questionnaire: "Markov Logic capabilities meet requirements on data cleaning systems" and "Markov logic is easy to use". Being explained in former Sections \ref{sec:method}, \ref{subsec:exp1}, \ref{subsec:exp2} and \ref{subsec:exp3}, Markov logic indeed meet the main requirements on data cleaning systems such as \textit{holistic} data quality rules treatment \cite{Fan:2014:IRM:2628135.2567657, Dallachiesa:2013:NCD:2463676.2465327}, automation \cite{Stonebraker_datacuration} and heterogeneous rules incorporation \cite{chu2013holistic}. In the following we focus on the second item from \textsc{umux-lite} - "Markov logic is easy to use" - and provide our experience in how we modeled data cleaning rules by using Markov logic on all three datasets \textsc{hosp}, \textsc{tpc-h} and \textsc{msag}. %Table \ref{tab:rulesformulas}
+
+\textbf{\textsc{hosp} Quality Rules}. In our data cleaning method for the \textsc{hosp} data, we use 6 manually designed CDFs and one MD, which result in 15 normalized CFDs. One MD rule is transformed into 2 formulas. All data cleaning rules are positive. Finally, all interleaved rules are translated into 21 Markov logic formulas. In the Table \ref{tab:rulesformulas}, we provide an example of these data quality rules, which are defined on pairs of tuples. The MD rule is specified on a two relations. Markov logic predicates used for data quality formulas are shown in Table~\ref{tab:predicates}. After transforming the 100k \textsc{hosp} tuples into Markov logic grounded atoms, the resulting data comprises 1.3M evidence atoms, which will be used for inference. We empirically observe that extending the data quality rules set for additional conditions, which makes consideration of similar tuples unnecessary and reduces the search space and therefore converges much faster than \textit{"pure"} model. This means that each first order logic formula, which represent the RHS of the normalized data quality rule $\mathsf{\textsl{attr}(id1, v1)~\wedge~\textsl{attr}(id2, v2)}$ becomes an inverse part $\mathsf{!\textsl{attr}(id1, v2)~\wedge~!\textsl{attr}(id2, v1)}$. This additional part denotes that we consider only tuples with different values. Here the normalized CFD rules are being compiled as demonstrated in the Table \ref{tab:rulesformulas}. 
 %\note{What has this whole paragraph to do with usability? How did you measure it? What is the purpose of this discussion?}
 
-\textbf{\textsc{tpc-h} Quality Rules}. We write 9 CFDs and 3 MDs for this dataset. One example of the rules is a CFD that states if two tuples agree on \textsf{c\_custkey}, then they should agree on \textsf{c\_name} and \textsf{c\_address} attributes. MDs are designed on the same schema \textsc{tpc-h} \textsf{(T, T)}. These MDs state that for any pair of tuples $(t_1,t_2)$ if the LHS is similar, then the attribute values on the RHS should be identified. In the Table \ref{tab:rulesformulas} we provide an except of the data quality rules we create for \textsc{tpc-h}. Markov logic predicates used for data quality rules are shown in Table~\ref{tab:predicates}. After transforming the 100k \textsc{tpc-h} tuples into Markov logic grounded atoms, the resulting data comprises 1 Mio evidence atoms, which are then used for inference. \note{Again: What has this whole paragraph to do with usability? How did you measure it? What is the purpose of this discussion?}
+\textbf{\textsc{tpc-h} Quality Rules}. We write 9 CFDs and 3 MDs for this dataset. One example of the rules is a CFD that states if two tuples agree on \textsl{c\_custkey}, then they should agree on \textsl{c\_name} and \textsl{c\_address} attributes. MDs are designed on the same schema \textsc{tpc-h} \textsl{(T, T)}. These MDs state that for any pair of tuples $(t_1,t_2)$ if the LHS is similar, then the attribute values on the RHS should be identified. In the Table \ref{tab:rulesformulas} we provide an except of the data quality rules we created for \textsc{tpc-h}. Markov logic predicates used for data quality rules are shown in Table~\ref{tab:predicates}. After transforming the 100k \textsc{tpc-h} tuples into Markov logic grounded atoms, the resulting data comprises 1 Mio evidence atoms, which are then used for inference. 
+%\note{Again: What has this whole paragraph to do with usability? How did you measure it? What is the purpose of this discussion?}
 
-\textbf{\textsc{msag} Quality Rules}. Due to the graph nature of the \textsc{msag} data (c.f.,~Figure \ref{fig:msagmissing}) we develop data quality rules, which are based on CFDs, \textit{extended} CFDs \cite{Chen2009extended} and equality axioms, such as \textit{symmetry} and \textit{transitivity}. For the \textit{Paper}-\textit{Author}-\textit{Organisation} subgraph we define two CFDs, one extended CFD and 8 additional rules that comprises equality axioms for hidden predicates. Considering the semantical meaning of the data, we profit from the ability to add supporting knowledge into data cleaning process. For example, having the CFD $\mathsf{\textsc{m}([\textsf{author\_id, year}] \rightarrow [\textsf{affiliation\_id}],t1=(\_,\_ \parallel \_))} $  allows us to capture all missing affiliation by the same author, which published in the same year. In real life we know that in academia an average contract lasts around 2-3 years. Therefore by incorporating this knowledge in form of a predicate $\mathsf{\textsf{inRange}(year, year)}$, we will extend our search range. Additionally, by combining with equality axioms, we enable capturing more missing values. For example, the hard rule $\mathsf{\textsf{equal-Affiliation}(id_1, id_2) ~\wedge~ \textsf{equal-Affiliation}(id_2, id_3) \Rightarrow  \textsf{equal-Affiliation}(id_1, id_3)}$ denotes transitive relationship between three different entities \textit{Organisation}. In total, Markov Logic program consists then from 21 lines of code. \note{Again: What has this whole paragraph to do with usability? How did you measure it? What is the purpose of this discussion?}
+\textbf{\textsc{msag} Quality Rules}. Due to the graph nature of the \textsc{msag} data (c.f.,~Figure \ref{fig:msagmissing}) we develop data quality rules, which are based on CFDs, \textit{extended} CFDs \cite{Chen2009extended} and equality axioms, such as \textit{symmetry} and \textit{transitivity}. For the \textit{Paper}-\textit{Author}-\textit{Organisation} subgraph we define two CFDs, one extended CFD and 8 additional rules that comprises equality axioms for hidden predicates. Considering the semantical meaning of the data, we profit from the ability to add supporting knowledge into data cleaning process. For example, having the CFD $\mathsf{\textsc{m}([\textsl{author\_id, year}] \rightarrow [\textsl{affiliation\_id}],t1=(\_,\_ \parallel \_))} $  allows us to capture all missing affiliation by the same author, which published in the same year. In real life we know that in academia an average contract lasts around 2-3 years. Therefore by incorporating this knowledge in form of a predicate $\mathsf{\textsl{inRange}(year, year)}$, we will extend our search range. Additionally, by combining with equality axioms, we enable capturing more missing values. For example, the hard rule $\mathsf{\textsl{equal-Affiliation}(id_1, id_2) ~\wedge~ \textsl{equal-Affiliation}(id_2, id_3) \Rightarrow  \textsl{equal-Affiliation}(id_1, id_3)}$ denotes transitive relationship between three different entities \textit{Organisation}. In total, Markov Logic program consists then from 21 lines of code and an except can be viewed in the Table \ref{tab:rulesformulas}. 
+%\note{Again: What has this whole paragraph to do with usability? How did you measure it? What is the purpose of this discussion?}
 
-This part of our experimental study demonstrates that the expressiveness of Markov Logic affords us to model data cleaning rules in a convenient \anno{be more specific} manner. While existing data cleaning systems \cite{Dallachiesa:2013:NCD:2463676.2465327} are also concerned about the generality of the data cleaning rules, we can define Markov Logic data cleaning rules in expressive first-order logic manner without the need to implement any code.  Furthermore, Markov Logic is data format independent, which facilitates data cleaning on different data formats as provided on relational and graph data formats. The direct translation of data cleaning rules into first-order logic (and therefore Markov Logic formulae) simplifies the process of writing data cleaning routines. 
-
+This part of our experimental study demonstrates that the expressiveness of Markov Logic affords us to model data cleaning rules. While existing data cleaning systems \cite{Dallachiesa:2013:NCD:2463676.2465327} are also concerned about the generality of the data cleaning rules, we can define Markov Logic data cleaning rules in expressive first-order logic manner without the need to implement any code. Furthermore, Markov Logic is data format independent, which facilitates data cleaning on different data formats as provided on relational and graph data formats. 
 
 \subsection{Summary}
-\note{Add references to the individual chapters when you summarize! Does this summary cover all experiments?}
+%\note{Add references to the individual chapters when you summarize! Does this summary cover all experiments?}
 
-The results of our experimental study indicate that multiple types of data cleaning rules should be considered \textit{holistically}, which confirms previous research \cite{Dallachiesa:2013:NCD:2463676.2465327, Fan:2014:IRM:2628135.2567657, Fan:2011:IRM:1989323.1989373}. Adding domain or structural knowledge about data into the Markov logic program improves overall data cleaning. Furthermore, by using joint inference we are able to achieve very good results without defining the order of the data cleaning rules execution. We find that joint modeling of data quality rules results in better \anno{be specific! you mean higher accuracy, right?} data correction. By combining matching and repairing processes, we achieve better \anno{be specific!} results than by performing these processes separately. By using the probabilistic-logical framework Markov logic we benefit from its flexibility in constraints definition and joint inference over different data repair and match rules. Therefore it is a great fit into the data quality management field; \anno{be specific, don't just claim something. Why exactly is it a great fit?}
-
-
+The results of our experimental study indicate that multiple types of data cleaning rules should be considered \textit{holistically} (Section \ref{subsec:exp1} and \ref{subsec:exp2}), which confirms previous research \cite{Dallachiesa:2013:NCD:2463676.2465327, Fan:2014:IRM:2628135.2567657, Fan:2011:IRM:1989323.1989373}. Adding domain or structural knowledge about data into the Markov logic program improves overall data cleaning. Furthermore, by using joint inference we are able to achieve very good results without defining the order of the data cleaning rules execution. We find that joint modeling of data quality rules results in higher accuracy of data correction (Section \ref{subsec:exp3}). By using the probabilistic-logical framework Markov logic we benefit from its flexibility in constraints definition and joint inference over different data repair and match rules. The direct translation of data cleaning rules into first-order logic (and therefore Markov Logic formulas) simplifies the process of writing data cleaning routines (Section \ref{subsec:exp4}). 
