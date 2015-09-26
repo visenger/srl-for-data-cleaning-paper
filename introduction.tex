@@ -12,28 +12,20 @@ A common approach to increase data quality is to formulate a set of \textit{data
 
 %\todo[inline]{Desiderata: Challenge}  
 \textit{Interleaved rules}. First, while each such rule usually addresses one data quality issue individually, the individual rules as a whole typically \textit{interact}~\cite{fan2012foundations, Fan:2014:IRM:2628135.2567657}. For instance, a rule that deletes duplicates might perform better if missing data has already been imputed, while, on the other hand, a rule that imputes missing data might perform better if duplicates have already been removed. Therefore, we argue to model data quality rules such as deduplication and missing value imputation \textit{jointly}, rather than as separate processes.
-Second, rules in such a rule-set may need to be \textit{"soft"} and \textit{"hard"} in order to balance constraints of different importance \cite{Yakout:2013:DSU:2463676.2463706}, especially within a set of interacting rules. This makes the creation of such rule sets challenging from a modeling perspective \anno{why?}. 
+Second, rules in such a rule-set may need to be modeled \textit{"soft"} and \textit{"hard"} in order to balance constraints of different importance \cite{Yakout:2013:DSU:2463676.2463706}, especially within a set of interacting rules. 
 
 \textit{Automation}. Different execution orders of interleaved rules produce different results~\cite{Dallachiesa:2013:NCD:2463676.2465327}. Imposing the difficult problem of manually specifying the execution order on the user conflicts with the automation principle of data curation systems~\cite{Stonebraker_datacuration}.
 
-\textit{Usability and domain knowledge integration}. Various languages and statistical approaches for data curation exist \cite{Dallachiesa:2013:NCD:2463676.2465327, chu2013holistic, llunaticVDLB2013b}. However, there is a need for expressiveness and customization of the rules in order to integrate arbitrary constraints into data cleaning. \note{one more sentence, give an example or describe more specific what is currently not working} 
+\textit{Usability and domain knowledge integration}. Various languages and statistical approaches for data curation exist \cite{Dallachiesa:2013:NCD:2463676.2465327, chu2013holistic, llunaticVDLB2013b}. However, there is a need for expressiveness and customization of the rules in order to integrate arbitrary constraints into data cleaning without specification of user-defined functions. 
+%\note{one more sentence, give an example or describe more specific what is currently not working} 
 
 In this paper, we present an approach to data cleaning based on Statistical Relational Learning (SRL)~\cite{getoor2007introduction} and probabilistic inference~(c.f.,~Section~\ref{sec:method}). SRL is a branch of machine learning that models joint distributions over relational data. Generally, data quality rules represent relationships between attributes in the database schema (c.f., Section~\ref{sec:expl}). These rules are mainly based on integrity constraints such as functional dependencies~\cite{AbiteboulHV95, fan2012foundations} on top of a database schema. We show how to translate such functional dependencies, expressed as first-order logic formulas, into probabilistic-logical languages, allowing us to reason over inconsistencies, duplicates or missing values in a probabilistic way~(c.f.,~Section~\ref{sec:ml}). During automatic data cleaning, the optimal order of rules execution is hardly achievable \cite{Dallachiesa:2013:NCD:2463676.2465327}. Therefore we propose to use joint inference for the simultaneous rules execution.
 
 The contributions of this paper are the following:
 
 \begin{itemize}
-
   \item We discuss how to model data cleaning rules based on integrity constraints within the probabilistic framework of Markov~logic. (Section~\ref{sec:ml}).
-
-  \item \note{describe data repair as joint inference --> allows us to treat rules as interleaved, allows for soft/hard rules, obliterates need to specify execution order}. (Section~\ref{subsec:jointinference})
-
-	\item We present an extensive empirical study of holistic modeling and error prediction in data cleaning using Markov Logic. Modelling data quality rules in a probabilistic way enables statistical inference of data quality errors. Our experimental evaluation reveals that the simultaneous treatment of data cleaning rules leads to higher accuracy in data curation. \note{Mention best looking results again here, similar to abstract, not more than one sentence}. We show that joint inference for data correction prediction outperforms sequential execution of data cleaning rules and results in an improved $F_1$-score of $0.95$. (Section~\ref{sec:evaluation})
-	
- 
-	
-  
+  \item We describe how data repair leverages joint inference on probabilistic graphical models and allows us to treat data curation rules holistically, which obliterates the need to specify execution order. (Section~\ref{subsec:jointinference})
+ \item We present an extensive empirical study of holistic modeling and error prediction in data cleaning using Markov Logic. Modelling data quality rules in a probabilistic way enables statistical inference of data quality errors. Our experimental evaluation reveals that the simultaneous treatment of data cleaning rules leads to higher accuracy in data curation. On the dataset size of hundred thousands tuples with $10\%$ of noisy values we show that joint inference for data correction prediction outperforms sequential execution of data cleaning rules and results in an improved $F_1$-score of $0.95$. (Section~\ref{sec:evaluation})
 \end{itemize}
 
-
-\note{put ref}

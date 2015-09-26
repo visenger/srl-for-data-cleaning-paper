@@ -88,41 +88,63 @@
 % without further effort on your part as the last section in
 % the body of your article BEFORE References or any Appendices.
 
-\numberofauthors{5} %  in this sample file, there are a *total*
+\numberofauthors{6} %  in this sample file, there are a *total*
 % of EIGHT authors. SIX appear on the 'first-page' (for formatting
 % reasons) and the remaining two appear in the \additionalauthors section.
 %
 
-\author {
+%\author {
 %
- \alignauthor Larysa Visengeriyeva
+ %\alignauthor Larysa Visengeriyeva
  %
- \alignauthor Alan Akbik
+ %\alignauthor Alan Akbik
        %
- \alignauthor Sebastian Schelter
+ %\alignauthor Sebastian Schelter
   %
- \and
- \alignauthor Manohar Kaul
+ %\and
+ %\alignauthor Manohar Kaul
  %
- \alignauthor Tilmann Rabl
+ %\alignauthor Tilmann Rabl
  %
- \alignauthor Volker Markl
+ %\alignauthor Volker Markl
        %
- \sharedaffiliation
- \\
- \affaddr{Technische Universit{\"a}t Berlin, Germany}\\
- \affaddr{\raisebox{0pt}[0pt][0pt]\ firstname.lastname@tu-berlin.de}
+ %\sharedaffiliation
+ %\\
+ %\affaddr{Technische Universit{\"a}t Berlin, Germany}\\
+ %\affaddr{\raisebox{0pt}[0pt][0pt]\ firstname.lastname@tu-berlin.de}
 %  % \email{} does not work for some reason...
-}
+%}
 
+\newcommand{\superscript}[1]{\ensuremath{^{\textrm{#1}}}}
+\def\wu{\superscript{*}}
+\def\wg{\superscript{\dag}}
+
+\author{%
+{
+Larysa Visengeriyeva{\small $~^*$},
+Alan Akbik{\small $~^*$},
+Sebastian Schelter{\small $~^*$},}
+\\
+{Manohar Kaul{\small $~^\ddag$},
+Tilmann Rabl{\small $~^*$},
+Volker Markl{\small $~^*$}
+}
+\\
+\vspace{0.5mm}\\
+\begin{tabular}{*{2}{>{\centering}p{.32\textwidth}}}
+$^*$\,Technische Universit{\"a}t Berlin
+&
+$^\ddag$\,IIT Hyderabad \tabularnewline
+$^*$\,\{first.last\}@tu-berlin.de
+&
+$^\ddag$\,mkaul@iith.ac.in
+\end{tabular}
+}
 
 
 \maketitle
 \begin{abstract}
-High quality data is important for data science and data analysis. Unfortunately, digitally collected data often suffers from many data quality issues, such as duplicate, incorrect or incomplete data. A common approach for counteracting these issues is to formulate a set of data agnostic cleaning rules, intended to identify and repair incorrect, duplicate and missing data. There is a number of requirements for new approaches for data cleaning systems to make them usable, automate and incorporate arbitrary cleaning rules \anno{reads wrong, rewrite}. Therefore, we propose an approach to data cleaning based on Statistical Relational Learning (SRL) and probabilistic inference. We argue that a well-known formalism - Markov logic - is a natural fit for modeling interacting data quality rules in a flexible and extensible way. Our approach allows the usage of probabilistic joint inference over interleaved data cleaning rules to improve data quality. Furthermore, it obliterates the need to specify the order of rules execution. We show how data quality rules expressed as formulas in first-order logic directly translate into the predictive model in our SRL framework.  %\note{Mention contributions!} 
-We demonstrate the viability of our proposed approach in an experimental study on three datasets of different nature. We improve the accuracy of data cleaning by a factor $1.2$ \anno{percentage might sound better here} compared to a state-of-the-art solution. \note{Mention other contributions as well, e.g. we show that simultaneous rule execution automatically performed by our system much better than manually selected order} 
-%\note{Mention details of best experimental outcomes, e.g., improved the accuracy by a factor of X.y compared to state-of-the-art solutions.
-
+High quality data is important for data science and data analysis. Unfortunately, digitally collected data often suffers from many data quality issues, such as duplicate, incorrect or incomplete data. A common approach for counteracting these issues is to formulate a set of data agnostic cleaning rules, intended to identify and repair incorrect, duplicate and missing data. There is a number of requirements for new approaches for data cleaning systems, which are able to treat data quality rules holistically, to incorporate heterogeneous constraints within a single routine and to automate data curation. Therefore, we propose an approach to data cleaning based on Statistical Relational Learning (SRL) and probabilistic inference. We argue that a well-known formalism - Markov logic - is a natural fit for modeling interacting data quality rules in a flexible and extensible way. Our approach allows the usage of probabilistic joint inference over interleaved data cleaning rules to improve data quality. Furthermore, it obliterates the need to specify the order of rules execution. We show how data quality rules expressed as formulas in first-order logic directly translate into the predictive model in our SRL framework. In this paper we show that simultaneous rule execution automatically performed by our system better than manually selected order. We demonstrate the viability of our proposed approach in an experimental study on three datasets of different nature. We improve the accuracy of data cleaning by $10\%$ compared to a state-of-the-art solution.
 \end{abstract}
 
 \linespread{.94}
