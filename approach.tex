@@ -52,7 +52,7 @@ semi-structured data for Markov logic.
  \label{fig:mlngrounding}
 \end{figure*}
 
-\subsection{Compilation of Data Cleaning Rules to Predicate Calculus}
+\subsection{Compilation of Data Cleaning Rules to \\Predicate Calculus}
 \label{sec:ml} 
 
 %\anno{Does your system automate the compilation? If yes, mention this!} - right now, there is a master thesis I am supervising, which implements the automate compilation. 
@@ -126,10 +126,12 @@ To enable straightforward compilation, we assume that CFDs are provided in norma
 According to~\cite{Fagin:1982:HCD:322344.322347} we can represent these $\mathsf{cfd_1}$ and $\mathsf{cfd_2}$ as two first-order logic formulas:
 \begin{flalign*}
 & \mathsf{1)~\forall~\textsl{city}, \textsl{phone}, \textsl{street}_1, \textsl{street}_2 }& \\
-& \mathsf{\textsc{transaction}(\textsl{city}, \textsl{phone}, \textsl{street}_1)~\wedge~\textsc{transaction}(\textsl{city}, \textsl{phone}, \textsl{street}_2) }& \\
+& \mathsf{\textsc{transaction}(\textsl{city}, \textsl{phone}, \textsl{street}_1)~\wedge}&\\
+& \mathsf{\textsc{transaction}(\textsl{city}, \textsl{phone}, \textsl{street}_2) }& \\
 & \mathsf{ \Rightarrow \textsl{street}_1=\textsl{street}_2 }& \\
 & \mathsf{2) ~\forall~\textsl{city}, \textsl{phone}, \textsl{zip}_1, \textsl{zip}_2 }& \\
-& \mathsf{ ~\textsc{transaction}(\textsl{city}, \textsl{phone}, \textsl{zip}_1) \wedge~\textsc{transaction}(\textsl{city}, \textsl{phone}, \textsl{zip}_2) }& \\
+& \mathsf{ ~\textsc{transaction}(\textsl{city}, \textsl{phone}, \textsl{zip}_1) \wedge}& \\
+& \mathsf{\textsc{transaction}(\textsl{city}, \textsl{phone}, \textsl{zip}_2) }& \\
 & \mathsf{ \Rightarrow \textsl{zip}_1=\textsl{zip}_2 }&
 \end{flalign*}
 \vspace*{-0.3cm}
@@ -147,13 +149,14 @@ namely $\mathsf{\textsl{city}(id, city)}$ and $\mathsf{\textsl{phone}(id, phone)
 \end{flalign*}
 \vspace*{-0.5cm}
 
-Please note that using the same arguments in predicates $\mathsf{\textsl{city}(id, city)}$ and $\mathsf{\textsl{phone}(id, phone)}$ encodes equality of the corresponding values in the Markov logic program. The two different tuples are distinguished by $\mathsf{id_1}$ and $\mathsf{id_2}$. 
+Note that using the same arguments in predicates $\mathsf{\textsl{city}(id, city)}$ and $\mathsf{\textsl{phone}(id, phone)}$ encodes equality of the corresponding values in the Markov logic program. The two different tuples are distinguished by $\mathsf{id_1}$ and $\mathsf{id_2}$. 
 These data quality rules form the basis for a Markov logic program. A particular advantage of Markov logic is its \textit{modularity} while modeling. We can create "complex" statistical models by combining various "atomic" models. Thereby, we consider each declared data quality rule as an "atomic" probabilistic model. In combination, these small models form a "compound" model. So far we have shown how to express integrity constraints in terms of the predicate calculus.
 Having declared the data quality rules by capturing all correlations and constraints, we can now infer potential predicates, such as $\mathsf{\textsl{equal-street}(id, id)}$. This predicate holds the information about possible repairs on the attribute $\mathsf{\textsl{street}}$ in the \textsc{transactions} tables in our running example from Section~\ref{sec:expl}. Reasoning about such hidden predicates allows us to decide which attributes gets a particular repair. 
 
 \begin{table}[t]\footnotesize
 %\scriptsize
 \centering
+\resizebox{\columnwidth}{!}{%
 \begin{tabular}{@{}ll@{}}
 \toprule
 Phase                                                                             & Example                                                                                                                                                          \\ \midrule
@@ -161,14 +164,15 @@ Phase                                                                           
 \begin{tabular}[c]{@{}l@{}}2) Observed predicates \\ MLN declaration\end{tabular} & \begin{tabular}[c]{@{}l@{}}$\mathsf{\textsl{firstname}(id, value)}$ \\ $\mathsf{\textsl{lastname}(id, lastname)}$ \\ $\mathsf{\textsl{street}(id, street)}$ \\ $\mathsf{\textsl{city}(id, city)}$\\ $\mathsf{\textsl{zip}(id, code)}$ \\ $\mathsf{\textsl{phone}(id, num)}$\end{tabular} \\ \midrule
 3) Data                                                                           & \begin{tabular}[c]{@{}l@{}}$t_2$(Galaxy 5, NULL, Miller, \\ 12 Hay St., NULL, 818, 11234)\end{tabular}                                                              \\ \midrule
 4) Grounded (evidence) atoms                                                      & \begin{tabular}[c]{@{}l@{}} $\mathsf{\textsl{item}(2, Galaxy5)}$ \\ $\mathsf{\textsl{lastname}(2, Miller)}$ \\ $\mathsf{\textsl{street}(2, 12HaySt.)}$ \\ $\mathsf{\textsl{zip}(2, 818)}$ \\ $\mathsf{\textsl{phone}(2, 11234)}$\end{tabular}                         \\ \bottomrule
-\end{tabular}
-\caption{\label{tab:mlndeclare} MLN declaration process and creation of grounded atoms for tuple 2 in the \textsc{Transactions} example table.}
+\end{tabular}}
+\caption{\label{tab:mlndeclare} MLN declaration process and creation of grounded atoms for Tuple 2 in the \textsc{Transactions} example table.}
 \end{table}
 \subsection{Data Repair as Joint Inference}
 \label{subsec:jointinference}
 Markov logic defines a knowledge representation system that combines first-order logic as a declarative language with probabilistic graphical models (undirected Markov Networks MLNs) on top of which we perform probabilistic inference. Semantically, a MLN is a log-linear model, which defines the probability distribution over possible worlds, in our case all possible states in the database.
 
-We create MLNs by writing a set of first-order logic rules (c.f.,~Section~\ref{sec:ml}) with weights by using predicates that represent relations between these objects. We distinguish between observed and hidden predicates. \textit{Observed predicates} are relations between objects which exist in a given dataset: $\mathsf{\textsl{attr-X}_1(id,v_1)}$, $\mathsf{\textsl{attr-X}_2(id,v_2)}$ $\dots$ $\mathsf{\textsl{attr-X}_n(id,v_n)}$ are observed predicates, which encode that $\mathsf{\textsl{attr-X}_i}$ has value $\mathsf{v_i}$ on tuple $\mathsf{id}$. In addition, an MLN may have a number of \textit{hidden predicates}, which are not present in the input data, but can be inferred through rules. In our case, $\mathsf{\textsl{equal-Y}(id_1, id_2)}$ and $\mathsf{\textsl{S1/match-Y/S2}(id_1, id_2)}$ are hidden.  The goal of probabilistic inference is to infer the likelihood for observed and hidden predicates given a rule set and evidence. We define the MLN in such a way that reasoning about hidden predicates given evidence and data cleaning rules allow us to determine data repair operations. In other words, we perform an inference task as a prediction for the data cleaning.
+We create MLNs by writing a set of first-order logic rules (c.f., Section~\ref{sec:ml}) with weights by using predicates that represent relations between these objects. We distinguish between observed and hidden predicates. \textit{Observed predicates} are relations between objects which exist in a given dataset: $\mathsf{\textsl{attr-X}_1(id,v_1)}$, $\mathsf{\textsl{attr-X}_2(id,v_2)}$ $\dots$ $\mathsf{\textsl{attr-X}_n(id,v_n)}$ are observed predicates, which encode that $\mathsf{\textsl{attr-X}_i}$ has value $\mathsf{v_i}$ on tuple $\mathsf{id}$. In addition, an MLN may have a number of \textit{hidden predicates}, which are not present in the input data, but can be inferred through rules. In our case, $\mathsf{\textsl{equal-Y}(id_1, id_2)}$ and $\mathsf{\textsl{S1/match-Y/S2}(id_1, id_2)}$ are hidden.  The goal of probabilistic inference is to infer the likelihood for observed and hidden predicates given a rule set and evidence. We define the MLN in such a way that reasoning about hidden predicates given evidence and data cleaning rules allow us to determine data repair operations. In other words, we perform an inference task as a prediction for the data cleaning.
+We create MLNs by writing a set of first-order logic rules (c.f., Section~\ref{sec:ml}) with weights by using predicates that represent relations between these objects. We distinguish between observed and hidden predicates. \textit{Observed predicates} are relations between objects which exist in a given dataset: $\mathsf{\textsl{attr-X}_1(id,v_1)}$, $\mathsf{\textsl{attr-X}_2(id,v_2)}$ $\dots$ $\mathsf{\textsl{attr-X}_n(id,v_n)}$ are observed predicates, which encode that $\mathsf{\textsl{attr-X}_i}$ has value $\mathsf{v_i}$ on tuple $\mathsf{id}$. In addition, an MLN may have a number of \textit{hidden predicates}, which are not present in the input data, but can be inferred through rules. In our case, $\mathsf{\textsl{equal-Y}(id_1, id_2)}$ and $\mathsf{\textsl{S1/match-Y/S2}(id_1, id_2)}$ are hidden.  The goal of probabilistic inference is to infer the likelihood for observed and hidden predicates given a rule set and evidence. We define the MLN in such a way that reasoning about hidden predicates given evidence and data cleaning rules allow us to determine data repair operations. In other words, we perform an inference task as a prediction for the data cleaning.
 
 %%%%%%
 An important step in our method is the \textit{grounding} of the MLN (in details illustrated in Figure \ref{fig:mlngrounding}). 
@@ -194,7 +198,7 @@ where $\langle \theta, \phi(q) \rangle$ denotes a dot product.
 $Z(\theta)$ is the normalization constant also called the 
 \emph{partition function}. Since the partition function is a constant and the exponential is monotonic, finding the MAP assignment in our data cleaning problem is equivalent to finding the assignment $q_M$ that maximizes the probability $Pr \left( q | \theta \right)$.
 
-The output of the inference are data repair operations; for example, the hidden predicate \textsl{equal-street} may be determined to have (among other groundings) the following likely value: $\mathsf{\textsl{equal-street}(1, 3)}$, indicating that the \textsl{street} field for transaction 3 should have the same value as the \textsl{street} field of transaction 1. In this case, the data repair operation is to replace the \textsc{null} value in transaction 3 with the address ``1 Sun Dr.''. 
+The output of the inference are data repair operations; e.g., the hidden predicate \textsl{equal-street} may be determined to have (among other groundings) the following likely value: $\mathsf{\textsl{equal-street}(1, 3)}$, indicating that the \textsl{street} field for transaction 3 should have the same value as the \textsl{street} field of transaction 1. In this case, the data repair operation is to replace the \textsc{null} value in transaction 3 with the address ``1 Sun Dr.''. 
 %\note{Shouldn't the MLN allow us to inspect the uncertainty in these decisions? Can you elaborate on that?}  I was thinking about this. Because we are using MAP, we assume that we take the most possible solution. otherwise we would need to explain all of the Markov logic + Markov networks here.
 As we noted in the discussion of the running example, there is an interplay of different rules that affects the probability of hidden predicates. Therefore, the inference produces the most likely state of the entire Markov Logic Network with regards to all integrity constraints. The probabilities for the hidden predicates are therefore influenced by \textit{all} defined data quality rules. By running the inference over the entire database, we predict the most likely data repairs for our data set by determining the most likely grounding of the hidden predicates and this reduces to computing \textsc{map} inference on the MLN model.      
 
