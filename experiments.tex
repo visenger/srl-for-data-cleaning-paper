@@ -203,26 +203,26 @@
 hidden \\ predicates
 \end{tabular}  
 & \begin{tabular}[c]{@{}l@{}}
-  \textsl{equal-HospitalName/\textsc{hosp}}(hid, n, hid, n)\\ 
-  \textsl{equal-Address/\textsc{hosp}}(hid, add, hid, add)\\ 
-  \textsl{equal-City/\textsc{hosp}}(hid, c, hid, c)\\ 
-  \textsl{equal-State/\textsc{hosp}}(hid, st, hid, st)\\ 
-  \textsl{equal-ZipCode/\textsc{hosp}}(hid, code, hid, code)\\ 
-  \textsl{equal-CountryName/\textsc{hosp}}(hid, ctr, hid, ctr)\\ 
-  \textsl{equal-PhoneNumber/\textsc{hosp}}(hid, nr, hid, nr)\\ 
-  \textsl{equal-MeasureName/\textsc{hosp}}(hid, mn, hid, mn)\\ 
-  \textsl{equal-Condition/\textsc{hosp}}(hid, cond, hid, cond)\\ 
+  \textsl{equal-HospitalName/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-Address/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-City/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-State/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-ZipCode/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-CountryName/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-PhoneNumber/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-MeasureName/\textsc{hosp}}(hid, hid)\\ 
+  \textsl{equal-Condition/\textsc{hosp}}(hid, hid)\\ 
   \textsl{\textsc{hosp}/match-State/\textsc{ZipCode}}(hid, zid)\\ 
   \textsl{\textsc{hosp}/match-ZipCode/\textsc{ZipCode}}(hid, code)
 \end{tabular} 
 & 
 \begin{tabular}[c]{@{}l@{}}
- \textsl{equal-Names}(id, n, id, n)\\ 
- \textsl{equal-Addr}(id, add, id, add)\\ 
- \textsl{equal-Natkey}(id, nkey, id, nkey)\\ 
- \textsl{equal-Phone}(id, ph, id, ph)\\ 
- \textsl{equal-Acc}(id, a, id, a)\\ 
- \textsl{equal-Mrkt}(id, m, id, m)\\ 
+ \textsl{equal-Names}(id, id)\\ 
+ \textsl{equal-Addr}(id, id)\\ 
+ \textsl{equal-Natkey}(id, id)\\ 
+ \textsl{equal-Phone}(id, id)\\ 
+ \textsl{equal-Acc}(id, id)\\ 
+ \textsl{equal-Mrkt}(id, id)\\ 
  \textsl{match-Phone}(id, id)\\ 
  \textsl{match-Addr}(id, id)
 \end{tabular} 
@@ -312,7 +312,7 @@ This is again a characteristic of the underlying MAP inference algorithm \textit
 
 
 \subsection{Holistic Data Cleaning: Missing Value and Consistency Issues Interaction}
-
+\label{subsec:exp2}
 \pgfplotsset{small,  compat=1.5}
 \begin{table*}[t]\footnotesize
 \scriptsize
@@ -384,6 +384,7 @@ Table~\ref{tab:msag} (a) shows the accuracy achieved by our approach on the samp
 nodes with one or two missing \textit{Author}-\textit{Organisation} edges, nodes with three or four missing values for the \textit{Author} \textit{Organisation} connection, and finally nodes with more than 5 missing edges. Additionally, Table~\ref{tab:msag} (b) provides another perspective on this experiment by revealing the exact distribution of corrected \textit{Author}-entities ($x$-axis) by $F_1$-score ($y$-axis). The result shows the following: The method demonstrates overall $F_1$ score greater than $50\%$ and recall greater than $78\%$ for \textit{Author}-entities with one to two missing edges. Starting from three missing edges, we still achieve a recall ranging from $0.8$ to $1.0$, though the precision (and therefore $F_1$ score) drops. This happens because our approach selects more false positives with an increasing number of missing values. This experiment tells us that our method produces satisfying results on web data with very little noise only (e.g., missing values). In future work, extending data cleaning rules with domain specific information should be studied further in order to reduce the false positives rate. Because the \textsc{MSAG} dataset has only recently been published and related work in data cleaning systems provide results for cleaning relational data only, we are not able to compare ourselves to another system directly.
 
 \subsection{Impact of Rule Execution Order}
+\label{subsec:exp3}
 Next, we study different orders of executing data cleaning rules, to show that specifying the optimal order of rules manually is hardly achievable~\cite{Dallachiesa:2013:NCD:2463676.2465327}. We investigate whether it is beneficial to leverage joint inference for simultaneous rule execution instead of manual specification of the optimal order of data cleaning rule execution. We verify the result in Figure~\ref{fig:orderexec} by investigating the $F_1$-score ($y$-axis) distribution of various data quality settings executed on varying noise rates ($x$-axis). We run our Markov Logic program on the attributes \textsl{state} and \textsl{zip} of the \textsc{hosp} dataset because they both participate in CFD and MD. Furthermore, we fix the dataset size at ninety thousands tuples with a noise rate varying from $2\%$ to $10\%$. Each experiment consists of three parts: First, we run the MD rules and then the CFDs, which gives us the overall worst accuracy. This results agree with the previous experiment about the joint modeling data cleaning rules (c.f.,~Table~\ref{tab:plots} (a) and Section \ref{subsec:exp1}). The MD rules perform poorer than CFDs. The overall $F_1$ score ranges between $0.01$ and $0.02$, which can be explained by really low precision and recall values due to error propagation from MDs to CFDs.  
 In the second part of the experiment, we change the sequence of execution to running CFD rules before MD rules. This slightly improves the $F_1$ scores by increasing them from $0.1$ to $0.3$ for different noise values. We attribute this to the fact that CFDs initially detect more violations. However, analogous to the previous part, error propagation leads to the insufficient results. 
 
@@ -433,7 +434,7 @@ nodes near coords align={vertical},
 
 
 \subsection{Modeling Data Cleaning Rules}
-
+\label{subsec:exp4}
 %Big table containing all the rules and formulas:
 \begin{table*}[t]\footnotesize
 \scriptsize
@@ -445,15 +446,15 @@ nodes near coords align={vertical},
 \multirow{2}{*}{\textsc{hosp}}  & %hosp dq rules
                         \begin{tabular}[c]{@{}l@{}}
                         $\mathsf{cfd_1: \textsc{hosp}([\textsl{zip}] \rightarrow [\textsl{state, city}], t1=(\_ \parallel \_, \_))}$\\
-                        $\mathsf{cfd_2: \textsc{hosp}([\textsl{phone}] \rightarrow [\textsl{addr, zip,state, city}],t2=(\_ \parallel \_,\_,\_,\_))}$
+                        $\mathsf{cfd_2: \textsc{hosp}([\textsl{phone}] \rightarrow [\textsl{addr, city}],t2=(\_ \parallel \_,\_,\_,\_))}$
                         \end{tabular}                   
                         & %hosp markov logic cfd
                         \begin{tabular}[c]{@{}l@{}}
                         $\mathsf{w_1: \textsl{zip}(id1, code)~\wedge~\textsl{zip}(id2, code)~\wedge \textsl{state}(id1, s1)~\wedge~\textsl{state}(id2, s2)~}$ \\
-                        $\mathsf{~~~~~~~~\wedge!\textsl{state}(id1, s2)~\wedge~!\textsl{state}(id2, s1)~\Rightarrow \textsl{equal-state}(id1, s1, id2, s2)}$\\
+                        $\mathsf{~~~~~~~~\wedge!\textsl{state}(id1, s2)~\wedge~!\textsl{state}(id2, s1)~\Rightarrow \textsl{equal-state}(id1, id2)}$\\
                         %second cfd:
                         $\mathsf{w_2: \textsl{zip}(id1, code)~\wedge~\textsl{zip}(id2, code)~\wedge \textsl{city}(id1, c1)~\wedge~\textsl{city}(id2, c2)~}$ \\
-                        $\mathsf{~~~~~~~~\wedge!\textsl{city}(id1, c2)~\wedge~!\textsl{city}(id2, c1)~\Rightarrow \textsl{equal-city}(id1, c1, id2, c2)}$
+                        $\mathsf{~~~~~~~~\wedge!\textsl{city}(id1, c2)~\wedge~!\textsl{city}(id2, c1)~\Rightarrow \textsl{equal-city}(id1, id2)}$
                         \end{tabular}                 \\ 
                        & %hosp md rule
                          \begin{tabular}[c]{@{}l@{}}
@@ -517,27 +518,26 @@ nodes near coords align={vertical},
 
                                 \\ \hline
 \end{tabular}
-\caption{Modeling data cleaning rules as Markov Logic programs.}
+\caption{\note{FINISH ME}Modeling data cleaning rules as Markov Logic programs.}
 \label{tab:rulesformulas}
 \end{table*}
 
 %\note{This section would greatly benefit from a few concrete examples that show the benefits of modeling rules with markov logic!!! Furthermore, you need to explain how you measure usability!!!} - due to space limitations, I extracted all examples into a table. 
-\note{trying to elaborate the usability methodology from} \cite{Lewis2013UMUX, Finstad2010}
-Lastly, we focus on the feasibility of translating data quality rules into Markov logic. We conduct experiments on all three datasets described above. 
+%\note{trying to elaborate the usability methodology from} \cite{Lewis2013UMUX, Finstad2010}
+To asses usability of our method, we adopt research methodology from Usability Metric for User Experience (\textsc{umux-lite})~\cite{Lewis2013UMUX, Finstad2010} and discuss two items from \textsc{umux-lite} questionnaire: "Markov Logic capabilities meet requirements on data cleaning systems" and "Markov logic is easy to use". Being explained in former Sections \ref{sec:method}, \ref{subsec:exp1}, \ref{subsec:exp2} and \ref{subsec:exp3}, Markov logic indeed meet the main requirements on data cleaning systems such as \textit{holistic} data quality rules treatment \cite{Fan:2014:IRM:2628135.2567657, Dallachiesa:2013:NCD:2463676.2465327}, automation \cite{Stonebraker_datacuration} and heterogeneous rules incorporation \cite{chu2013holistic}. In the following we focus on the second item from \textsc{umux-lite} - "Markov logic is easy to use" - and provide our experience in how we modeled data cleaning rules by using Markov logic on all three datasets \textsc{hosp}, \textsc{tpc-h} and \textsc{msag}. %Table \ref{tab:rulesformulas}
 
-\textbf{\textsc{hosp} Quality Rules}. In our data cleaning method for the \textsc{hosp} data, we use 6 manually designed CDFs and one MD, which result in 15 normalized CFDs. One MD rule is transformed into 2 formulas. All data cleaning rules are positive. Finally, all interleaved rules are translated into 21 Markov logic formulas. In the Table \ref{tab:rulesformulas}, we provide an example of these data quality rules, which are defined on pairs of tuples. The MD rule is specified on a two relations. Markov logic predicates used for data quality formulae are shown in Table~\ref{tab:predicates}. After transforming the 100k \textsc{hosp} tuples into Markov logic grounded atoms, the resulting data comprises 1.3M evidence atoms, which will be used for inference. We empirically observe that extending the data quality rules set for additional conditions, which makes consideration of similar tuples unnecessary and reduces the search space and therefore converges much faster than \textit{"pure"} model. This means that each first order logic formula, which represent the RHS of the normalized data quality rule $\mathsf{\textsl{attr}(id1, v1)~\wedge~\textsl{attr}(id2, v2)}$ becomes an inverse part $\mathsf{!\textsl{attr}(id1, v2)~\wedge~!\textsl{attr}(id2, v1)}$. This additional part denotes that we consider only tuples with different values. Here the normalized CFD rules are being compiled as demonstrated in the Table \ref{tab:rulesformulas}. 
+\textbf{\textsc{hosp} Quality Rules}. In our data cleaning method for the \textsc{hosp} data, we use 6 manually designed CDFs and one MD, which result in 15 normalized CFDs. One MD rule is transformed into 2 formulas. All data cleaning rules are positive. Finally, all interleaved rules are translated into 21 Markov logic formulas. In the Table \ref{tab:rulesformulas}, we provide an example of these data quality rules, which are defined on pairs of tuples. The MD rule is specified on a two relations. Markov logic predicates used for data quality formulas are shown in Table~\ref{tab:predicates}. After transforming the 100k \textsc{hosp} tuples into Markov logic grounded atoms, the resulting data comprises 1.3M evidence atoms, which will be used for inference. We empirically observe that extending the data quality rules set for additional conditions, which makes consideration of similar tuples unnecessary and reduces the search space and therefore converges much faster than \textit{"pure"} model. This means that each first order logic formula, which represent the RHS of the normalized data quality rule $\mathsf{\textsl{attr}(id1, v1)~\wedge~\textsl{attr}(id2, v2)}$ becomes an inverse part $\mathsf{!\textsl{attr}(id1, v2)~\wedge~!\textsl{attr}(id2, v1)}$. This additional part denotes that we consider only tuples with different values. Here the normalized CFD rules are being compiled as demonstrated in the Table \ref{tab:rulesformulas}. 
 %\note{What has this whole paragraph to do with usability? How did you measure it? What is the purpose of this discussion?}
 
-\textbf{\textsc{tpc-h} Quality Rules}. We write 9 CFDs and 3 MDs for this dataset. One example of the rules is a CFD that states if two tuples agree on \textsl{c\_custkey}, then they should agree on \textsl{c\_name} and \textsl{c\_address} attributes. MDs are designed on the same schema \textsc{tpc-h} \textsl{(T, T)}. These MDs state that for any pair of tuples $(t_1,t_2)$ if the LHS is similar, then the attribute values on the RHS should be identified. In the Table \ref{tab:rulesformulas} we provide an except of the data quality rules we create for \textsc{tpc-h}. Markov logic predicates used for data quality rules are shown in Table~\ref{tab:predicates}. After transforming the 100k \textsc{tpc-h} tuples into Markov logic grounded atoms, the resulting data comprises 1 Mio evidence atoms, which are then used for inference. \note{Again: What has this whole paragraph to do with usability? How did you measure it? What is the purpose of this discussion?}
+\textbf{\textsc{tpc-h} Quality Rules}. We write 9 CFDs and 3 MDs for this dataset. One example of the rules is a CFD that states if two tuples agree on \textsl{c\_custkey}, then they should agree on \textsl{c\_name} and \textsl{c\_address} attributes. MDs are designed on the same schema \textsc{tpc-h} \textsl{(T, T)}. These MDs state that for any pair of tuples $(t_1,t_2)$ if the LHS is similar, then the attribute values on the RHS should be identified. In the Table \ref{tab:rulesformulas} we provide an except of the data quality rules we created for \textsc{tpc-h}. Markov logic predicates used for data quality rules are shown in Table~\ref{tab:predicates}. After transforming the 100k \textsc{tpc-h} tuples into Markov logic grounded atoms, the resulting data comprises 1 Mio evidence atoms, which are then used for inference. 
+%\note{Again: What has this whole paragraph to do with usability? How did you measure it? What is the purpose of this discussion?}
 
-\textbf{\textsc{msag} Quality Rules}. Due to the graph nature of the \textsc{msag} data (c.f.,~Figure \ref{fig:msagmissing}) we develop data quality rules, which are based on CFDs, \textit{extended} CFDs \cite{Chen2009extended} and equality axioms, such as \textit{symmetry} and \textit{transitivity}. For the \textit{Paper}-\textit{Author}-\textit{Organisation} subgraph we define two CFDs, one extended CFD and 8 additional rules that comprises equality axioms for hidden predicates. Considering the semantical meaning of the data, we profit from the ability to add supporting knowledge into data cleaning process. For example, having the CFD $\mathsf{\textsc{m}([\textsl{author\_id, year}] \rightarrow [\textsl{affiliation\_id}],t1=(\_,\_ \parallel \_))} $  allows us to capture all missing affiliation by the same author, which published in the same year. In real life we know that in academia an average contract lasts around 2-3 years. Therefore by incorporating this knowledge in form of a predicate $\mathsf{\textsl{inRange}(year, year)}$, we will extend our search range. Additionally, by combining with equality axioms, we enable capturing more missing values. For example, the hard rule $\mathsf{\textsl{equal-Affiliation}(id_1, id_2) ~\wedge~ \textsl{equal-Affiliation}(id_2, id_3) \Rightarrow  \textsl{equal-Affiliation}(id_1, id_3)}$ denotes transitive relationship between three different entities \textit{Organisation}. In total, Markov Logic program consists then from 21 lines of code. \note{Again: What has this whole paragraph to do with usability? How did you measure it? What is the purpose of this discussion?}
+\textbf{\textsc{msag} Quality Rules}. Due to the graph nature of the \textsc{msag} data (c.f.,~Figure \ref{fig:msagmissing}) we develop data quality rules, which are based on CFDs, \textit{extended} CFDs \cite{Chen2009extended} and equality axioms, such as \textit{symmetry} and \textit{transitivity}. For the \textit{Paper}-\textit{Author}-\textit{Organisation} subgraph we define two CFDs, one extended CFD and 8 additional rules that comprises equality axioms for hidden predicates. Considering the semantical meaning of the data, we profit from the ability to add supporting knowledge into data cleaning process. For example, having the CFD $\mathsf{\textsc{m}([\textsl{author\_id, year}] \rightarrow [\textsl{affiliation\_id}],t1=(\_,\_ \parallel \_))} $  allows us to capture all missing affiliation by the same author, which published in the same year. In real life we know that in academia an average contract lasts around 2-3 years. Therefore by incorporating this knowledge in form of a predicate $\mathsf{\textsl{inRange}(year, year)}$, we will extend our search range. Additionally, by combining with equality axioms, we enable capturing more missing values. For example, the hard rule $\mathsf{\textsl{equal-Affiliation}(id_1, id_2) ~\wedge~ \textsl{equal-Affiliation}(id_2, id_3) \Rightarrow  \textsl{equal-Affiliation}(id_1, id_3)}$ denotes transitive relationship between three different entities \textit{Organisation}. In total, Markov Logic program consists then from 21 lines of code and an except can be viewed in the Table \ref{tab:rulesformulas}. 
+%\note{Again: What has this whole paragraph to do with usability? How did you measure it? What is the purpose of this discussion?}
 
-This part of our experimental study demonstrates that the expressiveness of Markov Logic affords us to model data cleaning rules in a convenient \anno{be more specific} manner. While existing data cleaning systems \cite{Dallachiesa:2013:NCD:2463676.2465327} are also concerned about the generality of the data cleaning rules, we can define Markov Logic data cleaning rules in expressive first-order logic manner without the need to implement any code.  Furthermore, Markov Logic is data format independent, which facilitates data cleaning on different data formats as provided on relational and graph data formats. The direct translation of data cleaning rules into first-order logic (and therefore Markov Logic formulae) simplifies the process of writing data cleaning routines. 
-
+This part of our experimental study demonstrates that the expressiveness of Markov Logic affords us to model data cleaning rules. While existing data cleaning systems \cite{Dallachiesa:2013:NCD:2463676.2465327} are also concerned about the generality of the data cleaning rules, we can define Markov Logic data cleaning rules in expressive first-order logic manner without the need to implement any code. Furthermore, Markov Logic is data format independent, which facilitates data cleaning on different data formats as provided on relational and graph data formats. 
 
 \subsection{Summary}
-\note{Add references to the individual chapters when you summarize! Does this summary cover all experiments?}
+%\note{Add references to the individual chapters when you summarize! Does this summary cover all experiments?}
 
-The results of our experimental study indicate that multiple types of data cleaning rules should be considered \textit{holistically}, which confirms previous research \cite{Dallachiesa:2013:NCD:2463676.2465327, Fan:2014:IRM:2628135.2567657, Fan:2011:IRM:1989323.1989373}. Adding domain or structural knowledge about data into the Markov logic program improves overall data cleaning. Furthermore, by using joint inference we are able to achieve very good results without defining the order of the data cleaning rules execution. We find that joint modeling of data quality rules results in better \anno{be specific! you mean higher accuracy, right?} data correction. By combining matching and repairing processes, we achieve better \anno{be specific!} results than by performing these processes separately. By using the probabilistic-logical framework Markov logic we benefit from its flexibility in constraints definition and joint inference over different data repair and match rules. Therefore it is a great fit into the data quality management field; \anno{be specific, don't just claim something. Why exactly is it a great fit?}
-
-
+The results of our experimental study indicate that multiple types of data cleaning rules should be considered \textit{holistically} (Section \ref{subsec:exp1} and \ref{subsec:exp2}), which confirms previous research \cite{Dallachiesa:2013:NCD:2463676.2465327, Fan:2014:IRM:2628135.2567657, Fan:2011:IRM:1989323.1989373}. Adding domain or structural knowledge about data into the Markov logic program improves overall data cleaning. Furthermore, by using joint inference we are able to achieve very good results without defining the order of the data cleaning rules execution. We find that joint modeling of data quality rules results in higher accuracy of data correction (Section \ref{subsec:exp3}). By using the probabilistic-logical framework Markov logic we benefit from its flexibility in constraints definition and joint inference over different data repair and match rules. The direct translation of data cleaning rules into first-order logic (and therefore Markov Logic formulas) simplifies the process of writing data cleaning routines (Section \ref{subsec:exp4}). 
