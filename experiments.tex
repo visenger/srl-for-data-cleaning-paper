@@ -164,11 +164,11 @@
 \textsl{city/\textsc{hosp}}(hid, c)\\ 
 \textsl{state/\textsc{hosp}}(hid, st)\\ 
 \textsl{zipCode/\textsc{hosp}}(hid, code)\\ 
-\textsl{countryName/\textsc{hosp}}(hid, country)\\ 
+%\textsl{countryName/\textsc{hosp}}(hid, country)\\ 
 \textsl{phoneNumber/\textsc{hosp}}(hid, numb)\\ 
 \textsl{condition/\textsc{hosp}}(hid, cond)\\ 
 \textsl{measureCode/\textsc{hosp}}(hid, mcode)\\ 
-\textsl{measureName/\textsc{hosp}}(hid, mname)\\ 
+%\textsl{measureName/\textsc{hosp}}(hid, mname)\\ 
 \textsl{score/\textsc{hosp}}(hid, score)\\ 
 \textsl{zip/\textsc{zipcode}}(zid, code)\\ 
 \textsl{state/\textsc{zipcode}}(zid, st)
@@ -183,7 +183,7 @@
 \textsl{acc}(id, a)\\ 
 \textsl{mrkt}(id, m)\\ 
 \textsl{orderKey}(id, okey)\\ 
-\textsl{orderStatus}(id, st)\\ 
+%\textsl{orderStatus}(id, st)\\ 
 \textsl{totalPrice}(id, p)\\ 
 \textsl{orderDate}(id, d)\\ 
 \textsl{orderPriority}(id, pr) \\ 
@@ -208,9 +208,9 @@ hidden \\ predicates
   \textsl{equal-City/\textsc{hosp}}(hid, hid)\\ 
   \textsl{equal-State/\textsc{hosp}}(hid, hid)\\ 
   \textsl{equal-ZipCode/\textsc{hosp}}(hid, hid)\\ 
-  \textsl{equal-CountryName/\textsc{hosp}}(hid, hid)\\ 
+  %\textsl{equal-CountryName/\textsc{hosp}}(hid, hid)\\ 
   \textsl{equal-PhoneNumber/\textsc{hosp}}(hid, hid)\\ 
-  \textsl{equal-MeasureName/\textsc{hosp}}(hid, hid)\\ 
+  %\textsl{equal-MeasureName/\textsc{hosp}}(hid, hid)\\ 
   \textsl{equal-Condition/\textsc{hosp}}(hid, hid)\\ 
   \textsl{\textsc{hosp}/match-State/\textsc{ZipCode}}(hid, zid)\\ 
   \textsl{\textsc{hosp}/match-ZipCode/\textsc{ZipCode}}(hid, code)
@@ -446,15 +446,17 @@ nodes near coords align={vertical},
 \multirow{2}{*}{\textsc{hosp}}  & %hosp dq rules
                         \begin{tabular}[c]{@{}l@{}}
                         $\mathsf{cfd_1: \textsc{hosp}([\textsl{zip}] \rightarrow [\textsl{state, city}], t1=(\_ \parallel \_, \_))}$\\
-                        $\mathsf{cfd_2: \textsc{hosp}([\textsl{phone}] \rightarrow [\textsl{addr, city}],t2=(\_ \parallel \_,\_,\_,\_))}$
+                        %$\mathsf{cfd_2: \textsc{hosp}([\textsl{phone}] \rightarrow [\textsl{addr, city}],t2=(\_ \parallel \_,\_,\_,\_))}$
                         \end{tabular}                   
                         & %hosp markov logic cfd
                         \begin{tabular}[c]{@{}l@{}}
-                        $\mathsf{w_1: \textsl{zip}(id1, code)~\wedge~\textsl{zip}(id2, code)~\wedge \textsl{state}(id1, s1)~\wedge~\textsl{state}(id2, s2)~}$ \\
-                        $\mathsf{~~~~~~~~\wedge!\textsl{state}(id1, s2)~\wedge~!\textsl{state}(id2, s1)~\Rightarrow \textsl{equal-state}(id1, id2)}$\\
+                        $\mathsf{w_1: \textsl{zip/\textsc{hosp}}(id1, code)~\wedge~\textsl{zip/\textsc{hosp}}(id2, code)~\wedge }$\\
+                        $\mathsf{~~~~~~~~\textsl{state/\textsc{hosp}}(id1, s1)~\wedge~\textsl{state/\textsc{hosp}}(id2, s2)~\wedge}$ \\
+                        $\mathsf{~~~~~~~~!\textsl{state/\textsc{hosp}}(id1, s2)~\wedge~!\textsl{state/\textsc{hosp}}(id2, s1)~\Rightarrow \textsl{equal-state/\textsc{hosp}}(id1, id2)}$\\
                         %second cfd:
-                        $\mathsf{w_2: \textsl{zip}(id1, code)~\wedge~\textsl{zip}(id2, code)~\wedge \textsl{city}(id1, c1)~\wedge~\textsl{city}(id2, c2)~}$ \\
-                        $\mathsf{~~~~~~~~\wedge!\textsl{city}(id1, c2)~\wedge~!\textsl{city}(id2, c1)~\Rightarrow \textsl{equal-city}(id1, id2)}$
+                        $\mathsf{w_2: \textsl{zip/\textsc{hosp}}(id1, code)~\wedge~\textsl{zip/\textsc{hosp}}(id2, code)~\wedge }$\\
+                        $\mathsf{~~~~~~~~~\textsl{city/\textsc{hosp}}(id1, c1)~\wedge~\textsl{city/\textsc{hosp}}(id2, c2)~\wedge}$ \\
+                        $\mathsf{~~~~~~~~~!\textsl{city/\textsc{hosp}}(id1, c2)~\wedge~!\textsl{city/\textsc{hosp}}(id2, c1)~\Rightarrow \textsl{equal-city/\textsc{hosp}}(id1, id2)}$
                         \end{tabular}                 \\ 
                        & %hosp md rule
                          \begin{tabular}[c]{@{}l@{}}
@@ -463,7 +465,9 @@ nodes near coords align={vertical},
                         \end{tabular}                 
                        & %hosp markov logic md
                        \begin{tabular}[c]{@{}l@{}}
-                        $ todo $
+                        $ \mathsf{w_3: \textsl{zip/\textsc{hosp}}(id1, code)~\wedge~\textsl{zip/\textsc{ZipCode}}(id2, code)~\wedge }$\\
+                        $\mathsf{~~~~~~~~~\textsl{state/\textsc{hosp}}(id1, s1)~\wedge~\textsl{state/\textsc{ZipCode}}(id2, s2)~}$ \\
+                        $\mathsf{~~~~~~~~~\Rightarrow \textsl{\textsc{hosp}/match-State/\textsc{ZipCode}}(id1, id2)} $
                        \end{tabular}                  
                        \\ \hline
 
@@ -474,51 +478,66 @@ nodes near coords align={vertical},
                         \end{tabular}                   
                         &%tpc-h mlogic fds
                          \begin{tabular}[c]{@{}l@{}}
-                        $ todo $
+                        $ \mathsf{w_1: \textsl{custKey}(id1, key) \wedge \textsl{custKey}(id2, key) \wedge }$\\
+                        $\mathsf{~~~~~~~~~\textsl{name}(id1, n1) \wedge \textsl{name}(id2, n2) \wedge~}$\\
+                        $\mathsf{~~~~~~~~~!\textsl{name}(id1, n2)\wedge~!\textsl{name}(id2, n1) \Rightarrow \textsl{equal-Names}(id1, id2)} $\\
+                        %second cfd
+                        $ \mathsf{w_2: \textsl{custKey}(id1, key) \wedge \textsl{custKey}(id2, key) \wedge }$\\
+                        $\mathsf{~~~~~~~~~\textsl{addr}(id1, addr1) \wedge \textsl{addr}(id2, addr2) \wedge~}$\\
+                        $\mathsf{~~~~~~~~~!\textsl{addr}(id1, addr2)\wedge~!\textsl{addr}(id2, addr1) \Rightarrow \textsl{equal-Names}(id1, id2)} $
                         \end{tabular}                    
                          \\  
                        & %tpch md rules
                        \begin{tabular}[c]{@{}l@{}}
                         $\mathsf{md_1: \textsc{t}[\textsl{c\_address}]=\textsc{t}[\textsl{c\_address}] \rightarrow \textsc{t}[\textsl{c\_phone}]\rightleftharpoons \textsc{t}[\textsl{c\_phone}]}$\\ 
-                        $\mathsf{md_2: \textsc{t}[\textsl{c\_name}]=\textsc{t}[\textsl{c\_name}] \rightarrow \textsc{t}[\textsl{c\_address}]\rightleftharpoons \textsc{t}[\textsl{c\_address}]} $
+                        %$\mathsf{md_2: \textsc{t}[\textsl{c\_name}]=\textsc{t}[\textsl{c\_name}] \rightarrow \textsc{t}[\textsl{c\_address}]\rightleftharpoons \textsc{t}[\textsl{c\_address}]} $
 
                         \end{tabular}                  
                        & %tpch md markov logic
                        \begin{tabular}[c]{@{}l@{}}
-                        $ todo $
+                        $\mathsf{w_3: \textsl{addr}(id1, addr) \wedge \textsl{addr}(id2, addr) \wedge~}$\\
+                        $\mathsf{~~~~~~~~~\textsl{phone}(id1, phone1) \wedge \textsl{phone}(id2, phone2) \wedge~}$\\
+                        $\mathsf{~~~~~~~~~ \Rightarrow  \textsl{match-Phone}(id1, id2)} $
                         \end{tabular}                     
                        \\ \hline
 %msag
 \multirow{3}{*}{\textsc{msag}}  & % msag fd
                                 \begin{tabular}[c]{@{}l@{}}
                                 $\mathsf{cfd_1: \textsc{m}([\textsl{author\_id, year}] \rightarrow [\textsl{affiliation\_id}],t1=(\_,\_ \parallel \_))} $\\
-                                $\mathsf{cfd_2: \textsc{m}([\textsl{affiliation\_id}] \rightarrow [\textsl{origin\_name}],t2=(\_ \parallel \_))} $
+                                %$\mathsf{cfd_2: \textsc{m}([\textsl{affiliation\_id}] \rightarrow [\textsl{origin\_name}],t2=(\_ \parallel \_))} $
                                 \end{tabular}                   
                                 & %msag markov logic fd
                                 \begin{tabular}[c]{@{}l@{}}
-                                $todo $
+                                $\mathsf{w_1: \textsl{author}(pid1,aid1)\wedge\textsl{author}(pid2,aid2)\wedge }$\\
+                                $\mathsf{~~~~~~~~~\textsl{publishYear}(pid1,y)\wedge\textsl{publishYear}(pid2,y)\Rightarrow \textsl{equal-Affiliation}(pid1, pid2)}$\\
                                 \end{tabular}                   
                                 \\  
                                 & % msag extended fd
                                 \begin{tabular}[c]{@{}l@{}}
-                                 $\mathsf{eCfd_1: \textsc{m}([\textsl{author\_id, year}] \rightarrow [\textsl{affiliation\_id}],t1=(\_, diff(\_)\leq 2 \parallel \_))} $   
+                                 $\mathsf{eCfd_1: \textsc{m}([\textsl{author\_id, year}] \rightarrow [\textsl{affiliation\_id}],}$\\
+                                 $\mathsf{~~~~~~~~~t1=(\_, diff(\_)\leq 2 \parallel \_))} $   
                                 \end{tabular}             
                                 & % msag markov logic 
                                 \begin{tabular}[c]{@{}l@{}}
-                                $ todo $
+                                $\mathsf{w_2: \textsl{author}(pid1,aid1)\wedge\textsl{author}(pid2,aid2)\wedge }$\\
+                                $\mathsf{~~~~~~~~~\textsl{publishYear}(pid1,y1)\wedge\textsl{publishYear}(pid2,y2)\wedge }$\\
+                                $\mathsf{~~~~~~~~~\textsl{inRange}(y1, y2)\Rightarrow \textsl{equal-Affiliation}(pid1, pid2)}$\\
                                 \end{tabular}  
                                 \\
                                 &%additional predicates for msag
                                 %nothing here
-                                & Equality axioms:
+                                & %Equality axioms:
                                 \begin{tabular}[c]{@{}l@{}}
-                                $symmetry$\\
-                                $transitivity$
+                                $symmetry:$\\
+                                $\mathsf{\infty:~\textsl{equal-Affiliation}(pid1, pid2)\Rightarrow \textsl{equal-Affiliation}(pid2, pid1)}$\\
+                                $transitivity:$\\
+                                $\mathsf{\infty:~\textsl{equal-Affiliation}(pid1, pid2)\wedge \textsl{equal-Affiliation}(pid2, pid3)}$\\
+                                $\mathsf{~~~~~~~~~\Rightarrow \textsl{equal-Affiliation}(pid1, pid3)}$\\
                                 \end{tabular}  
 
                                 \\ \hline
 \end{tabular}
-\caption{\note{FINISH ME}Modeling data cleaning rules as Markov Logic programs.}
+\caption{Modeling data cleaning rules as Markov Logic programs.}
 \label{tab:rulesformulas}
 \end{table*}
 
