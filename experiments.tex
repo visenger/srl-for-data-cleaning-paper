@@ -76,9 +76,9 @@
       xlabel=noise,
       ylabel=F1, ]
 
-         \addplot[mark=diamond] table[x=NOISE, y=CFDF1] {data/tpch-evaluation-20000-datasize.tsv};
-         \addplot table[x=NOISE, y=MDF1] {data/tpch-evaluation-20000-datasize.tsv};
-         \addplot table[x=NOISE, y=CFDMDF1] {data/tpch-evaluation-20000-datasize.tsv};
+         \addplot[mark=diamond] table[x=NOISE, y=CFDF1] {data/tpch-eval-20000-datasize.tsv};
+         \addplot table[x=NOISE, y=MDF1] {data/tpch-eval-20000-datasize.tsv};
+         \addplot table[x=NOISE, y=CFDMDF1] {data/tpch-eval-20000-datasize.tsv};
 
       \legend{$cfd$,$md$,$cfd+md$},
 
@@ -93,9 +93,9 @@
       xlabel=data size,
       ylabel=F1, ]
 
-         \addplot[mark=diamond] table[x=DATASIZE, y=CFDF1] {data/tpch-evaluation-2-noise.tsv};
-         \addplot table[x=DATASIZE, y=MDF1] {data/tpch-evaluation-2-noise.tsv};
-         \addplot table[x=DATASIZE, y=CFDMDF1] {data/tpch-evaluation-2-noise.tsv};
+         \addplot[mark=diamond] table[x=DATASIZE, y=CFDF1] {data/tpch-eval-2-noise.tsv};
+         \addplot table[x=DATASIZE, y=MDF1] {data/tpch-eval-2-noise.tsv};
+         \addplot table[x=DATASIZE, y=CFDMDF1] {data/tpch-eval-2-noise.tsv};
 
       \legend{$cfd$,$md$,$cfd+md$},
 
@@ -121,7 +121,7 @@
   \end{axis}
 \end{tikzpicture}
 \end{tabular}
-\caption{\label{tab:plots} \anno{Y-SCALE OF d and e is broken!!!} Evaluation of the data repair method based on Markov logic applied on the ~\textsc{hosp} and~\textsc{tpc-h} data sets. (a)-(c) Data repair on \textsc{hosp} with an extended Markov logic method. (d)-(f) Experimental study of the Markov logic data cleaning on synthetic data set \textsc{tpc-h}.}
+\caption{\label{tab:plots} Evaluation of the data repair method based on Markov logic applied on the ~\textsc{hosp} and~\textsc{tpc-h} data sets. (a)-(c) Data repair on \textsc{hosp} with an extended Markov logic method. (d)-(f) Experimental study of the Markov logic data cleaning on synthetic data set \textsc{tpc-h}.}
 \end{table*}
 
 
