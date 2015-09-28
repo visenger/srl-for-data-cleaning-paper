@@ -121,7 +121,7 @@
   \end{axis}
 \end{tikzpicture}
 \end{tabular}
-\caption{\label{tab:plots} Evaluation of the data repair method based on Markov logic applied on the ~\textsc{hosp} and~\textsc{tpc-h} data sets. (a)-(c) Data repair on \textsc{hosp} with an extended Markov logic method. (d)-(f) Experimental study of the Markov logic data cleaning on synthetic data set \textsc{tpc-h}.}
+\caption{\label{tab:plots} Evaluation of the data repair method based on Markov logic applied on the ~\textsc{hosp} and~\textsc{tpc-h} datasets. (a)-(c) Data repair on \textsc{hosp} with an extended Markov logic method. (d)-(f) Experimental study of the Markov logic data cleaning on synthetic dataset \textsc{tpc-h}.}
 \end{table*}
 
 
@@ -143,7 +143,7 @@
 {\bf \textsc{tpc-h}}           & 40K                                                                                                                      & 15                                                                                                                                        & 131                                                           \\
 \multicolumn{1}{l}{} & 100K                                                                                                                     & 15                                                                                                                                        & 732                                                           \\ \bottomrule
 \end{tabular}
-\caption{\label{tab:runtime} Scalability of the data cleaning for \textsc{tpc-h} and \textsc{hosp} data sets (with fixed noise 4\%). }
+\caption{\label{tab:runtime} Scalability of the data cleaning for \textsc{tpc-h} and \textsc{hosp} datasets (with fixed noise 4\%). }
 \end{table}
 
 
@@ -243,12 +243,12 @@ hidden \\ predicates
 %\scriptsize
 \centering
 \begin{tabular}{ccc}
-\textbf{\textit{Paper}}         & \textbf{\textit{Author}}     & \textbf{\textit{Organisation}}      \\ \hline
+\textbf{\textit{Paper}}         & \textbf{\textit{Author}}     & \textbf{\textit{Organization}}      \\ \hline
 \textsl{paper\_id}     & \textsl{author\_id} & \textsl{affiliation\_id}  \\
 \textsl{publish\_year} &            & \textsl{origin\_name}     \\
               &            & \textsl{normalized\_name}\\ \hline
 \end{tabular}
-\caption{Entities \textbf{\textit{Paper}}, \textbf{\textit{Author}} and \textbf{\textit{Organisation}} and their attributes that have been used in experiments for Web data cleaning with Markov Logic.}
+\caption{Entities \textbf{\textit{Paper}}, \textbf{\textit{Author}} and \textbf{\textit{Organization}} and their attributes that have been used in experiments for Web data cleaning with Markov logic.}
     \label{tab:msagattrs}
 \end{table}
 
@@ -264,9 +264,9 @@ We use 6 CDFs and one MD, which have been manually designed. These data quality 
 
 \textbf{\textsc{tpc-h}.} The \textsc{tpc-h}\footnote{http://www.tpc.org/tpch/} dataset is well-known dataset used in decision support benchmarks for databases. For our experiments we use two relations, \textit{Customer} and \textit{Orders}, which we join in order to introduce duplications on the \textit{Customer} relations data. The resulting dataset consists of 17 attributes of schema $T$: \textsl{c\_custkey}, \textsl{c\_name}, \textsl{c\_address},  \textsl{c\_nationkey}, \textsl{c\_phone}, \textsl{c\_acctbal},\\ \textsl{c\_mtksegment}, \textsl{c\_comment}, \textsl{o\_orderkey}, \textsl{o\_custkey},\\ \textsl{o\_orderstatus}, \textsl{o\_totalprice}, \textsl{o\_orderdate},\\ \textsl{o\_orderpriority}, \textsl{o\_clerk}, \textsl{o\_shippriority}, \textsl{o\_comment}. 
 
-\textbf{Dirty Data.} We introduce noise into the relational datasets \textsc{hosp} and \textsc{tpc-h} to produce dirty data. Our methods handles several kinds of noise: missing values, errors from the active domain, and typos. We consider the initial data to be clean and therefore use it as ground truth. Additionally, we manually assess that the ground truth datasets are consistent with respect to the CFDs and MDs. Afterwards, we insert noise into the datasets. We conduct our experiments on the two datasets with different noise rates ranging from $\mathsf{noi\%}$=2$\%$ to $\mathsf{noi\%}$=10$\%$. We introduce this noise into different dataset sizes ranging from one thousand to one hundred thousand data points. The noise rate depicts the ratio of the number of erroneous values to the total number of values in the data set. We only introduce noise to the attributes which are involved in data quality rules.
+\textbf{Dirty Data.} We introduce noise into the relational datasets \textsc{hosp} and \textsc{tpc-h} to produce dirty data. Our methods handles several kinds of noise: missing values, errors from the active domain, and typos. We consider the initial data to be clean and therefore use it as ground truth. Additionally, we manually assess that the ground truth datasets are consistent with respect to the CFDs and MDs. Afterwards, we insert noise into the datasets. We conduct our experiments on the two datasets with different noise rates ranging from $\mathsf{noi\%}$=2$\%$ to $\mathsf{noi\%}$=10$\%$. We introduce this noise into different dataset sizes ranging from one thousand to one hundred thousand data points. The noise rate depicts the ratio of the number of erroneous values to the total number of values in the dataset. We only introduce noise to the attributes which are involved in data quality rules.
 
-\textbf{\textsc{microsoft academic graph (msag)}.} Data quality issues are massively present in the context of the web due to the integration of heterogeneous data from different sources. Thus we include a third dataset - \textsc{microsoft academic graph (MSAG)}\footnote{http://research.microsoft.com/en-us/projects/mag/}~\cite{msag2015} - to assess our method on web data cleaning. MSAG is a heterogeneous entity graph comprised of six types of entities that model real-life academic relationships: field of study, author, institution, paper, venue, and conference instances. The raw data has been obtained from different sources (academic publishers and web-pages indexed by Bing search engine) and is organized in the form of a connected graph schema. For our experiments, we select three entities from the whole graph: \textit{author}, \textit{organization} and \textit{paper} entities. This part of \textsc{MSAG} is of interest because it reveals important characteristics of the extracted web data, such as missing and inconsistent values. In particular, we discover that there are inconsistencies in organization names for the same author. Furthermore, a number of entries suffer from missing affiliation by an author. In order to model and run data cleaning on this web data set, we consider the attributes of the selected entities in \textsc{MSAG}, as presented in Table~\ref{tab:msagattrs}. 
+\textbf{\textsc{microsoft academic graph (msag)}.} Data quality issues are massively present in the context of the web due to the integration of heterogeneous data from different sources. Thus we include a third dataset - \textsc{microsoft academic graph (MSAG)}\footnote{http://research.microsoft.com/en-us/projects/mag/}~\cite{msag2015} - to assess our method on web data cleaning. MSAG is a heterogeneous entity graph comprised of six types of entities that model real-life academic relationships: field of study, author, institution, paper, venue, and conference instances. The raw data has been obtained from different sources (academic publishers and web-pages indexed by Bing search engine) and is organized in the form of a connected graph schema. For our experiments, we select three entities from the whole graph: \textit{author}, \textit{organization} and \textit{paper} entities. This part of \textsc{MSAG} is of interest because it reveals important characteristics of the extracted web data, such as missing and inconsistent values. In particular, we discover that there are inconsistencies in organization names for the same author. Furthermore, a number of entries suffer from missing affiliation by an author. In order to model and run data cleaning on this web dataset, we consider the attributes of the selected entities in \textsc{MSAG}, as presented in Table~\ref{tab:msagattrs}. 
 
 \textbf{Data Quality Issues.} We extract a subset of complete entity instances in order to perform data cleaning experiments on web data. We reproduce data quality issues that we observe in \textsc{MSAG}: namely missing values. In order to a create gold standard to assess our data cleaning method, we proceed in the following way: We remove one affiliation entry from each author if there are more than three publications made by the same affiliation. Thus, we create a dataset with missing \textsl{affiliation\_id}, \textsl{origin\_name}, and \textsl{normalized\_name} attributes. We thereby obtain graph data where $37\%$ of all authors have one missing edge to theirs affiliation; $27\%$ are missing two edges for theirs institutions; $15\%$ miss three edges. Almost $21\%$ of authors suffer from missing more than three edges. 
 
@@ -295,7 +295,7 @@ Our results are in line with the observations made in \cite{Dallachiesa:2013:NCD
 
 We conclude from this experiment that the joint modeling and joint inference improves the accuracy achieved by running single data quality rules.
 
-We also study the runtime of our method for different data sizes and noise rates. Table~\ref{tab:plots}~(c) for \textsc{hosp} and Table~\ref{tab:plots} (f) for \textsc{tpc-h} show the general trend for the runtime values ($y$-axis) for every data size ($x$-axis) setting. Each plot denotes different noise percentages. We see that the runtime on both, real-life and synthetic data, shows an upward trend. Cleaning data sets with joint inference will take longer the larger the data is and the more noise it contains. In particular, for the real-life \textsc{hosp} data of size $100K$ with increasing noise rate, we observe that the runtime increases by a factor $1.2$ for every noise setting. 
+We also study the runtime of our method for different data sizes and noise rates. Table~\ref{tab:plots}~(c) for \textsc{hosp} and Table~\ref{tab:plots} (f) for \textsc{tpc-h} show the general trend for the runtime values ($y$-axis) for every data size ($x$-axis) setting. Each plot denotes different noise percentages. We see that the runtime on both, real-life and synthetic data, shows an upward trend. Cleaning datasets with joint inference will take longer the larger the data is and the more noise it contains. In particular, for the real-life \textsc{hosp} data of size $100K$ with increasing noise rate, we observe that the runtime increases by a factor $1.2$ for every noise setting. 
 
 Additionally, Table~\ref{tab:runtime} provides detailed runtime values for different data sizes of \textsc{hosp} and \textsc{tpc-h} by fixing the noise to $4\%$. We observe that while we increaste the data size from $20$ to $143$ thousands tuples, the average runtime growth rate is $1.9$. This is again a characteristic of the underlying MAP inference algorithm \textit{Cutting Plane Inference} \cite{riedel08improving}: Having less noise causes the algorithm converge faster, hence results in faster run time values for data with less noise. 
 
@@ -428,7 +428,7 @@ nodes near coords align={vertical},
 \centering
 
 \begin{tabular}{cll}
-\textbf{\textit{Data Set}}               & \multicolumn{1}{c}{\textbf{\textit{Data Cleaning Rules}}}              & \multicolumn{1}{c}{\textbf{\textit{Markov Logic Formulae}}} \\ \hline
+\textbf{\textit{Dataset}}               & \multicolumn{1}{c}{\textbf{\textit{Data Cleaning Rules}}}              & \multicolumn{1}{c}{\textbf{\textit{Markov Logic Formulae}}} \\ \hline
 %hosp
 \multirow{2}{*}{\textsc{hosp}}  & %hosp dq rules
                         \begin{tabular}[c]{@{}l@{}}
@@ -524,7 +524,7 @@ nodes near coords align={vertical},
 
                                 \\ \hline
 \end{tabular}
-\caption{Modeling data cleaning rules as Markov Logic programs.}
+\caption{Modeling data cleaning rules as Markov logic programs.}
 \label{tab:rulesformulas}
 \end{table*}
 
