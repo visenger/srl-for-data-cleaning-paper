@@ -5,6 +5,10 @@
 \section{Proposed Approach}
 \label{sec:method}
 
+\todo[inline]{introduce the notion of hidden predicates}
+\todo[inline]{add currency constraints}
+\todo[inline]{add equivalence between data cleaning rules and MLN}
+
 %\note{This intro here must be much more concrete, it is too general and high level. Also, it is very long.}
 
  \begin{figure}[t]
@@ -154,8 +158,11 @@ Phase                                                                           
 \end{tabular}}
 \caption{\label{tab:mlndeclare} MLN declaration process and creation of grounded atoms for Tuple 2 in the \textsc{Transactions} example table.}
 \end{table}
+
 \subsection{Data Repair as Joint Inference}
 \label{subsec:jointinference}
+\todo[inline]{rewrite this Section.}
+\todo[inline]{add complexity analysis for the entire algorithm}
 Markov logic defines a knowledge representation system that combines first-order logic as a declarative language with probabilistic graphical models (undirected Markov Networks MLNs) on top of which we perform probabilistic inference. Semantically, a MLN is a log-linear model, which defines the probability distribution over possible worlds, in our case all possible states in the database.
 
 We create MLNs by writing a set of first-order logic rules (c.f., Section~\ref{sec:ml}) with weights by using predicates that represent relations between these objects. We distinguish between observed and hidden predicates. \textit{Observed predicates} are relations between objects which exist in a given dataset: $\mathsf{\textsl{attr-X}_1(id,v_1)}$, $\mathsf{\textsl{attr-X}_2(id,v_2)}$ $\dots$ $\mathsf{\textsl{attr-X}_n(id,v_n)}$ are observed predicates, which encode that $\mathsf{\textsl{attr-X}_i}$ has value $\mathsf{v_i}$ on tuple $\mathsf{id}$. In addition, an MLN may have a number of \textit{hidden predicates}, which are not present in the input data, but may be inferred through rules. In our case, $\mathsf{\textsl{equal-Y}(id_1, id_2)}$ and $\mathsf{\textsl{S1/match-Y/S2}(id_1, id_2)}$ are hidden.  The goal of probabilistic inference is to infer the likelihood for observed and hidden predicates given a rule set and evidence. We define the MLN in such a way that reasoning about hidden predicates given evidence and data cleaning rules allows us to determine data repair operations. In other words, we perform an inference task as prediction for data cleaning.
